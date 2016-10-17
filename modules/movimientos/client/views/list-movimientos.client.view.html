@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Movimientos</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="movimiento in vm.movimientos"
+       data-ui-sref="movimientos.view({ movimientoId: movimiento._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="movimiento.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="movimiento.user" data-ng-bind="movimiento.user.displayName"></span>
+        <span data-ng-if="!movimiento.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="movimiento.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.movimientos.$resolved && !vm.movimientos.length">
+    No Movimientos yet, why don't you <a data-ui-sref="movimientos.create">create one</a>?
+  </div>
+</section>

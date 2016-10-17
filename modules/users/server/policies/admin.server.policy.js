@@ -3,7 +3,9 @@
 /**
  * Module dependencies
  */
-var acl = require('acl');
+var acl = require('acl'),
+mongoose = require('mongoose'),
+Log = mongoose.model('Log');
 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());
@@ -24,6 +26,32 @@ exports.invokeRolesPolicies = function () {
   }]);
 };
 
+/**
+ * update log before logout
+ */
+exports.setLog = function (req, res, next) {
+ var userId = req.session.passport.user;
+
+  Log.find({createdUser:userId, active:true}).exec(function(err, data){
+   if(data){
+   console.log('passed');
+   console.log(data);
+   console.log(data[0]);
+   data.active = false;
+   var log = new Log(data);
+   console.log(log);
+
+   // log.update(function(err){
+   //  if (err) {
+   //    return res.status(400).send({
+   //      message: "Error"
+   //    });
+   //  }
+   //  });
+   }
+ });
+  next();
+};
 /**
  * Check If Admin Policy Allows
  */

@@ -21,6 +21,8 @@ var config = require('../config'),
   _ = require('lodash'),
   lusca = require('lusca');
 
+
+
 /**
  * Initialize local variables
  */
@@ -52,6 +54,7 @@ module.exports.initLocalVariables = function (app) {
  * Initialize application middleware
  */
 module.exports.initMiddleware = function (app) {
+
   // Showing stack errors
   app.set('showStackError', true);
 

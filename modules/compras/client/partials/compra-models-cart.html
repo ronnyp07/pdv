@@ -1,0 +1,101 @@
+<div class="panel panel-info">
+  <div id="cartsDivTop" class="panel-heading" ng-click="vm.openProviderWindows()">
+   <h5 class="compraTopPanelHeader">
+    Click para ver informacion de proveedor   <i class="fa fa-chevron-down pull-right" ng-if="!vm.compraServices.providerWindowOpen"></i>
+    <i class="fa fa-chevron-up pull-right" ng-if="vm.compraServices.providerWindowOpen"></i>
+  </h5>
+</div>
+<div id="divBody" class="panel-body animate-show" ng-show="vm.compraServices.providerWindowOpen">
+
+  <table  id="providerDetails" class="table table-bordered">
+    <tr>
+      <td id="providerDetails" class="halfWidth"> <span class="cartsLabelsTop">Nombre:</span></td>
+      <td id="providerDetails" class="halfWidth">{{vm.compraServices.compraSelected.provider.name}}</td>
+      <td id="providerDetails" class="halfWidth"><span class="cartsLabelsTop">RNC:</span></td>
+      <td id="providerDetails" class="halfWidth"><span>{{vm.compraServices.compraSelected.provider.RNC}}</span></td>
+    </tr>
+    <tr>
+    <td id="providerDetails" class="halfWidth"> <span class="cartsLabelsTop">Telefono:</span></td>
+      <td id="providerDetails" class="halfWidth">{{vm.compraServices.compraSelected.provider.phones.offices | phonenumber}}</td>
+      <td id="providerDetails" class="halfWidth"><span class="cartsLabelsTop">Email:</span></td>
+      <td id="providerDetails" class="halfWidth"><span>{{vm.compraServices.compraSelected.provider.email}}</span></td>
+    </tr>
+    <tr>
+    <td id="providerDetails"  class="halfWidth"> <span class="cartsLabelsTop">Razon Social:</span></td>
+      <td id="providerDetails" class="halfWidth">{{vm.compraServices.compraSelected.provider.razonSocial}}</td>
+      <td id="providerDetails" class="halfWidth"><span class="cartsLabelsTop">Direccion:</span></td>
+      <td id="providerDetails" class="halfWidth"><span>{{vm.compraServices.compraSelected.provider.address}}</span></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<table  class="table table-condensed table-bordered table-striped">
+      <th class="col-1 text-center">#</th>
+      <th class="col-1 text-center">Cantidad</th>
+      <th class="col-2 text-center">Articulo</th>
+      <th class="col-3 text-center">Marca</th>
+      <th class="col-4 text-center">Precio</th>
+      <th class="col-5 text-center">Importe</th>
+
+      <tr dir-paginate="compra in vm.compraServices.compraSelected.cart | itemsPerPage: 10" pagination-id="cart">
+       <td class="text-center col-1" >
+        <span>{{compra.productId}}</span>
+      </td>
+      <td  class="text-center col-2">
+       {{compra.quantity}}
+     </td>
+     <td class="text-center col-2">
+       {{compra.name}}
+     </td>
+     <td class="text-center col-3" >
+       {{compra.marca}}
+     </td>
+
+     <td class="text-center col-5">
+      {{compra.cost | currency}}</span></a>
+    </td>
+    <td class="text-center col-5">
+      {{compra.total | currency}}
+    </td>
+  </tr>
+<dir-pagination-controls pagination-id="cart">
+</dir-pagination-controls>
+</table>
+
+<hr class="cartsDetails">
+<div class="row">
+  <div class="col-sm-12 ">
+   <div class="pull-right">
+     <span class="cartsLabelsTop">Sub-Total: </span>  <span class="cartsLabelsTop">{{vm.compraServices.compraSelected.subtotal | currency }}</span>
+   </div>
+ </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="pull-right">
+     <span class="cartsLabelsTop">Itbs: </span>  <span class="cartsLabelsTop">{{vm.compraServices.compraSelected.itbs | currency }}
+   </span>
+ </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="pull-right">
+     <span class="cartsLabelsTop">Total: </span>  <span class="cartsLabelsTop">{{vm.compraServices.compraSelected.total | currency }}</span>
+   </div>
+ </div>
+</div>
+<hr class="cartsDetails">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="pull-right">
+      <a ng-click="vm.createModal.hide()" class="btn btn-danger">Cerrar</a>
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</div>

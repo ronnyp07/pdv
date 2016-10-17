@@ -1,0 +1,142 @@
+.col-margin-right{
+	margin-right: 5px;
+}
+
+.checkMargin{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.product-promotion-content{
+	  height: 300px;
+}
+
+/*.md-accent-bg {
+    background-color: rgb(3,155,229);
+    color: rgba(255,255,255,1);
+}
+
+.top-bg{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 200px;
+    background-image: url(/assets/images/backgrounds/header-bg.png);
+    background-size: cover;
+}
+
+.center .header {
+    height: 136px!important;
+    min-height: 136px!important;
+    max-height: 136px!important;
+    padding: 24px 0;
+}
+.h1{
+  font-size: 2.4rem;
+   font-weight: 400;
+}
+
+.center {
+    position: relative;
+    z-index: 2;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+.center .header .product-count {
+    margin: 6px 0 0 36px;
+}
+
+.page-layout.carded.fullwidth>.center .header {
+    height: 136px;
+    min-height: 136px;
+    max-height: 136px;
+    padding: 24px;
+}
+*/
+.noMarginBotton{
+margin-bottom: 0px;
+}
+
+.product .table .col-1 {
+  width: 30%; }
+.product .table .col-2 {
+  width: 20%; }
+.product .table .col-3 {
+  width: 15%; }
+.product .table .col-4 {
+  width: 15%; }
+.product .table .col-5 {
+  width: 10%; }
+
+#editable{
+  width: 50%;
+  float: left;
+  margin-right: 10px;
+}
+.minimunProduct{
+    border-left: 5px solid #D32F2F;
+    background-color: #EF9A9A;
+}
+.evenCierre{
+    border-left: 5px solid #1B5E20;
+}
+.overCierre{
+    border-left: 5px solid #0D47A1;
+}
+
+.shortCierre{
+    border-left: 5px solid #D32F2F;
+    background-color: transparent;
+    background-color: #FFCDD2;
+}
+
+.shortCierre[readonly] {
+    background-color: #FFCDD2;
+    opacity: 1;
+    font-weight: bold;
+    color: #F44336;
+}
+
+.evenCierre[readonly] {
+    background-color: #C8E6C9;
+    opacity: 1;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.overCierre[readonly] {
+    background-color: #BBDEFB;
+    opacity: 1;
+    font-weight: bold;
+    color: #0D47A1;
+}
+.tableCuadre {
+   width: 50%;
+   margin-top: 30px;
+}
+
+.table-striped.totalCuadre > tbody > tr{
+      background-color: #BDBDBD;
+}
+
+.totalCuadre{
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #BDBDBD;
+}
+
+#myWorkContent{
+    width:530px;
+    height:210px;
+    border: 13px solid #bed5cd;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+#myWorkContent a {
+    display: inline;
+}
+

@@ -1,0 +1,177 @@
+<div layout="row" layout-padding layout-xs="column"  layout-align="center">
+  <div flex-sm ="100" flex-md ="80" flex-lg ="70">
+<md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout layout-align="center">
+  <div layout="row">
+  <button style="margin-right: 5px" class="btn btn-lg" ng-click="vm.goBack()" ng-class="{'btn-default' : vm.activePath === 'pending',
+  'btn-success' : vm.activePath !== 'pending'}">Anterior</button>
+   <a ui-sref="sales.pos" style="margin-right: 5px" class="btn btn-success btn-lg">Cancelar</a>
+  {{}}
+     <button ng-if="vm.activePath !== 'review'"
+     ng-class="{'btn-default' : (vm.activePath === 'pending' && vm.salesPendingInfo.length > 0),
+     'btn-success' : (vm.activePath === 'pending' &&  vm.salesPendingInfo.length  <= 0) || (vm.activePath === 'cuadre' &&  vm.salesPendingInfo.length  <= 0)}"
+     class="btn btn-lg" ng-click="vm.goNext()">Siguiente</button>
+     <button ng-if="vm.activePath === 'review'" class="btn btn-success btn-lg" ng-click="vm.procesarCierre()">Completar</button>
+   </div>
+</md-whiteframe>
+
+<div class="row" ng-if="vm.activePath === 'pending'">
+   <md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout>
+   <table class="table table-condensed table-striped table-bordered table-hover">
+ <tr >
+  <th class="col-1" >Fecha</th >
+  <th class="col-1" >Hora</th >
+  <th class="col-2" >
+   Id
+  </th >
+  <th class="col-3" >
+   Cliente
+  </th >
+  <th class="col-4" >
+    Total
+  </th>
+  <th class="col-4" >
+    Acción
+   </th>
+  </tr>
+  <tr ng-repeat="sales in vm.salesPendingInfo " >
+    <td>{{sales.fecha_venta | date}}</td>
+    <td>{{sales.fecha_venta | date : 'HH:mm:ss a'}}</td>
+    <td>{{sales.salesId}}</td>
+    <td><span ng-if="!sales.customer.name">
+      Consumidor Final
+    </span><span ng-if="sales.customer.name">{{sales.customer.name}} {{sales.customer.lastName}}</span></td>
+    <td>{{sales.total | currency}}</td>
+    <td class="pull-right">
+     <button ng-click="vm.deletePending(sales)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+    </td>
+    </tr>
+  </table>
+</md-whiteframe>
+ </div>
+
+ <div layout="row" ng-if="vm.activePath === 'cuadre'">
+<md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout="column">
+<table class="table table-condensed table-striped table-bordered table-hover">
+ <tr >
+ <th></th>
+  <th class="col-1" >Contado</th >
+  <th class="col-1" >Calculado</th >
+  <th class="col-2" >
+   Diferencia
+  </th >
+  <th class="col-2" >
+    Retiro
+  </th >
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Efectivo </span>
+    <button class="btn btn-primary" ng-click="vm.openCalculator()"><i class="fa fa-calculator"></i>  </button></td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-change="vm.calculateType('efectivo')" ng-model="vm.efectivo.contado">	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.efectivo.calculado" readonly>	</td>
+     <td> <input  ng-class="{'shortCierre': vm.efectivo.contado < vm.efectivo.calculado,
+     'evenCierre': vm.efectivo.contado === vm.efectivo.calculado,
+     'overCierre': vm.efectivo.contado > vm.efectivo.calculado}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.efectivo.diferencia" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.efectivo.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado')"
+     ng-disable="vm.efectivo.retirado <= 0">	</td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Tarjeta</span></td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.tarjeta.contado" ng-change="vm.calculateType('tarjeta')">	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.tarjeta.calculado" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.tarjeta.diferencia" ng-class="{'shortCierre': vm.tarjeta.contado < vm.tarjeta.calculado,
+     'evenCierre': vm.tarjeta.contado === vm.tarjeta.calculado,
+     'overCierre': vm.tarjeta.contado > vm.tarjeta.calculado}" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.tarjeta.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado')" ng-disabled="vm.tarjeta.retirado <= 0">	</td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Cheque</span>
+     </td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.cheque.contado" ng-change="vm.calculateType('cheque')">	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.cheque.calculado" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.cheque.diferencia" ng-class="{'shortCierre': vm.cheque.contado < vm.cheque.calculado,
+     'evenCierre': vm.cheque.contado === vm.cheque.calculado,
+     'overCierre': vm.cheque.contado > vm.cheque.calculado}" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.cheque.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado')" ng-disabled="vm.cheque.retirado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Vales</span>
+     </td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.vales.contado" ng-change="vm.calculateType('vales')">	</td>
+     <td> <input readonly select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.vales.calculado" >	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.vales.diferencia" ng-class="{'shortCierre': vm.vales.contado < vm.vales.calculado,
+     'evenCierre': vm.vales.contado === vm.vales.calculado,
+     'overCierre': vm.vales.contado > vm.vales.calculado}" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.vales.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado')" ng-disabled="vm.vales.retirado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Tran.</span>
+    </td>
+    <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.transferencia.contado" ng-change="vm.calculateType('transferencia')">	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.transferencia.calculado" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.transferencia.diferencia" ng-class="{'shortCierre': vm.transferencia.contado < vm.transferencia.calculado,
+     'evenCierre': vm.transferencia.contado === vm.transferencia.calculado,
+     'overCierre': vm.transferencia.contado > vm.transferencia.calculado}" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.transferencia.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado')" ng-disabled="vm.transferencia.retirado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Totales</span>
+    </td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.totales.contado" readonly></td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.totales.calculado" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.totales.diferencia" ng-class="{'shortCierre': vm.totales.contado < vm.totales.calculado,
+     'evenCierre': vm.totales.contado === vm.totales.calculado,
+     'overCierre': vm.totales.contado > vm.totales.calculado}" readonly>	</td>
+     <td> <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.totales.retirado"   readonly>	</td>
+  </tr>
+  </table>
+</md-whiteframe>
+ </div>
+ <div layout="row" ng-if="vm.activePath === 'review'">
+   <md-whiteframe class="md-whiteframe-19dp" flex layout-align="center" layout-padding layout>
+
+ <table class="table table-condensed  table-bordered  tableCuadre">
+  <tr ng-if="vm.sessionInfo.cuadreOpen.efectivo > 0"><td><span>iniciar EFECTIVO</span></td>
+ <td><span></span>{{vm.sessionInfo.cuadreOpen.efectivo | currency}}</td></tr>
+
+ <tr ng-if="vm.sessionInfo.cuadreOpen.tarjeta > 0"> <td><span>iniciar TARJETA</span></td>
+ <td><span>{{vm.sessionInfo.cuadreOpen.tarjeta | currency}}</span></td></tr>
+ <tr ng-if="vm.sessionInfo.cuadreOpen.cheque > 0"> <td><span>iniciar CHEQUE\</span>	</td>
+ <td><span>{{vm.sessionInfo.cuadreOpen.cheque | currency}}</span>	</td></tr>
+ <tr ng-if="vm.sessionInfo.cuadreOpen.vales > 0"> <td><span>iniciar VALES</span>	</td>
+ <td><span>{{vm.sessionInfo.cuadreOpen.vales | currency}}</span></td></tr>
+ <tr ng-if="vm.sessionInfo.cuadreOpen.transferencia > 0"> <td><span>iniciar TRANSFERENCIA</span>	</td>
+ <td><span>{{vm.sessionInfo.cuadreOpen.transferencia | currency}}</span>	</td></tr>
+  <tr class="totalCuadre"> <td><span>FONDO DE CAJA</span></td>
+ <td>{{vm.salesInfo.totalFondo | currency}}</td></tr>
+
+ <tr class="totalCuadre"> <td><span>VENTAS EN EFECTIVO</span></td>
+ <td>{{vm.salesInfo.ventasCredito | currency}}</td></tr>
+ <tr class="totalCuadre"> <td><span>VENTAS A CREDITO</span></td>
+ <td>{{vm.salesInfo.ventasCredito | currency}}</td></tr>
+
+<tr><td></td><td></td></tr>
+ <tr > <td><span>VENTAS NETAS</span>	</td>
+ <td><span>{{vm.salesInfo.ventasNetas | currency}}</span>	</td></tr>
+ <tr > <td><span>ITBS</span>	</td>
+ <td><span>{{vm.salesInfo.itbs | currency}}</span></td></tr>
+ <tr class="totalCuadre"> <td><span>VENTAS BRUTOS</span></td>
+ <td>{{vm.salesInfo.brutos | currency}}</td></tr>
+
+ <tr class="totalCuadre"> <td><span>TOTAL TRANSACCIONES                                                     </span></td>
+ <td>{{vm.salesInfo.ventasCredito | currency}}</td></tr>
+ <tr><td></td><td></td></tr>
+
+
+ <tr><td><span>Entradas</span></td>
+ <td><span>0</span></td></tr>
+ <tr><td><span>Salidas</span></td>
+ <td><span>0</span></td></tr>
+  <tr class="totalCuadre"> <td><span>MOVIEMIENTOS</span></td>
+ <td></td></tr>
+ </table>
+
+</md-whiteframe>
+ </div>
+  </div>
+</div>
+

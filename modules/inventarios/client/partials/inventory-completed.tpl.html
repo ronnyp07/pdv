@@ -1,0 +1,87 @@
+
+
+<div class="row">
+ <div class="col-sm-12">
+  <div class="form-group pull-right">
+  <button  type="button" class="btn btn-success"
+    ng-click="vm.exportar()">
+    Exportar
+  </button>
+</div>
+</div>
+</div>
+<div class="row">
+ <div class="col-sm-12">
+<!--    <p class="bg-success alertPadding text-center" ng-if=" vm.inventoryServices.saveMode === 'update'">
+     Sucursal: <span> {{vm.authentication.selectedSucural.name}}</span>
+   </p> -->
+
+  <div class="alert  alert-success text-center">
+    <h3 id="inventoryTopHeader">RESUMEN DE SALDOS Y MOVIMIENTOS DE PRODUCTOR</h3>
+     <h4>ALMACEN: {{vm.authentication.selectedSucural.name}} / iNVENTARIO: {{vm.inventoryServices.inventory.name}}</h4>
+  </div>
+ </div>
+</div>
+</br>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box box-solid box-info">
+     <div class="box-header">
+     </div><!-- /.box-header -->
+     <div class="box-body">
+       <md-content flex layout-padding>
+         <div class="inventory-promotion-content">
+
+          <table  class="table table-condensed table-bordered table-striped">
+            <th class="col-1 text-center">#</th>
+            <th class="col-1 text-center">Producto</th>
+            <th class="col-2 text-center">Marca</th>
+            <th class="col-3 text-center">Saldo Inicial</th>
+            <th class="col-4 text-center">Entrada</th>
+            <th class="col-5 text-center">Salida</th>
+            <th class="col-5 text-center">Saldo</th>
+
+            <tr dir-paginate="inventory in vm.inventoryServices.inventory.listinventoryPromotion | itemsPerPage: 50">
+             <td data-title="'#'" header-class="'text-center'" class="text-center col-1" >
+              <span>{{inventory.productId}}</span>
+            </td>
+            <td data-title="'Producto'" header-class="'text-center'" sortable="'name'" class="text-center col-2">{{inventory.name}}</td>
+            <td data-title="'Marca'" header-class="'text-center'" class="text-center col-2">
+              <span>{{inventory.marca }}</span>
+            </td>
+            <td class="text-center col-3" header-class="'text-center'" data-title="'Saldo Inicial'" >
+             <div >
+              <span>
+               {{inventory.saldoIni}}
+             </span>
+           </div>
+         </td>
+         <td data-title="'Entrada'" header-class="'text-center'" class="text-center col-4">
+          <span >{{inventory.entrada}}</span>
+        </td>
+
+        <td data-title="'Salida'" header-class="'text-center'" class="text-center col-5">
+          <span >{{inventory.salida}}</span>
+        </td>
+        <td data-title="'Saldo'" header-class="'text-center'" class="text-center col-5">
+          {{inventory.saldo}}
+        </td>
+      </tr>
+    </table>
+
+    <dir-pagination-controls  on-page-change="loadMore(newPageNumber, oldPageNumer)">
+    </dir-pagination-controls>
+  </div>
+</md-content>
+
+</div><!-- /.box-body -->
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a type="submit" class="btn btn-danger" ng-click="vm.cancelInventory()">Cancelar</a>
+  </div>
+</div>
+</div>
+

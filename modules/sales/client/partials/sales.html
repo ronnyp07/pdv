@@ -1,0 +1,39 @@
+<div style="height: 300px">
+<table class="table table-condensed table-striped table-bordered table-hover"
+ >
+ <tr >
+  <th class="col-1" >Folio</th >
+  <th class="col-2" >
+   Fecha
+  </th >
+  <th class="col-3" >
+   Cliente
+  </th >
+  <th class="col-4" >
+    Total
+  </th>
+  </tr>
+  <tr ng-repeat="sales in vm.salesPedingList " ng-click="vm.pedingSale(sales)">
+    <td>{{sales.salesId}}</td>
+    <td>{{sales.fecha_venta | date}}</td>
+    <td><span ng-if="!sales.customer.name">
+      Consumidor Final
+    </span><span ng-if="sales.customer.name">{{sales.customer.name}} {{sales.customer.lastName}}</span></td>
+    <td>{{sales.total | currency}}</td>
+    <td class="pull-right">
+      </td>
+    </tr>
+  </table>
+   <dir-pagination-controls  on-page-change="vm.loadMore(newPageNumber, oldPageNumer)">
+  </dir-pagination-controls>
+
+  <div ng-show="vm.salesServices.salessList.length == 0 && !vm.salesServices.isLoading" >
+  <div class="alert alert-info" >
+    <p class="text-center" >Ningun resultado fue encontrado en termino a la busqueda '{{vm.salesServices.salesName }}'</p >
+    </div >
+
+  </div >
+  <cc-spinner is-loading="vm.salesServices.isLoading"
+  message="Cargando..." ></cc-spinner>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="wrapper">
+
+  <ng-include src="'modules/core/views/menu.left.template.html'" ></ng-include >
+    <div class="content-wrapper">
+      <section>
+        <div class="container">
+          <div ng-if= "isSaving" class="loadsettings">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+          </div>
+
+        </div>
+      </section>
+    </div>
+    <ng-include src="'modules/core/views/menu.footer.template.html'" ></ng-include >
+</div>
+
+
+
+
+
+

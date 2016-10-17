@@ -1,0 +1,47 @@
+<div class="box box-info">
+  <form name="cajaForm" ng-submit="vm.createCaja(vm.cajaRestServices.caja, cajaForm.$valid)" class="form-horizontal" id="cajaForm"  novalidate>
+    <div class="box-body">
+      <div class="row">
+        <div class="form-group">
+          <md-switch ng-model="vm.cajaRestServices.caja.isActive" aria-label="Activo" class="pull-right">
+           Activo
+         </md-switch>
+       </div>
+       <div class="form-group" ng-if="vm.authentication.sucursal === 'superUser' && vm.cajaRestServices.saveMode != 'update'">
+       <label class="col-sm-2 control-label" >Seleccione Sucursal</label>
+       <div class="col-sm-10">
+       <oi-select
+       oi-options="item.name for item in vm.sucursalList track by item._id"
+       ng-change="vm.search()"
+       ng-model="vm.cajaRestServices.caja.sucursalId"
+       placeholder="Relacionados"
+       ></oi-select>
+       </div>
+     </div>
+       <div class="form-group"
+       ng-class="{'has-error': !cajaForm.name.$valid && ( !cajaForm.$pristine || cajaForm.$submitted),
+       'has-success': cajaForm.name.$valid && ( !cajaForm.$pristine || cajaForm.$submitted)}
+       ">
+       <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
+       <div class="col-sm-10">
+        <input  ng-model="vm.cajaRestServices.caja.name" class="form-control" id="nombre" placeholder="Nombre" required autocomplete="off" name="name">
+        <p class="help-block" ng-show="cajaForm.name.$error.required && ( !cajaForm.$pristine || cajaForm.$submitted)">
+         Este campo es requerido
+       </p>
+     </div>
+   </div>
+</div><!-- /.row -->
+
+
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a type="submit" class="btn btn-danger" ng-click="vm.createModal.hide()">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</div>
+
+
+</div><!-- /.box-body -->
+</form>
+
+</div><!-- /.box -->

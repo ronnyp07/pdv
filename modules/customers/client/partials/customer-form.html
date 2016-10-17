@@ -1,0 +1,138 @@
+<div class="row">
+<div class="col-sm-10 col-sm-offset-1">
+
+ <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Información General">
+        <md-content class="md-padding">
+          <div class="row">
+	<div class="col-sm-6">
+      <h4 class="cusformtitle">Detalle de Cliente</h4>
+	</div>
+	<div class="col-sm-6 text-right">
+	    <i class="fa fa-user cusformicon hidden-xs"></i>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		<md-icon class="form-icon"><i class="fa fa-male iconform hidden-xs"></i></md-icon>
+		      <input ng-model="vm.services.customer.name" type="text" placeholder="Nombre" required>
+		</md-input-container>
+
+	  <md-input-container md-no-float class="md-block cusinput material-txt visible-xs-block, hidden-sm hidden-md hidden-lg">
+		      <input ng-model="services.customer.name" type="text" placeholder="Nombre" required>
+	 </md-input-container>
+
+		
+	</div>
+	<div class="col-sm-6">
+		<md-input-container md-no-float class="md-block cusinput material-txt">
+		      <input ng-model="vm.services.customer.lastName" type="text" placeholder="Apellido" required>
+		</md-input-container>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		      <md-icon><i class="fa fa-phone iconform hidden-xs"></i></md-icon>
+		      <input ng-model="vm.services.customer.phone" name="phone" type="text" placeholder="Telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" class="form-control">
+
+		        <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>  
+           
+		</md-input-container>
+
+		<md-input-container md-no-float class="md-block cusinput visible-xs-block, hidden-sm hidden-md hidden-lg material-txt">
+		      <input ng-model="vm.services.customer.phone" name="Email" type="text" placeholder="Email" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/">
+
+		      <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>  
+		</md-input-container>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		      <md-icon><i class="fa  fa-envelope iconform hidden-xs"></i></md-icon>
+		      <input ng-model="vm.services.customer.email" name="email" type="text" placeholder="E.j email@hotmail.com" class="form-control">           
+		</md-input-container>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		<md-icon class="form-icon"><i class="fa fa-male iconform hidden-xs"></i></md-icon>
+		      <input ng-model="vm.services.customer.address.street" type="text" placeholder="Direccion" required>
+		</md-input-container>
+
+	  <md-input-container md-no-float class="md-block cusinput material-txt visible-xs-block, hidden-sm hidden-md hidden-lg">
+		      <input ng-model="vm.services.customer.address.street" type="text" placeholder="Direccion" required>
+	 </md-input-container>
+
+		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+      <h4 class="cusformtitle">Razon Social</h4>
+	</div>
+<!-- 	<div class="col-sm-6 text-right">
+	    <i class="fa fa-car cusformicon hidden-xs"></i>
+	</div> -->
+
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+   <md-switch class="md-primary material-txt" md-no-ink aria-label="Switch No Ink" ng-model="vm.services.customer.autorizedCredit">
+    Autorizar Credito
+  </md-switch>
+	</div>
+	<div class="col-sm-6">
+		<md-input-container md-no-float class="md-block cusinput material-txt">
+		      <input ng-model="vm.services.customer.autorizedAmmount" type="text" placeholder="E.j 10,000">
+		</md-input-container>
+	</div>
+</div>
+
+<!-- <div class="row">
+	<div class="col-sm-6">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		      <md-icon><i class="fa  fa-calendar-o iconform hidden-xs"></i></md-icon>
+		      <input ng-model="services.selectedCar.year" type="text" placeholder="Año">
+		</md-input-container>
+
+		<md-input-container md-no-float class="md-block cusinput visible-xs-block, hidden-sm hidden-md hidden-lg">
+		      <input ng-model="services.selectedCar.year" type="text" placeholder="Año">
+		</md-input-container>
+	</div>
+	<div class="col-sm-6">
+		<md-input-container md-no-float class="md-block cusinput material-txt">
+		      <input ng-model="services.selectedCar.cilindro" type="text" placeholder="Cilindro">
+		</md-input-container>
+	</div>
+</div>
+ -->
+        </md-content>
+      </md-tab>
+      <md-tab label="Ventas">
+        <md-content class="md-padding">
+          <p>Listado de ventas</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+
+
+<div class="row">
+	<div class="col-sm-12 text-center">
+     <md-button class="md-raised md-primary" ng-click="vm.save()">Guardar</md-button>
+	</div>
+</div>
+</div>
+</div>
+
+

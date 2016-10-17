@@ -1,0 +1,313 @@
+<div class="box box-info">
+  <form name="productForm" ng-submit="vm.saveProduct(vm.productServices.product, productForm.$valid)" id="productForm"  novalidate>
+    <div class="box-body">
+      <div class="col-sm-12">
+        <div class="row">
+         <div class="col-sm-3">
+          <fieldset>
+            <div class="form-group text-center">
+              <img data-ng-src="{{vm.imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+            </div>
+            <div class="text-center form-group" ng-if="!vm.uploader.queue.length">
+              <span class="btn btn-default btn-file">
+                Subir Imagen <input ng-model="vm.productServices.product.picturesURL" type="file" nv-file-select uploader="vm.uploader" >
+              </span>
+            </div>
+            <div class="text-center form-group" ng-if="vm.uploader.queue.length">
+
+             <a class="btn btn-danger btn-sm" data-ng-click="vm.cancel()"><i class="fa fa-trash"></i></a>
+           </div>
+           <div data-ng-show="success" class="text-center text-success">
+            <strong>Profile Picture Changed Successfully</strong>
+          </div>
+          <div data-ng-show="error" class="text-center text-danger">
+            <strong data-ng-bind="error"></strong>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <md-switch ng-model="vm.productServices.product.isActive" aria-label="Activo" class="text-center checkMargin">
+               Activo
+             </md-switch>
+           </div>
+         </div>
+
+         <div class="form-group">
+          <div class="col-sm-12">
+            <md-switch ng-model="vm.productServices.product.isPOS" aria-label="Activo" class="text-center checkMargin">
+             Visualizar en POS
+           </md-switch>
+         </div>
+       </div>
+       <div class="form-group">
+          <div class="col-sm-12">
+            <md-switch ng-model="vm.productServices.product.applyTax" aria-label="Activo" class="text-center checkMargin">
+             Aplicar Impuesto
+           </md-switch>
+         </div>
+       </div>
+     </fieldset>
+   </div>
+   <div class="col-sm-9">
+    <div class="row">
+     <div class="col-sm-6">
+      <div class="form-group" ng-if="vm.authentication.sucursal === 'superUser' && vm.productServices.saveMode != 'update'">
+       <label class="control-label" >Seleccione Sucursal</label>
+       <oi-select
+       oi-options="item.name for item in vm.sucursalList track by item._id"
+       ng-change="vm.search()"
+       ng-model="vm.productServices.product.sucursalId"
+       placeholder="Relacionados"
+       ></oi-select>
+     </div>
+   </div>
+ </div>
+
+ <div class="row">
+  <div class="col-sm-6">
+    <div class="form-group"
+    ng-class="{'has-error': !productForm.name.$valid && ( !productForm.$pristine || productForm.$submitted),
+    'has-success': productForm.name.$valid && ( !productForm.$pristine || productForm.$submitted)}
+    ">
+    <label class="control-label" >Nombre</label>
+    <input type="text" ng-model="vm.productServices.product.name" id="name" name="name" autocomplete="off" class="form-control" required>
+    <p class="help-block" ng-show="productForm.name.$error.required && ( !productForm.$pristine || productForm.$submitted)">
+     Este campo es requerido
+   </p>
+ </div>
+</div>
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label" for="patientPolisa">Unid. Medida</label>
+    <input type="text" ng-model="vm.productServices.product.uMedida" placeholder="Unidad de Medida" uib-typeahead="param._id as param.name for param in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Unidad Medida')"
+    typeahead-on-select="onSelectDoctor($item, $model, $label)"
+    typeahead-no-results="noResults" class="form-control">
+  </div>
+</div>
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Categoria</label>
+      <input type="text" ng-model="vm.productServices.product.category" placeholder="Categoria" uib-typeahead="param._id as param.name for param in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Categoria')"
+      typeahead-on-select="onSelectDoctor($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+    </div>
+    <div ng-if="noResults">
+      No Results Found!
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Presentacion</label>
+      <input type="text" ng-model="vm.productServices.product.presentation" placeholder="Categoria" uib-typeahead="param._id as param.name for param in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Presentacion')"
+      typeahead-on-select="onSelectDoctor($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+    </div>
+  </div>
+</div><!-- /.row -->
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Marca</label>
+      <input type="text" ng-model="vm.productServices.product.brand" placeholder="Categoria" uib-typeahead="param._id as param.name for param in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Marcas Producto')"
+      typeahead-on-select="onSelectDoctor($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label">Codigo Barra</label>
+      <input type="text" data-ng-model="vm.productServices.product.bardCode" id="bardCode" name="bardCode" autocomplete="off" class="form-control">
+    </div>
+  </div>
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label">Precio Compra</label>
+      <input type="text" data-ng-model="vm.productServices.product.cost" id="cost" name="cost" autocomplete="off" class="form-control" ui-number-mask="2">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Precio Venta</label>
+      <input type="text" data-ng-model="vm.productServices.product.price" id="price" name="price" autocomplete="off" class="form-control" ui-number-mask="2">
+    </div>
+  </div>
+</div><!-- /.row -->
+<div class="row">
+ <div class="col-sm-12">
+  <div class="box box-danger">
+    <div class="box-header">
+      <h3 class="box-title">
+        <md-checkbox class="noMarginBotton" ng-model="vm.productServices.product.warehouseControl" aria-label="Checkbox 1">
+         Control de Almacen
+       </md-checkbox>
+     </h3>
+   </div>
+   <div class="box-body">
+     <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="control-label">Stuck Minimano</label>
+          <input type="Number" data-ng-model="vm.productServices.product.minimumStock" min="0" id="minimumStock" name="minimumStock" autocomplete="off" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="control-label">Stuck Maximo</label>
+          <input type="Number" data-ng-model="vm.productServices.product.maximumStock" min="0" id="maximumStock" name="maximumStock" autocomplete="off" class="form-control">
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="control-label">Stuck</label>
+          <input type="Number" data-ng-model="vm.productServices.product.inStock" min="0" id="patientPolisa" name="inStuck" autocomplete="off" class="form-control" >
+        </div>
+      </div>
+    </div><!-- /.row -->
+    <div class="row">
+     <div class="col-sm-12">
+      <md-checkbox ng-model="vm.productServices.product.productPromotion" aria-label="COMBO o PROMOCION">
+       Este producto es un COMBO o PROMOCION
+     </md-checkbox>
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- end off col-8-->
+</div><!-- /.row -->
+<div class="row" ng-if="vm.productServices.product.productPromotion">
+  <div class="col-sm-12">
+    <div class="box box-solid box-info">
+     <div class="box-header">
+      <h3 class="box-title">
+        Indicar el o los productos que forman parte de este COMBO o PROMOCION</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+       <md-content flex layout-padding>
+         <div class="product-promotion-content">
+        <!--  <div class="brn-group pull-right">
+        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
+          <span class="glyphicon glyphicon-ok"></span>
+        </button>
+        <button class="btn btn-default" ng-click="demo.add()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </div>
+      <table ng-table="vm.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+        <colgroup>
+          <col width="70%" />
+          <col width="12%" />
+          <col width="13%" />
+          <col width="5%" />
+        </colgroup>
+        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+          <td title="'Name'" filter="{name: 'text'}" sortable="'name'" ng-switch="demo.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.name}}</span>
+            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="row.name" class="editable-input form-control input-sm" required />
+            </div>
+          </td>
+          <td title="'Age'" filter="{age: 'number'}" sortable="'age'" ng-switch="demo.isEditing" ng-class="age.$dirty ? 'bg-warning' : ''" ng-form="age" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.age}}</span>
+            <div class="controls" ng-class="age.$invalid && age.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="age" ng-model="row.age" class="editable-input form-control input-sm" required/>
+            </div>
+          </td>
+          <td title="'Money'" filter="{money: 'number'}" sortable="'money'" ng-switch="demo.isEditing" ng-class="money.$dirty ? 'bg-warning' : ''" ng-form="money" demo-tracked-table-cell>
+            <span ng-switch-default class="editable-text">{{row.money}}</span>
+            <div class="controls" ng-class="money.$invalid && money.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="money" ng-model="row.money" class="editable-input form-control input-sm" required/>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+          </td>
+        </tr>
+      </table>
+    -->
+
+    <table class="table table-bordered table-hover table-condensed">
+     <th class="col-1">Producto</th>
+     <th class="col-2">Cantidad</th>
+     <th class="col-3">Costo</th>
+     <th class="col-4">Precio</th>
+     <th class="col-5">Importe</th>
+
+     <tr ng-repeat="product in vm.productServices.product.listProductPromotion">
+      <td data-title="'#'">
+        <span>{{product.name}}</span>
+      </td>
+      <td>
+       <div ng-if="vm.editMode && (product._id === vm.productServices.tempSelectedProduct._id)">
+        <input class="form-control" id="editable" type="Number" ng-model="vm.product.Editvalue" />
+        <a class="btn btn-sm btn-success" ng-click="vm.saveField($index, product);vm.editMode = fase"><span>
+         Guardar
+       </span></a>
+     </div>
+     <div ng-if="!vm.editMode">
+      <a class="btn btn-sm btn-success" ng-click="vm.editMode = true; vm.editAppKey(product)"><span>
+       {{product.qt}}
+     </span></a>
+   </div>
+ </td>
+ <td data-title="'Costo'">
+  <span >{{product.cost | currency }}</span>
+</td>
+
+<td data-title="'Costo'">
+  <span >{{product.price | currency}}</span>
+</td>
+<td data-title="'Pago'">
+  {{product.total | currency}}
+</td>
+<td class="pull-right">
+  <div>
+    <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="parameter.systemParam"><i class="fa fa-trash"
+      ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+      ng-bootbox-confirm-action="parameter.systemParam || vm.deletePromoItem($index)"></i></a>
+    </div>
+  </td>
+</tr>
+</table>
+</div>
+</md-content>
+<div class="form-group">
+  <div class="col-sm-1">
+   <input type="Number" ng-model="vm.product.qt" class="form-control">
+
+ </div>
+ <div class="col-sm-11">
+   <input type="text" ng-model="vm.productServices.product.promotionItems" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in  vm.productServices.getProductFilter($viewValue)"
+   typeahead-on-select="vm.selectedProduct($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+ </div>
+
+ <label class="control-label" for="patientPolisa">Buscar producto para agregar a COMBO o PROMOCION</label>
+</div>
+</div><!-- /.box-body -->
+</div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a ng-click="vm.cancelForm()" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-success">Guardar/Salir</button>
+  </div>
+</div>
+
+</div>
+</div><!-- /.box-body -->
+</form>
+</div><!-- /.box -->

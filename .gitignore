@@ -9,20 +9,19 @@ Thumbs.db
 # ==========================
 .nodemonignore
 .sass-cache/
-node_modules/
-public/lib/
 app/tests/coverage/
-.bower-*/
 .idea/
 coverage/
 
 # MEAN.js app and assets
 # ======================
-public/dist/
 uploads
 modules/users/client/img/profile/uploads
+<<<<<<< HEAD
 config/env/local.js
 config/env/local-*.js
+=======
+>>>>>>> lost_changes
 *.pem
 
 # Ignoring MEAN.JS's gh-pages branch for documenation

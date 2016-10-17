@@ -1,0 +1,98 @@
+<md-whiteframe ng-if="!vm.salesServices.printMode"
+	id="pagoEfectivoDetails" class="md-whiteframe-1dp cartFrame1"   flex layout-padding layout >
+	<div id="pagoEfectivoDetailsFrame">
+	<!-- <div layout="row" column >
+        <div flex>
+		<span class="pagoLabel">Tipo de Pago:</span>
+		</div>
+	    <div flex class="text-right">
+		<select
+             class="form-control"
+             name="tipoPago"
+             id="tipoPago"
+             ng-options="item._id as item.name for item in vm.tipoPagoList"
+             data-ng-model = "vm.product.tipoPago">
+             </select>
+	  </div>
+	</div> -->
+	<div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Total</span>
+		</div>
+	    <div flex class="text-right">
+	   <span class="cartSpan">{{vm.product.total | currency}}</span>
+	  </div>
+	</div>
+	<div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Efectivo</span>
+		</div>
+	    <div flex class="text-right">
+	      <input select-on-click ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.payOrder(vm.product.efectivo, vm.parameterServices.paramEnum.details.tipo_sales_pago_efectivo)" id="pagoResult" type="number" min="0" class="form-control" ng-model="vm.product.efectivo">
+	  </div>
+	</div>
+  <div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Tarjeta</span>
+		</div>
+	    <div flex class="text-right">
+	      <input select-on-click ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"
+
+	      ng-change="vm.payOrder(vm.product.tarjeta, vm.parameterServices.paramEnum.details.tipo_sales_pago_tarjeta)" id="pagoResult" type="number" min="0" class="form-control" ng-model="vm.product.tarjeta">
+	  </div>
+	</div>
+	<div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Cheque</span>
+		</div>
+	    <div flex class="text-right">
+	      <input ng-change="vm.payOrder(vm.product.cheque, vm.parameterServices.paramEnum.details.tipo_sales_pago_cheque)" id="pagoResult" type="number" min="0" class="form-control" ng-model="vm.product.cheque">
+	  </div>
+	</div>
+	<div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Tranferencia</span>
+		</div>
+	    <div flex class="text-right">
+	      <input ng-change="vm.payOrder(vm.product.transferencia, vm.parameterServices.paramEnum.details.tipo_sales_pago_tran)" id="pagoResult" type="number" min="0" class="form-control" ng-model="vm.product.transferencia">
+	  </div>
+	</div>
+	<div layout="row" column>
+        <div flex>
+		<span class="cartSpan">Vales</span>
+		</div>
+	    <div flex class="text-right">
+	      <input ng-change="vm.payOrder(vm.product.vales, vm.parameterServices.paramEnum.details.tipo_sales_pago_vales)" id="pagoResult" type="number" min="0" class="form-control" ng-model="vm.product.vales">
+	  </div>
+	</div>
+	<hr>
+	<div layout="row" column >
+        <div flex>
+		<span class="pagoLabel">Pagado:</span>
+		</div>
+	    <div flex class="text-right">
+	   <span class="pagoLabelchange">{{vm.product.pagado | currency}}</span>
+	  </div>
+	</div>
+	<div layout="row" column>
+        <div flex>
+		<span class="pagoLabel">Cambio:</span>
+		</div>
+	    <div flex class="text-right">
+	   <span class="pagoLabelchange">{{vm.product.change | currency}}</span>
+	  </div>
+	</div>
+<br>
+	<div layout="row" column>
+	    <div flex class="text-right">
+	    <a class="btn pagoButtonCancel" ng-click="vm.cancelOrder()">
+                 <i class="fa fa-chevron-left"></i>
+                 Atras
+                  </a>
+	    <a class="btn pagoButtonSuccess" ng-if="(vm.product.efectivo >= vm.product.total) || (vm.product.tarjeta >= vm.product.total) || (vm.product.cheque >= vm.product.total)" ng-click="vm.saveOrder(vm.product)">
+                 <i class="fa fa-inbox"></i> Cobrar
+                  </a>
+	  </div>
+	</div>
+	</div>
+	</md-whiteframe>

@@ -17,9 +17,15 @@ module.exports = {
         'public/lib/angular-messages/angular-messages.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+<<<<<<< HEAD
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js'
         // endbower
+=======
+        'public/lib/angular-file-upload/angular-file-upload.js',
+        'modules/parameters/tests/client/**/*.js',
+        'modules/parameters/tests/server/**/*.js'
+>>>>>>> lost_changes
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

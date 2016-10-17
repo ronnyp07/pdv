@@ -2,6 +2,7 @@
   'use strict';
 
   var applicationModuleName = 'mean';
+<<<<<<< HEAD
 
   var service = {
     applicationModuleName: applicationModuleName,
@@ -10,6 +11,31 @@
   };
 
   window.ApplicationConfiguration = service;
+=======
+  var applicationModuleVendorDependencies = [
+  'ngResource',
+  'ngAnimate',
+  'ui.router',
+  'ui.bootstrap',
+  'ui.utils',
+  'angularFileUpload',
+  'ngTable',
+  'mgcrea.ngStrap',
+  'ngMaterial',
+  'ngBootbox',
+  'ui.select',
+  'ui.mask',
+  'ui.utils.masks',
+  'angular-cache',
+  'oi.select',
+  'angular-ladda',
+  'angularSpinner',
+  'angularUtils.directives.dirPagination',
+  'infinite-scroll',
+  'luegg.directives',
+  'onScreenKeyboard',
+  'angular-virtual-keyboard'];
+>>>>>>> lost_changes
 
   // Add a new vertical module
   function registerModule(moduleName, dependencies) {

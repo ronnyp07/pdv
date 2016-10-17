@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Turnocajas</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="turnocaja in vm.turnocajas"
+       data-ui-sref="turnocajas.view({ turnocajaId: turnocaja._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="turnocaja.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="turnocaja.user" data-ng-bind="turnocaja.user.displayName"></span>
+        <span data-ng-if="!turnocaja.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="turnocaja.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.turnocajas.$resolved && !vm.turnocajas.length">
+    No Turnocajas yet, why don't you <a data-ui-sref="turnocajas.create">create one</a>?
+  </div>
+</section>

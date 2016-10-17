@@ -1,0 +1,158 @@
+
+<md-whiteframe ng-if="!vm.salesServices.printMode"
+ id="pagoCredito"
+ class="md-whiteframe-1dp cartFrame1"    layout-padding layout >
+<div id="pagoCredito">
+	<!-- <div layout="row" column >
+        <div flex>
+		<span class="pagoLabel">Tipo de Pago:</span>
+		</div>
+	    <div flex class="text-right">
+		<select
+             class="form-control"
+             name="tipoPago"
+             id="tipoPago"
+             ng-options="item._id as item.name for item in vm.tipoPagoList"
+             data-ng-model = "vm.product.tipoPago">
+             </select>
+	  </div>
+	</div> -->
+	<div layout="row" column>
+		<div flex>
+			<span class="cartSpan">Total</span>
+		</div>
+		<div flex class="text-right">
+			<span class="cartSpan cartSpanColor">{{vm.product.total | currency}}</span>
+		</div>
+	</div>
+	<div layout="row" column>
+		<div flex>
+			<span class="cartSpan">Abonar</span>
+		</div>
+		<div flex class="text-right">
+		  <select
+             class="form-control"
+             name="tipoPago"
+             id="tipoPago"
+             ng-options="item._id as item.name for item in vm.tipoPagoList"
+             data-ng-model = "vm.product.tipoPago">
+            </select>
+			<input ng-change="vm.payOrder(vm.pay, vm.product.tipoPago);" id="pagoResult" type="number" min="0" class="form-control" ng-model-options="{ debounce: 300 }" ng-model="vm.pay">
+		</div>
+	</div>
+	<div layout="row" column >
+		<div flex>
+			<span class="pagoLabel">Pagado:</span>
+		</div>
+		<div flex class="text-right">
+			<span class="pagoLabelchange">{{vm.totalPagado | currency}}</span>
+		</div>
+	</div>
+	<div layout="row" column>
+		<div flex>
+			<span class="pagoLabel">Crédito:</span>
+		</div>
+		<div flex class="text-right">
+			<span class="pagoLabelchange">{{vm.product.credito | currency}}</span>
+		</div>
+	</div>
+	<br/>
+	<div layout="row" column>
+		<div flex= "50">
+		 <div layout="row" column style=" margin-bottom: 5px;">
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="40"  flex-gt-md="40"  flex-lg="35">
+			<span class="pagoLabel">#. Pago:</span>
+			</div>
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="50"  flex-gt-md="50"  flex-lg="50">
+			 <input  ng-model="vm.product.cantPagos" type="number" min="1" ng-change="vm.setDatePay()" class="salesTxt" id="cantPagos"  required autocomplete="off" name="cantPagos">
+			</div>
+          </div>
+
+          <div layout="row" column style=" margin-bottom: 5px;">
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="40"  flex-gt-md="40"  flex-lg="35">
+			<span class="pagoLabel">Rango:</span>
+			</div>
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="50"  flex-gt-md="50"  flex-lg="50">
+			<select data-ng-model="vm.product.rango" ng-change="vm.setDatePay()" id="proType" class="form-control"  style="" required>
+            <option value="days">Diario</option>
+            <option value="week">Semanal</option>
+            <option value="Q">Quincenal</option>
+            <option value="month">Mensual</option>
+            </select>
+			</div>
+          </div>
+
+          <div layout="row" column style=" margin-bottom: 5px;">
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="40"  flex-gt-md="40"  flex-lg="35">
+			<span class="pagoLabel">%. Int.:</span>
+			</div>
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="50"  flex-gt-md="50"  flex-lg="50">
+			 <input type="number"  ng-model="vm.product.interes" class="salesTxt" id="cantPagos" min="0" ng-change="vm.interesChange()" required autocomplete="off" name="cantPagos">
+			</div>
+          </div>
+
+          <div layout="row" column style=" margin-bottom: 5px;">
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="40"  flex-gt-md="40"  flex-lg="35">
+			<span class="pagoLabel">Interes:</span>
+			</div>
+			<div flex-sm="40"
+  flex-gt-sm="40"  flex-md="50"  flex-gt-md="50"  flex-lg="50">
+			 <span class="pagoLabelchange">{{vm.product.interesAmount | currency}}</span>
+			</div>
+          </div>
+		</div>
+		<div flex= "50">
+<div id="rangoDiv">
+<table class="table table-condensed table-striped table-bordered table-hover">
+ <tr>
+  <th class="col-1" >Pago</th >
+  <th class="col-2" >
+  Fecha
+  </th >
+  <th class="col-3" >
+   Día
+  </th >
+  <th>Cant.</th>
+  </tr >
+
+  <tr ng-repeat="rango in vm.product.rangoList">
+    <td>{{rango.numero}}</td>
+    <td>{{rango.date}}</td>
+    <td>{{rango.day}}</td>
+    <td>{{rango.cantidad  | currency}}</td>
+    </tr>
+  </table>
+  </div>
+		   <!-- <div layout="row" column>
+		   <div flex-sm="70"
+  flex-gt-sm="40"  flex-md="50"  flex-gt-md="50"  flex-lg="50">
+			</div>
+			</div> -->
+		</div>
+   </div>
+   <div ng-if="!vm.salesServices.selectedCustomer"
+   layout="row" column sylte="margin-top: 15px;">
+   	<div flex class="text-center">
+       <span class="pagoLabelchange">Seleccione clienete para acréditar venta</span>
+   	</div>
+   </div>
+   <div layout="row" column sylte="margin-top: 15px;">
+   	<div flex class="text-right">
+   		<a class="btn pagoButtonCancel" ng-click="vm.cancelOrder()">
+   			<i class="fa fa-chevron-left"></i>
+   			Atras
+   		</a>
+   		<a ng-if="vm.salesServices.selectedCustomer" class="btn pagoButtonSuccess" ng-click="vm.saveOrder(vm.product)">
+   			<i class="fa fa-inbox"></i> Cobrar
+   		</a>
+   	</div>
+   </div>
+</div>
+</md-whiteframe>

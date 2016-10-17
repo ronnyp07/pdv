@@ -3,22 +3,28 @@
 /**
  * Module dependencies
  */
-var path = require('path'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  mongoose = require('mongoose'),
-  passport = require('passport'),
-  User = mongoose.model('User');
+ var path = require('path'),
+ errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+ mongoose = require('mongoose'),
+ passport = require('passport'),
+ User = mongoose.model('User'),
+ Log = mongoose.model('Log');
 
 // URLs for which user can't be redirected on signin
 var noReturnUrls = [
+<<<<<<< HEAD
   '/authentication/signin',
   '/authentication/signup'
+=======
+'/authentication/signin',
+'/authentication/signup'
+>>>>>>> lost_changes
 ];
 
 /**
  * Signup
  */
-exports.signup = function (req, res) {
+ exports.signup = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
 
@@ -52,7 +58,7 @@ exports.signup = function (req, res) {
 /**
  * Signin after passport authentication
  */
-exports.signin = function (req, res, next) {
+ exports.signin = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err || !user) {
       res.status(400).send(info);
@@ -72,10 +78,36 @@ exports.signin = function (req, res, next) {
   })(req, res, next);
 };
 
-/**
- * Signout
- */
+/** Signout **/
 exports.signout = function (req, res) {
+  var userId = req.session.passport.user;
+  if(req.session.passport.user){
+    Log.find({createdUser:userId, active: true}).exec(function(err, data){
+     if(data){
+      Log.findById(data[0]._id, function(err, p) {
+        if (!p)
+          console.log('no session');
+        else {
+    // do your updates here
+    p.active = false;
+    p.updatedDate = new Date();
+    p.save(function(err) {
+      if (err)
+        console.log('error');
+      else
+        console.log('success');
+    });
+  }
+});
+}else{
+  req.logout();
+  res.redirect('/');
+}
+});
+  }else{
+    req.logout();
+    res.redirect('/');
+  }
   req.logout();
   res.redirect('/');
 };
@@ -83,7 +115,7 @@ exports.signout = function (req, res) {
 /**
  * OAuth provider call
  */
-exports.oauthCall = function (strategy, scope) {
+ exports.oauthCall = function (strategy, scope) {
   return function (req, res, next) {
     // Set redirection path on session.
     // Do not redirect to a signin or signup page
@@ -98,7 +130,7 @@ exports.oauthCall = function (strategy, scope) {
 /**
  * OAuth callback
  */
-exports.oauthCallback = function (strategy) {
+ exports.oauthCallback = function (strategy) {
   return function (req, res, next) {
     // Pop redirect URL from session
     var sessionRedirectURL = req.session.redirect_to;
@@ -125,7 +157,7 @@ exports.oauthCallback = function (strategy) {
 /**
  * Helper function to save or update a OAuth user profile
  */
-exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
+ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
   if (!req.user) {
     // Define a search query fields
     var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
@@ -203,7 +235,7 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
 /**
  * Remove OAuth provider
  */
-exports.removeOAuthProvider = function (req, res, next) {
+ exports.removeOAuthProvider = function (req, res, next) {
   var user = req.user;
   var provider = req.query.provider;
 

@@ -7,6 +7,7 @@ var config = require('../config'),
   chalk = require('chalk'),
   path = require('path'),
   mongoose = require('mongoose');
+  require('mongoose-middleware').initialize(mongoose);
 
 // Load the mongoose models
 module.exports.loadModels = function (callback) {

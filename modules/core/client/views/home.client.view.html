@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <section>
   <div class="jumbotron text-center">
     <div class="row">
@@ -78,7 +79,68 @@
         </li>
       </ul>
     </p>
+=======
+<section class="content">
+  <div class="row">
+    <div class="col-sm-6 col-md-3 col-md-offset-1 ">
+      <!-- Profile Image -->
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+         <img data-ng-src="{{vm.userimageURL}}" alt="{{vm.authentication.user.displayName}}" class="profile-user-img img-responsive img-circle">
+
+      <h3 class="profile-username text-center">{{vm.authentication.user.displayName}}</h3>
+      <p class="text-muted text-center"><span ng-if="vm.authentication.user.isSuperUser">Administrador de Sistema</span><span ng-if="!vm.authentication.user.isSuperUser">Usuario Limitado</span></p>
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+              <b>Email</b> <a class="pull-right">{{vm.authentication.user.email}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Sucursales Asignadas</b> <a class="pull-right">{{vm.authentication.user.sucursals.length}}</a>
+            </li>
+            <!-- <li class="list-group-item">
+              <b>Friends</b> <a class="pull-right">13,287</a>
+            </li> -->
+          </ul>
+
+          <a href="/api/auth/signout" target="_self" class="btn btn-primary btn-block"><b>Salir</b></a>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div>
+    <div class="col-sm-6 col-md-7">
+ <!-- TABLE: LATEST ORDERS -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Acceso a Sucursales</h3>
+
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="table-responsive">
+                    <table class="table no-margin">
+                      <thead>
+                        <tr>
+                          <th class="col-1">Logo</th>
+                          <th class="col-1">Sucursal</th>
+                          <th class="col-3">Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="sucursal in vm.user.permision">
+                          <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                          <td>{{sucursal.sucursalId.name}}</td>
+                          <td><a ng-click="vm.setSucursal(sucursal)" class="btn btn-sm btn-info btn-flat pull-left">Entrar</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div><!-- /.table-responsive -->
+                </div><!-- /.box-body -->
+                <div ng-if="vm.user.isSuperUser" class="box-footer clearfix">
+                  <a ng-click="vm.setSucursal('superUser')" class="btn btn-sm btn-success btn-flat pull-left">Entrar Como Super Usuario</a>
+                </div><!-- /.box-footer -->
+              </div><!-- /.box -->
+
+    </div>
+
+
+>>>>>>> lost_changes
   </div>
-  <br>Enjoy &amp; Keep Us Updated,
-  <br>The MEAN.JS Team.
 </section>

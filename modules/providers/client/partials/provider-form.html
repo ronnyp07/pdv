@@ -1,0 +1,137 @@
+<div class="box box-info">
+  <form name="parameterForm" ng-submit="createProvider(vm.paramRestServices.provider, parameterForm.$valid)" class="form-horizontal" id="parameterForm"  novalidate>
+    <div class="box-body">
+      <div class="row">
+        <div class="form-group">
+          <md-switch ng-model="vm.paramRestServices.provider.isActive" aria-label="Activo" class="pull-right">
+           Activo
+         </md-switch>
+       </div>
+       <div class="form-group"
+       ng-class="{'has-error': !parameterForm.name.$valid && ( !parameterForm.$pristine || parameterForm.$submitted),
+       'has-success': parameterForm.name.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+       ">
+       <label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
+       <div class="col-sm-10">
+        <input  ng-model="vm.paramRestServices.provider.name" class="form-control" id="nombre" placeholder="Nombre" required autocomplete="off" name="name">
+        <p class="help-block" ng-show="parameterForm.name.$error.required && ( !parameterForm.$pristine || parameterForm.$submitted)">
+         Este campo es requerido
+       </p>
+     </div>
+   </div>
+   <div class="form-group" ng-class="{'has-error': !parameterForm.RNC.$valid && ( !parameterForm.$pristine || parameterForm.$submitted),
+   'has-success': parameterForm.RNC.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+   ">
+   <label for="RNC" class="col-sm-2 control-label">RNC</label>
+   <div class="col-sm-10">
+    <input  ng-model="vm.paramRestServices.provider.RNC" class="form-control" id="RNC" name="RNC" placeholder="Ej. 00123940" autocomplete="false">
+  </div>
+</div>
+<div class="form-group" ng-class="{'has-error': !parameterForm.razonSocial.$valid && ( !parameterForm.$pristine || parameterForm.$submitted),
+'has-success': parameterForm.razonSocial.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+">
+<label for="razonSocial" class="col-sm-2 control-label">Razón Social</label>
+<div class="col-sm-10">
+<input  ng-model="vm.paramRestServices.provider.razonSocial" class="form-control" id="razonSocial" name="razonSocial" id="razonSocial" placeholder="Razon Social" autocomplete="false">
+</div>
+</div>
+<div class="form-group" ng-class="{'has-error': !parameterForm.contact.$valid && ( !parameterForm.$pristine || parameterForm.$submitted),
+'has-success': parameterForm.contact.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+">
+<label for="contact" class="col-sm-2 control-label">Contacto</label>
+<div class="col-sm-10">
+  <input ng-model="vm.paramRestServices.provider.contact" class="form-control" id="contact" name="contact" placeholder="Entrar Nombre Contacto" autocomplete="false">
+</div>
+</div>
+</div><!-- /.row -->
+
+
+<div class="row">
+  <div class="form-group"
+  ng-class="{'has-error': (parameterForm.cellphone.$invalid || parameterForm.telefono.$invalid)  && (!parameterForm.$pristine || parameterForm.$submitted),
+  'has-success': (parameterForm.cellphone.$valid || parameterForm.telefono.$valid) && ( !parameterForm.$pristine || parameterForm.$submitted)}">
+  <label for="cellphone" class="col-sm-2 control-label">Celular</label>
+  <div class="col-sm-4">
+    <input ng-model="vm.paramRestServices.provider.phones.cellphone" class="form-control" id="cellphone" name="cellphone" placeholder="Ej. 8090000000" type="text" data-inputmask="'mask': '(999) 999-9999'"  autocomplete="off" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/">
+
+    <p class="help-block" ng-show="parameterForm.cellphone.$invalid && (!parameterForm.$pristine || parameterForm.$submitted)">
+     Numero Invalido
+   </p>
+
+   <!-- <input ng-model="vm.services.customer.phone" name="phone" type="text" placeholder="Telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" class="form-control"> -->
+
+
+ </div>
+
+ <label for="telefono" class="col-sm-2 control-label">Telefono</label>
+ <div class="col-sm-4">
+  <input ng-model="vm.paramRestServices.provider.phones.offices" class="form-control" id="telefono" name="telefono" placeholder="Ej. 8090000000" type="text" data-inputmask="'mask': '(999) 999-9999'"  autocomplete="off" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/">
+
+  <p class="help-block" ng-show="parameterForm.telefono.$invalid && (!parameterForm.$pristine || parameterForm.$submitted)">
+   Numero Invalido
+ </p>
+</div>
+</div>
+</div><!-- /.row -->
+
+<div class="row">
+  <div class="form-group" ng-class="{'has-error':  !parameterForm.email.$valid && (!parameterForm.$pristine || parameterForm.$submitted),
+  'has-success': parameterForm.email.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+  ">
+  <label for="providerEmail" class="col-sm-2 control-label">Email</label>
+  <div class="col-sm-10">
+    <input type="email" ng-model="vm.paramRestServices.provider.email" class="form-control" id="providerEmail" name="email" placeholder="Ej. contact@hotmail.com" autocomplete="off">
+    <p class="help-block" ng-show="parameterForm.email.$error.email && (!parameterForm.$pristine || parameterForm.$submitted)">
+      Correo electronico invalido EJ: xxx@hotmail.com
+    </p>
+  </div>
+</div>
+</div><!-- /.row -->
+<div class="row">
+  <div class="form-group" ng-class="{'has-error':  !parameterForm.providerDireccion.$valid && (!parameterForm.$pristine || parameterForm.$submitted),
+  'has-success': parameterForm.providerDireccion.$valid && ( !parameterForm.$pristine || parameterForm.$submitted)}
+  ">
+  <label class="col-sm-2 control-label">Dirección</label>
+  <div class="col-sm-10">
+    <textarea class="form-control" id="providerDireccion" name="providerDireccion" ng-model="vm.paramRestServices.provider.address" rows="3" placeholder="Entrar Direccion" autocomplete="false"></textarea>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a type="submit" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</div>
+
+
+</div><!-- /.box-body -->
+</form>
+
+</div><!-- /.box -->
+
+
+<!-- <form class="form-horizontal">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox"> Remember me
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- /.box-body -->

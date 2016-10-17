@@ -77,6 +77,20 @@ var UserSchema = new Schema({
     type: String,
     required: 'Provider is required'
   },
+   isSuperUser: {
+    type: Boolean,
+    trim: true
+  },
+  sucursals: [{
+    type: Schema.ObjectId,
+    ref: 'Sucursal'
+  }],
+  permision: [{
+    sucursalId: {
+    type: Schema.ObjectId,
+    ref: 'Sucursal'},
+    permision: []
+  }],
   providerData: {},
   additionalProvidersData: {},
   roles: {

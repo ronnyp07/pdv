@@ -1,0 +1,64 @@
+<div>
+  <section class="content">
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <!-- Apply any bg-* class to to the icon to color it -->
+        <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Proveedores</span>
+          <span class="info-box-number">{{total}}</span>
+          <!-- {{vm.test}} -->
+        </div><!-- /.info-box-content -->
+      </div><!-- /.info-box -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listado de Proveedores</h3>
+
+          <a class="btn btn-app pull-right" ng-click="vm.showCreateProviderModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-plus"></i> Agregar
+          </a>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+         <table ng-table="tableParams" class="table table-condensed table-striped table-bordered table-hover">
+          <tr ng-repeat="provider in $data"">
+            <td data-title="'Nombre'" filter="{name: 'text'}">{{provider.name}}</td>
+            <td data-title="'Contacto'">{{provider.contact}}</td>
+            <td data-title="'Telefono'">
+              <span>{{provider.phones.offices | phonenumber}}</span>
+
+
+              <!-- <span ng-if="provider.phones.cellphone && provider.phones.offices"> Tel. {{provider.phones.offices | phonenumber}} / Cel. {{ provider.phones.cellphone | phonenumber}}</span> -->
+              <span ng-if="!provider.phones.offices && !provider.phones.cellphone"> No registro</span>
+            </td>
+            <td data-title="'Correo'">
+              {{provider.email}}
+            </td>
+             <td data-title="'Estado'">
+                  <span ng-if="provider.isActive" class="label label-info">Activo</span>
+                  <span ng-if="!provider.isActive" class="label label-danger">Inactivo</span>
+              </td>
+            <td class="pull-right">
+              <div>
+                <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="provider.systemParam"><i class="fa fa-trash"
+                  ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+                  ng-bootbox-confirm-action="provider.systemParam || vm.delete(provider)"></i></a>
+                  <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="provider.systemParam"><i class="fa fa-edit"    ng-click="provider.systemParam || vm.showCreateProviderModal(provider)"></i></a>
+
+                </div>
+
+              </td>
+
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

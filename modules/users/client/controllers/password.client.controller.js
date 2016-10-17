@@ -5,6 +5,7 @@
     .module('users')
     .controller('PasswordController', PasswordController);
 
+<<<<<<< HEAD
   PasswordController.$inject = ['$scope', '$stateParams', '$http', '$location', 'Authentication', 'PasswordValidator'];
 
   function PasswordController($scope, $stateParams, $http, $location, Authentication, PasswordValidator) {
@@ -19,6 +20,12 @@
     if (vm.authentication.user) {
       $location.path('/');
     }
+=======
+    //If user is signed in then redirect back home
+    // if ($scope.authentication.user) {
+    //   $location.path('/');
+    // }
+>>>>>>> lost_changes
 
     // Submit forgotten password account id
     function askForPasswordReset(isValid) {

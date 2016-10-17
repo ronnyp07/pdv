@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Abonos</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="abono in vm.abonos"
+       data-ui-sref="abonos.view({ abonoId: abono._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="abono.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="abono.user" data-ng-bind="abono.user.displayName"></span>
+        <span data-ng-if="!abono.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="abono.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.abonos.$resolved && !vm.abonos.length">
+    No Abonos yet, why don't you <a data-ui-sref="abonos.create">create one</a>?
+  </div>
+</section>

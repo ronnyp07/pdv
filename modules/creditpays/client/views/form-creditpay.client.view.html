@@ -1,0 +1,24 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.creditpay._id ? 'Edit Creditpay' : 'New Creditpay'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.creditpayForm" class="form-horizontal" ng-submit="vm.save(vm.form.creditpayForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.creditpay.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.creditpayForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Creditpay name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.creditpay._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

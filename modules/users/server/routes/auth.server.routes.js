@@ -8,6 +8,7 @@ var passport = require('passport');
 module.exports = function (app) {
   // User Routes
   var users = require('../controllers/users.server.controller');
+  var usersPolicy = require('../policies/admin.server.policy');
 
   // Setting up the users password api
   app.route('/api/auth/forgot').post(users.forgot);
@@ -17,7 +18,8 @@ module.exports = function (app) {
   // Setting up the users authentication api
   app.route('/api/auth/signup').post(users.signup);
   app.route('/api/auth/signin').post(users.signin);
-  app.route('/api/auth/signout').get(users.signout);
+  app.route('/api/auth/signout')
+ .get(users.signout);
 
   // Setting the facebook oauth routes
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
