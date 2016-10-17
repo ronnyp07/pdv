@@ -1,0 +1,73 @@
+<div class="box box-info">
+  <form name="partnerForm" ng-submit="vm.savePartner(vm.partnerServices.partner, partnerForm.$valid)" id="partnerForm"  novalidate>
+    <div class="box-body">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+         <div class="col-sm-3">
+          <fieldset>
+            <div class="form-group text-center">
+              <img data-ng-src="{{vm.imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+            </div>
+            <div class="text-center form-group" ng-if="!vm.uploader.queue.length">
+              <span class="btn btn-default btn-file">
+                Subir Imagen <input ng-model="vm.partnerServices.partner.picturesURL" type="file" nv-file-select uploader="vm.uploader" >
+              </span>
+            </div>
+            <div class="text-center form-group" ng-if="vm.uploader.queue.length">
+             <a class="btn btn-danger btn-sm" data-ng-click="vm.cancel()"><i class="fa fa-trash"></i></a>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <md-switch ng-model="vm.partnerServices.partner.isActive" aria-label="Activo" class="text-center checkMargin">
+               Activo
+             </md-switch>
+           </div>
+         </div>
+     </fieldset>
+   </div>
+<div class="col-sm-9">
+ <div class="row">
+  <div class="col-sm-6">
+    <div class="form-group"
+    ng-class="{'has-error': !partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted),
+    'has-success': partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted)}
+    ">
+    <label class="control-label" >Nombre:</label>
+    <input type="text" ng-model="vm.partnerServices.partner.name" id="name" name="name" autocomplete="off" class="form-control" required>
+    <p class="help-block" ng-show="partnerForm.name.$error.required && ( !partnerForm.$pristine || partnerForm.$submitted)">
+     Este campo es requerido
+   </p>
+ </div>
+</div>
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label" for="patientPolisa">Impuesto:</label>
+    <input type="text" ng-model="vm.partnerServices.partner.imp_Type" id="name" name="name" autocomplete="off" class="form-control">
+  </div>
+</div>
+</div><!-- /.row -->
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Porcentaje impuesto:</label>
+      <input type="text" ng-model="vm.partnerServices.partner.imp_Porcentaje" id="name" name="name" autocomplete="off" class="form-control">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="control-label" for="patientPolisa">Simbolo de Moneda</label>
+      <input type="text" ng-model="vm.partnerServices.partner.moneda" id="name" name="name" autocomplete="off" class="form-control">
+    </div>
+  </div>
+</div><!-- /.row -->
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a ng-click="vm.cancelForm()" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</div>
+
+</div>
+</div><!-- /.box-body -->
+</form>
+</div><!-- /.box -->

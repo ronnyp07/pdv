@@ -1,0 +1,51 @@
+<div layout="row" >
+				<md-whiteframe id="categoryList" class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
+				  <div  id="categoryFader" >
+			      <ul class="nav nav-pills">
+							<li role="presentation" ng-repeat="category in vm.parameterServices.category.ancestors" ng-class="{active :  vm.selectedCategory ===  category}">
+								<a  ng-click="vm.parameterServices.categoryTree(category); vm.setCategoryValue(category); vm.getCategoryProducts(category)" >
+
+									<i class="fa fa-home" ng-if="category === 'Categoria'"></i>
+
+									<span ng-if="category != 'Categoria'">{{category}}</span>
+								</a>
+							</li>
+						</ul>
+</div>
+</md-whiteframe>
+</div>
+<div layout="row">
+	<md-whiteframe id="categoryListDetails"class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
+		<div id="categoryChildren" ng-repeat="children in vm.parameterServices.children">
+			<button  class="btn btn-primary borderRadius" ng-click="vm.getCategoryProducts(children)">
+				{{children.name}}
+			</button>
+		</div>
+	</md-whiteframe>
+</div>
+<div class="row productRowPadding">
+<div class="col-sm-12 productMainContainer" style="height: 500px; overflow-y: auto;" id="productMainContainer"
+ infinite-scroll-parent
+ infinite-scroll-container="'#productMainContainer'"
+ infinite-scroll="vm.loadMoreProduct()"
+ infinite-scroll-distance="1">
+	<div class="col-md-3 col-lg-2 col-sm-3"  id="productItemContainer" ng-repeat="product in vm.productServices.productList">
+		<div ng-click="vm.selectedItem(product)" class="well well-sm productItemContainer2" >
+			<div class="row" >
+				<div>
+					<div class="col-md-12" >
+						<span class="badge bg-green">{{product.price | currency}}</span>
+						<img id="productImg" ng-src="{{ product.picturesURL  | defaultImage: 'modules/core/img/no-imagen.jpg'}}"
+						alt=""
+						class="img-rounded img-responsive " />
+						<p id="ProductP">
+							<i class="fa fa-bookmark-o" ></i >
+								<span class="productItemColor">{{ product.name }}</span>
+							</p>
+						</div >
+					</div>
+				</div>
+			</div >
+		</div >
+</div >
+</div>

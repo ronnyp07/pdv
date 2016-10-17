@@ -4,7 +4,29 @@
 var ApplicationConfiguration = (function () {
   // Init module configuration options
   var applicationModuleName = 'mean';
-  var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'angularFileUpload'];
+  var applicationModuleVendorDependencies = [
+  'ngResource',
+  'ngAnimate',
+  'ui.router',
+  'ui.bootstrap',
+  'ui.utils',
+  'angularFileUpload',
+  'ngTable',
+  'mgcrea.ngStrap',
+  'ngMaterial',
+  'ngBootbox',
+  'ui.select',
+  'ui.mask',
+  'ui.utils.masks',
+  'angular-cache',
+  'oi.select',
+  'angular-ladda',
+  'angularSpinner',
+  'angularUtils.directives.dirPagination',
+  'infinite-scroll',
+  'luegg.directives',
+  'onScreenKeyboard',
+  'angular-virtual-keyboard'];
 
   // Add a new vertical module
   var registerModule = function (moduleName, dependencies) {

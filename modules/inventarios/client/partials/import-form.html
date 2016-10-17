@@ -1,0 +1,65 @@
+<div class="box box-info">
+	<form name="importForm" class="form-horizontal" novalidate>
+		<div class="row">
+			<div class="col-sm-12">
+				<button id="importInventory"
+				ng-click="vm.importCurrentInventory()"
+				class="btn btn-success form-control"
+				ladda="vm.inventoryServices.isLoading">
+				Importar el inventario actual
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Categorias</label>
+				<div class="col-sm-9">
+					<oi-select
+					oi-options="item.name for item in vm.search($query, $selectedAs) track by item._id"
+					ng-model="vm.inventoryServices.importInfo.categories"
+					placeholder="Relacionados"
+					multiple
+					"
+				></oi-select>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+			<label class="col-sm-3 control-label pull-left">Incluir hijos</label>
+			<div class="col-sm-4">
+				<md-switch ng-model="vm.inventoryServices.importInfo." aria-label="Activo" class="pull-left checkMargin">
+				</md-switch>
+			</div>
+		</div>
+	</div>
+</div> -->
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+			<label class="col-sm-3 control-label pull-left">Iniciar en cero</label>
+			<div class="col-sm-4">
+				<md-switch ng-model="vm.inventoryServices.importInfo.resetStock" aria-label="Activo" class="pull-left checkMargin">
+				</md-switch>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12 text-right paddingRight">
+		<a type="submit" class="btn btn-danger" ng-click="cancel()">Cancelar</a>
+		<button
+		ng-click="vm.importCurrentInventory(true)"
+		class="btn btn-primary">
+		<i class="fa fa-archive"></i> Importar</button>
+	</div>
+</div>
+
+</form>
+</div>

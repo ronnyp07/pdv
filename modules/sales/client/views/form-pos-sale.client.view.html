@@ -1,0 +1,167 @@
+  <div class="navbar-header" ng-if ="">
+  	<button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+  		<span class="sr-only">Toggle navigation {{nav}}</span>
+  		<span class="icon-bar"></span>
+  		<span class="icon-bar"></span>
+  		<span class="icon-bar"></span>
+  	</button>
+  	<a data-ui-sref="home" class="navbar-brand">MEAN.JS</a>
+  </div>
+  <nav class="navb navbarPos" collapse="!isCollapsed" role="navigation">
+  	<ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+  		<li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.type" data-ng-class="{ active: $state.includes(item.state), dropdown: item.type === 'dropdown' }" class="{{item.class}}" dropdown="item.type === 'dropdown'">
+  			<a ng-switch-when="dropdown" class="dropdown-toggle" dropdown-toggle role="button">{{::item.title}}&nbsp;<span class="caret"></span></a>
+  			<ul ng-switch-when="dropdown" class="dropdown-menu">
+  				<li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" data-ui-sref-active="active">
+  					<a data-ui-sref="{{subitem.state}}" data-ng-bind="subitem.title"></a>
+  				</li>
+  			</ul>
+  			<a ng-switch-default data-ui-sref="{{item.state}}" data-ng-bind="item.title"></a>
+  		</li>
+  	</ul>
+
+  	<ul class="nav navbar-nav navbar-right">
+  	 <form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedSale">
+        <a ng-click="vm.removeHoldSale(vm.salesServices.selectedSale)" class="btn btn-danger"><i class="fa fa-edit"></i> {{vm.salesServices.selectedSale.salesId}}</a>
+      </form>
+  	 <form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedCustomer">
+        <a ng-click="vm.resetCustomer()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+      </form>
+  	<li class="divider" ng-if="vm.salesServices.selectedCustomer" ><a class="posNavLabel"<span class="posNavLabel"><i class="fa fa-user"></i> {{vm.salesServices.selectedCustomer.name}} {{vm.salesServices.selectedCustomer.lastName}}</span></a></li>
+       <form class="navbar-form navbar-left">
+       <button ng-click="vm.openSalesList()" class="btn btn-warning">Eliminar Ticket </button>
+        <button ng-click="vm.selectCustomer()" class="btn btn-success">Selecionar Cliente {{nav}}</button>
+      </form>
+  		<!-- <li ng-click=""><a class="btn btn-info" ><span> Selecionar Cliente</span></a></li> -->
+  		<li class="dropdown">
+  			<a href="#" class="dropdown-toggle posNavLabel" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gears"></i> Opciones<span class="caret"></span></a>
+  			<ul class="dropdown-menu">
+  				<li><a href="#">Salir</a></li>
+  				<li><a href="#">Cerrar Sesion</a></li>
+  				<li role="separator" class="divider"></li>
+  				<li><a ui-sref="sessions.cierre">Generar Corte</a></li>
+
+  			</ul>
+  		</li>
+  	</ul>
+  <!--   <ul class="nav navbar-nav navbar-right" data-ng-show="vm.authentication.user">
+      <li class="dropdown" dropdown>
+        <a class="dropdown-toggle user-header-dropdown-toggle" dropdown-toggle role="button">
+          <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+          <span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li data-ui-sref-active="active">
+            <a data-ui-sref="settings.profile">Edit Profile</a>
+          </li>
+          <li data-ui-sref-active="active">
+            <a data-ui-sref="settings.picture">Change Profile Picture</a>
+          </li>
+          <li data-ui-sref-active="active" data-ng-show="authentication.user.provider === 'local'">
+            <a data-ui-sref="settings.password">Change Password</a>
+          </li>
+          <li data-ui-sref-active="active">
+            <a data-ui-sref="settings.accounts">Manage Social Accounts</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="/api/auth/signout" target="_self">Signout</a>
+          </li>
+        </ul>
+      </li>
+  </ul> -->
+</nav>
+<div layout="row" id="posContainer" layout-padding layout-fill layout-xs="column"  >
+	<div flex="40" class="color1">
+		<div layout="row">
+			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" flex layout-padding layout >
+				<div flex>
+					<span class="cartSpan">Itbs: </span>
+					<span class="cartSpan cartSpanColor"> {{vm.product.itbs | currency}}</span>
+				</div>
+				<div flex>
+					<span class="cartSpan">Total:</span>
+					<span class="cartSpan cartSpanColor"> {{vm.product.total | currency}} </span>
+				</div>
+			</md-whiteframe>
+		</div>
+		<div layout="row">
+			<md-whiteframe class="md-whiteframe-19dp cartFrame" flex layout-padding layout >
+				<div scroll-glue id="cartFrameDiv" class="cartFrameDiv">
+			  <div  layout="row" column ng-repeat="product in vm.productServices.product.listproductPromotion" ng-class="{'selectedProduct': product._id === vm.salesServices.selectedProduct._id}" ng-click="vm.setSelectedProduct(product)">
+
+						<div class="col-sm-8">
+							<span class="cartSpan">{{product.name}}</span>
+							<p class="detailColor" ng-if="product.quantity > 1">{{product.quantity}} <span ng-if="product.uMedida"> {{product.uMedida}} </span> <span ng-if="!product.uMedida"> Unidades </span> a {{product.price | currency}} / <span ng-if="product.uMedida"> {{product.uMedida}} </span> <span ng-if="!product.uMedida"> Unidades </span></p>
+						</div>
+						<div class="col-sm-4 pull-right">
+							<span class="cartSpan">{{product.total | currency}}</span>
+						</div>
+
+					</div>
+				</div>
+			</md-whiteframe>
+		</div>
+		<div layout="row">
+			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" flex layout-padding layout >
+				<div flex="20">
+					<input id="qt" type="text" min="1" ng-model="vm.product.qt" class="form-control">
+				</div>
+				<div flex="80">
+					<input type="text" ng-model="vm.salesCart" autofocus ng-disabled="vm.product.formaPago" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in vm.getProductFilter($viewValue)"
+					typeahead-on-select="vm.selectedItem($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+				</div>
+
+			</md-whiteframe>
+		</div>
+<div layout="row" style="margin-top:15PX;">
+<div style="padding-left: 10PX; flex-sm="50"   hide-xs flex-gt-sm="50" flex-gt-md="50" flex-gt-xs="40" flex-xs="40" flex-gt-lg="40">
+		<on-screen-keyboard rows="[['1','2', '3','4'],['5','6','7','8'], ['9','0', '.', {type: 'erase', colspan: 1, text: '&lArr;'}]]"></on-screen-keyboard >
+		</div>
+	    <div style="padding-right: 10PX;" flex-sm="40"   hide-xs flex-gt-sm="30" flex-gt-md="50" flex-gt-xs="40" flex-xs="40" flex-gt-lg="40">
+		<button-action></button-action>
+		</div>
+		</div>
+
+		<!-- <div layout="row">
+			<div flex-sm="40"   hide-xs flex-gt-sm="40" flex-gt-md="40" flex-gt-xs="30" flex-xs="30" layout-padding ><button class="btn btn-default form-control" ng-click="vm.setPageMode('efectivo')">Efectivo</button></div>
+
+			<div flex-gt-md="60" flex-gt-sm="60"  flex-sm="60" flex-gt-xs="100" flex-xs="100" class="saleButtonCal">
+				<button ng-click="vm.setAccionValue(1)" class="btn btn-default buttoncal"><span class="buttoncalFont">1</span></button>
+				<button class="btn btn-default buttoncal"><span class="buttoncalFont">2</span></button>
+				<button class="btn btn-default buttoncal"><span class="buttoncalFont">3</span></button>
+				<button class="btn btn-default buttoncal"><span class="buttoncalFont">4</span></button>
+			</div>
+
+		</div>
+		<div layout="row">
+			<div flex-sm="40"   hide-xs flex-gt-sm="40" flex-gt-md="40" flex-gt-xs="30" flex-xs="30" layout-padding class="buttoncalPadding"><button class="btn btn-default form-control" ng-click="vm.setCredit('credito')">Credito</button></div>
+			<div flex-gt-md="60" flex-gt-sm="60"  flex-sm="60" flex-gt-xs="100" flex-xs="100"><button class="btn btn-default  buttoncal"><span class="buttoncalFont">4</span></button>
+				<button class="btn btn-default buttoncal"><span class="buttoncalFont">5</span></button><button class="btn btn-default  buttoncal"><span class="buttoncalFont">6</span></button>
+				<button ng-click="" class="btn btn-default buttoncal"><span class="buttoncalFont"><i class="times-circle"></i></span></button>
+			</div>
+		</div>
+		<div layout="row">
+			<div flex-sm="40"   hide-xs flex-gt-sm="40" flex-gt-md="40" flex-gt-xs="30" flex-xs="30" layout-padding class="buttoncalPadding"><button class="btn btn-default form-control">Apartado</button></div>
+			<div flex-gt-md="60" flex-gt-sm="60"  flex-sm="60" flex-gt-xs="100" flex-xs="100"><button class="btn btn-default  buttoncal"><span class="buttoncalFont">7</span></button>
+				<button class="btn btn-default buttoncal"><span class="buttoncalFont">8</span></button><button class="btn btn-default  buttoncal"><span class="buttoncalFont">9</span></button>
+				<button class="btn btn-default buttoncal">
+					<span class="buttoncalFont">Pr.</span></button>
+				</div>
+			</div>
+			<div layout="row">
+				<div flex-sm="40"   hide-xs flex-gt-sm="40" flex-gt-md="40" flex-gt-xs="30" flex-xs="30" layout-padding class="buttoncalPadding"></div>
+				<div flex-gt-md="60" flex-gt-sm="60"  flex-sm="60" flex-gt-xs="100" flex-xs="100">
+					<button class="btn btn-default  buttoncal"><span class="buttoncalFont">+/-</span></button>
+					<button class="btn btn-default buttoncal"><span class="buttoncalFont">0</span></button>
+					<button class="btn btn-default  buttoncal"><span class="buttoncalFont">.</span></button>
+					<button class="btn btn-default buttoncal"><span class="buttoncalFont">De.</span></button>
+				</div>
+			</div> -->
+		</div>
+		<div flex="60"  id="productFrame">
+			<div ng-if="!vm.product.formaPago || vm.productServices.product.listproductPromotion.length <= 0 " ng-include="'modules/sales/partials/products-list-tpl.html'">	</div>
+			<div ng-if="vm.product.formaPago && vm.productServices.product.listproductPromotion.length > 0" ng-include="'modules/sales/partials/pagos-tpl.html'">	</div>
+		</div>
+	</div>
+</div>

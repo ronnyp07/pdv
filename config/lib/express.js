@@ -19,6 +19,8 @@ var config = require('../config'),
   consolidate = require('consolidate'),
   path = require('path');
 
+
+
 /**
  * Initialize local variables
  */
@@ -48,6 +50,7 @@ module.exports.initLocalVariables = function (app) {
  * Initialize application middleware
  */
 module.exports.initMiddleware = function (app) {
+
   // Showing stack errors
   app.set('showStackError', true);
 

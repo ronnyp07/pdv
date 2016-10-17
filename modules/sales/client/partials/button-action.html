@@ -1,0 +1,52 @@
+<div class="keyboard">
+    <table style="width: 100%;">
+        <tr>
+            <td
+                ng-click="vm.discountQuantity()"
+                colspan="{{key.colspan || 1}}"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'DEL'">
+            </td>
+            <td ng-disabled="vm.productServices.product.listproductPromotion.length > 0"
+          ng-click="vm.setPageMode('efectivo')"
+                colspan="2"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'EFECTIVO'">
+            </td>
+        </tr>
+         <tr>
+            <td
+                ng-click="vm.changePrice()"
+                colspan="{{key.colspan || 1}}"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'PRE'">
+            </td>
+            <td
+                ng-click="vm.setCredit('credito')"
+                colspan="2"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'CREDITO'">
+            </td>
+        </tr>
+        <tr>
+            <td
+                ng-click="ctrl.printKeyStroke(key, $event)"
+                colspan="{{key.colspan || 1}}"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class=""><i class="fa fa-home"></i>
+             </td>
+             <td
+                ng-click="vm.setHold()"
+                colspan="{{key.colspan || 1}}"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'ESP'">
+            </td>
+            <td
+                ng-click="vm.getHold()"
+                colspan="{{key.colspan || 1}}"
+                ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
+                class="{{key.type}}"  ng-bind-html="'REC'">
+            </td>
+        </tr>
+    </table>
+</div>

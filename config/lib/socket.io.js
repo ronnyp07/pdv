@@ -33,6 +33,8 @@ module.exports = function (app, db) {
   // Create a new Socket.io server
   var io = socketio.listen(server);
 
+  app.set('socketio', io);
+
   // Create a MongoDB storage object
   var mongoStore = new MongoStore({
     mongooseConnection: db.connection,

@@ -1,0 +1,23 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+			<div class="modeltitle">
+				<button type="button"
+				        class="close"
+				        ng-click="vm.createModal.hide()" >&times;</button >
+                
+				<h4 class="modal-title " >Crear Cliente</h4 >
+		  </div>
+			</div >
+			<div class="modal-body" >
+				<form ng-submit="vm.save()" name="createCustomerForm"
+				      class="form-horizontal"
+				      novalidate >
+
+					<ng-include src="'modules/categories/partials/category-form.html'" ></ng-include >
+				</form >
+			</div >
+		</div >
+       </div >
+</div >

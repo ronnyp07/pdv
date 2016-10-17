@@ -1,0 +1,78 @@
+<div id="printSection">
+  <div class="print" id="printThisElement">
+    <h4 class="text-center">{{vm.sucursalInfo.name}}</h4>
+    <div class="row">
+    <div class="col-xs-12 text-center"> RNC: {{vm.sucursalInfo.documento}}</div>
+    </div>
+    <div class="row">
+    <div class="col-xs-12 text-center"> {{vm.sucursalInfo.direccion}}</div>
+    </div>
+    <div class="row">
+    <div class="col-xs-12 text-center"> Tel.: {{vm.sucursalInfo.telefono}}</div>
+    </div>
+    <hr class="hr" />
+    <h1 class="text-center" >{{vm.product.ticketNumber}}</h1>
+    <hr class="hr" />
+    <p>
+      <div class="ticketproductInfo">  <span class="fontBold">Fecha: </span>    {{vm.ticketDate}} <span class="fontBold">Hora:</span> {{vm.ticketTime}}</div>
+      <div class="ticketproductInfo">  <span class="fontBold">Cajero: </span>   {{vm.authentication.user.displayName}}</div>
+      <div class="ticketproductInfo">
+        <span class="fontBold">Cliente: </span>  {{vm.salesServices.selectedCustomer.name}} {{vm.salesServices.selectedCustomer.lastName}}</div>
+      </p>
+      <div class="text-center">
+       <span class="fontBold">PRODUCTOS COBRADOS</span>
+     </div>
+     <hr class="hr" />
+     <div id="ticketnotes">
+      <table>
+       <tr ng-repeat="product in vm.productServices.product.listproductPromotion">
+         <td><p class="compraDetail"><div class="ticketproductInfo">  {{product.quantity}} - {{product.name}}</div>
+          <div class="ticketprices">{{product.price | currency}}</div> <div class="pull-right">{{product.total | currency}}</div></p></td>
+        </tr>
+      </table>
+      <hr class="hr" />
+    </div>
+    <div class="row">
+      <div class="col-xs-6"> TOTAL:      </div>
+      <div class="col-xs-6 text-right"> {{vm.product.total | currency}}</div>
+    </div>
+
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-xs-6"> PAGO CON:      </div>
+      <div class="col-xs-6 text-right"> {{vm.pay | currency}}</div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-xs-6"> CAMBIO</div>
+      <div class="col-xs-6 text-right"> {{vm.product.change | currency}}</div>
+    </div>
+
+    <div class="row" ng-if="vm.pay">
+      <div class="col-xs-6"> {{vm.product.tipoPago}}</div>
+      <div class="col-xs-6 text-right"> {{vm.pay | currency}}</div>
+    </div>
+
+     <div class="row" ng-if="vm.product.formaPago === 'credito'">
+      <div class="col-xs-12 text-center"><p>*** VENTA A CREDITO ***</p></div>
+    </div>
+    <div class="row" ng-if="vm.product.formaPago === 'credito'">
+      <div class="col-xs-6"> INTERES</div>
+      <div class="col-xs-6 text-right"> {{vm.product.interesAmount | currency}}</div>
+    </div>
+    <div class="row" ng-if="vm.product.formaPago === 'credito'">
+      <div class="col-xs-6"> SALDO </div>
+      <div class="col-xs-6 text-right"> {{vm.product.credito | currency}}</div>
+   </div>
+  <hr/>
+   <div class="row" ng-if="vm.product.formaPago === 'credito'">
+      <div class="col-xs-12 text-center"><p>CALENDARIO DE PAGOS</p></div>
+    </div>
+   <div class="row" ng-repeat="p in vm.product.rangoList" ng-if="vm.product.formaPago === 'credito'">
+      <div class="col-xs-4 text-center"> {{p.numero}} - </div>
+      <div class="col-xs-4 text-center"> {{p.date}}</div>
+      <div class="col-xs-4 text-center"> {{p.cantidad | currency}} </div>
+   </div>
+
+   <hr/>
+
+   </div>
+</div>

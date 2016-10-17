@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Creditpays</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="creditpay in vm.creditpays"
+       data-ui-sref="creditpays.view({ creditpayId: creditpay._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="creditpay.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="creditpay.user" data-ng-bind="creditpay.user.displayName"></span>
+        <span data-ng-if="!creditpay.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="creditpay.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.creditpays.$resolved && !vm.creditpays.length">
+    No Creditpays yet, why don't you <a data-ui-sref="creditpays.create">create one</a>?
+  </div>
+</section>

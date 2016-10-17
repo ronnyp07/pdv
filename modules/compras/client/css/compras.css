@@ -1,0 +1,94 @@
+.buttonEditCompras {
+	width: 40px
+}
+
+.halfWidth{
+	width: 25%
+}
+
+.buttonEditPrice{
+	width: 60px
+}
+
+#compraOrderForm{
+	height: 700px;
+}
+
+.cartsDetails{
+	border-top-width: 5px;
+	border-top-color: #90A4AE;
+}
+
+.cartsLabels{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.compraTopPanelHeader{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#providerDetails {
+	border: 1px solid #90A4AE
+}
+
+#cartsDivTop:focus {outline:0;}
+
+
+tr.ng-enter{
+	animation: bounceInUp 1s;
+}
+
+tr.ng-leave{
+	animation: bounceOut 1s;
+}
+.cartsLabelsTop{
+	font-size: 14px;
+	font-weight: bold;
+}
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  background: white;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
+
+.cashSessionOff{
+	font-size: 70px;
+    color: #BDBDBD;
+    margin-top: 15px;
+}
+
+.cashSessionOn{
+	font-size: 70px;
+    color: #00E676;
+    margin-top: 15px;
+}
+
+.color1{
+	background-color: #E0E0E0;
+}
+.color2{
+	background-color: #B0BEC5;
+}
+.color3{
+	background-color: red;
+}
+.color4{
+	background-color: blue;
+}
+
+.marginOpenButton{
+	margin-bottom: 5px;
+}

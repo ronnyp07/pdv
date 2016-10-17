@@ -1,0 +1,39 @@
+{
+  "name": "angular-on-screen-keyboard",
+  "version": "0.9.2",
+  "main": [
+    "dist/angular-on-screen-keyboard.min.js",
+    "dist/angular-on-screen-keyboard.min.css"
+  ],
+  "dependencies": {
+    "angular": ">= 1.2.0",
+    "angular-sanitize": ">= 1.5.0"
+  },
+  "authors": [
+    "Jacob Blecher <blecher.jacob@gmail.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "js",
+    "css",
+    "templates",
+    ".gitignore",
+    ".git",
+    ".idea",
+    "Gruntfile.js",
+    "package.json",
+    "*.html"
+  ],
+  "homepage": "https://github.com/GreenfieldVentures/angular-on-screen-keyboard",
+  "_release": "0.9.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.2",
+    "commit": "56c7a4b8e29dc5c9a8d5c77934666b0abc959890"
+  },
+  "_source": "https://github.com/GreenfieldVentures/angular-on-screen-keyboard.git",
+  "_target": "^0.9.2",
+  "_originalSource": "angular-on-screen-keyboard",
+  "_direct": true
+}

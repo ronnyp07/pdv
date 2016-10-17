@@ -1,19 +1,50 @@
 {
-  "name": "meanjs",
+  "name": "rpm-ventas",
   "version": "0.4.0",
-  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "description": "Esta aplicacion es una forma facil de manejar tu inventario y t las ventas de tu negocio",
   "dependencies": {
     "bootstrap": "~3",
     "angular": "~1.3",
     "angular-resource": "~1.3",
     "angular-animate": "~1.3",
     "angular-mocks": "~1.3",
-    "angular-bootstrap": "~0.13",
+    "angular-bootstrap": "^1.3.3",
     "angular-ui-utils": "bower",
     "angular-ui-router": "~0.2",
-    "angular-file-upload": "1.1.5"
+    "angular-file-upload": "1.1.5",
+    "angular-ladda": "^0.3.4",
+    "angular-strap": "^2.3.9",
+    "angular-spinner": "^0.8.1",
+    "ng-table": "^1.0.0",
+    "moment": "^2.13.0",
+    "angular-material": "^1.0.9",
+    "angular-motion": "^0.4.4",
+    "ui.bootstrap": "^1.3.3",
+    "bootbox.js": "bootbox#^4.4.0",
+    "ngBootbox": "^0.1.3",
+    "alertify-js": "^1.7.1",
+    "angular-ui-select": "^0.18.1",
+    "angular-sanitize": "^1.5.7",
+    "jquery": "^3.1.0",
+    "angular-ui-mask": "^1.8.6",
+    "angular-input-masks": "^2.4.0",
+    "lodash": "^4.14.1",
+    "bootstrap-additions": "^0.3.1",
+    "ladda": "^1.0.0",
+    "ngInfiniteScroll": "^1.3.0",
+    "angular-scroll-glue": "^2.0.7"
   },
   "resolutions": {
     "angular": "~1.3"
+  },
+  "devDependencies": {
+    "angular-cache": "^4.6.0",
+    "oi.select": "^0.2.21",
+    "angular-ivh-multi-select": "^0.8.1",
+    "angular-ladda": "^0.4.2",
+    "angular-spinner": "^0.8.1",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1",
+    "moment": "^2.14.1",
+    "socket.io": "^1.4.8"
   }
 }
