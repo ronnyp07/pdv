@@ -1,0 +1,39 @@
+<div style="height: 300px">
+<table class="table table-condensed table-striped table-bordered table-hover"
+ >
+ <tr >
+  <th class="col-1" >Nombre</th >
+  <th class="col-2" >
+  Teléfono
+  </th >
+  <th class="col-3" >
+   Límite Crédito
+  </th >
+  <th class="col-4" >Saldo</th >
+  </tr >
+
+  <tr ng-repeat="customer in vm.customerServices.customersList" ng-click="vm.setClient(customer)">
+    <td>{{customer.name}} {{customer.lastName}}</td>
+    <td>{{customer.phone | phonenumber}}</td>
+    <td>{{customer.autorizedAmmount | currency}}</td>
+    <td>{{customer.peddingAmmount | currency}}</td>
+    <td class="pull-right">
+      <div>
+        <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs"><i class="fa fa-edit"  ng-click="vm.setClient(customer)"></i></a>
+        </div>
+      </td>
+    </tr>
+  </table>
+   <dir-pagination-controls  on-page-change="vm.loadMore(newPageNumber, oldPageNumer)">
+  </dir-pagination-controls>
+
+  <div ng-show="vm.customerServices.customersList.length == 0 && !vm.customerServices.isLoading" >
+  <div class="alert alert-info" >
+    <p class="text-center" >Ningun resultado fue encontrado en termino a la busqueda '{{vm.customerServices.customerName }}'</p >
+    </div >
+
+  </div >
+  <cc-spinner is-loading="vm.customerServices.isLoading"
+  message="Cargando..." ></cc-spinner>
+</div>
+

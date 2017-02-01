@@ -1,0 +1,51 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+				</div>
+			</div >
+			<div class="modal-body" >
+				<form ng-submit="vm.save()" name="createCustomerForm"
+				class="form-horizontal"
+				novalidate >
+				<div>
+					<div class="box box-default">
+						<div class="box-header with-border">
+						</div><!-- /.box-header -->
+						<div class="box-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class=" control-label" for="patientPolisa">Categoría:</label>
+										<oi-select
+										oi-options="item.name for item in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Categoria') track by item._id"
+										ng-change="vm.categoryChange(vm.productServices.product.category)"
+										ng-model="vm.categoryParent" placeholder="Categoria">
+									</oi-select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Sub Categoria</label>
+									<input type="text" ng-model="vm.categoryChild"class="form-control" placeholder="Enter ...">
+								</div>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 text-right paddingRight">
+								<a type="submit" ng-click="vm.cancelPopUp()" class="btn btn-danger">Cancelar</a>
+								<a ng-click="vm.createParameter(vm.newparameter, 'SubCategoria')" class="btn btn-primary">Guardar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form >
+	</div >
+</div >
+</div >
+</div >

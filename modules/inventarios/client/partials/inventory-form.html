@@ -1,0 +1,8 @@
+<div class="box box-info">
+  <form name="inventoryForm" ng-submit="vm.saveInventory( inventoryForm.$valid)" id="inventoryForm"  novalidate>
+<div class="box-body">
+           <ng-include ng-if="(vm.inventoryServices.inventory.status === 'Activo' || vm.inventoryServices.inventory.status === 'Cerrado') && vm.inventoryServices.saveMode !== 'create'" src="'modules/inventarios/partials/inventory-completed.tpl.html'"></ng-include>
+           <ng-include ng-if="vm.inventoryServices.inventory.status === 'Por Validar' || vm.inventoryServices.saveMode === 'create'" src="'modules/inventarios/partials/inventory-create.tpl.html'"></ng-include>
+</div><!-- /.box-body -->
+</form>
+</div><!-- /.box -->

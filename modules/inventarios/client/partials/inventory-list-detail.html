@@ -1,0 +1,52 @@
+<div>
+  <section class="content">
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <!-- Apply any bg-* class to to the icon to color it -->
+        <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">inventoryos</span>
+          <span class="info-box-number">{{total}}</span>
+          <!-- {{vm.test}} -->
+        </div><!-- /.info-box-content -->
+      </div><!-- /.info-box -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listado de inventarios</h3>
+          <a class="btn btn-success pull-right" ui-sref="inventarios.create">
+            <i class="fa fa-plus"></i> </br> Agregar
+          </a>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+         <table ng-table="tableParams" class="table table-condensed table-striped table-bordered table-hover">
+          <tr ng-repeat="inventory in $data | filter: (vm.authentication.sucursal !== 'superUser' ? vm.authentication.sucursal.sucursalId._id : '')">
+          <td data-title="'Sucursal'" >{{inventory.sucursalId.name}}</td>
+
+            <td data-title="'Referencia Inventario'" filter="{name: 'text'}">{{inventory.name}}</td>
+            <td data-title="'Fecha Creación'" class="invCol-6">{{inventory.createdDate | date : format : dd-mm-yy}} </td>
+            <td data-title="'Estado'" class="invCol-6">
+              <span ng-if="inventory.status === vm.paramRestServices.paramEnum.inventoryStatus.por_validar" class="label label-success">{{inventory.status}}</span>
+              <span ng-if="inventory.status === vm.paramRestServices.paramEnum.inventoryStatus.activo" class="label label-primary">{{inventory.status}}</span>
+              <span ng-if="inventory.status === vm.paramRestServices.paramEnum.inventoryStatus.cerrado" class="label label-danger">{{inventory.status}}</span>
+            </td>
+            <td class="pull-right" class="invCol-6">
+              <div>
+                <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="inventory.systemParam"><i class="fa fa-trash"
+                  ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+                  ng-bootbox-confirm-action="inventory.systemParam || vm.delete(inventory)"></i></a>
+                  <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="inventory.systemParam"><i class="fa fa-edit"  ui-sref="inventarios.edit({inventarioId:inventory._id})"></i></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

@@ -1,0 +1,241 @@
+<div layout="row" layout-padding layout-xs="column"  layout-align="center">
+  <div flex-sm ="100" flex-md ="80" flex-lg ="70">
+<md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout layout-align="center">
+  <div layout="row">
+  <button style="margin-right: 5px" class="btn btn-lg" ng-click="vm.goBack()" ng-class="{'btn-default' : vm.activePath === 'pending',
+  'btn-success' : vm.activePath !== 'pending'}">Anterior</button>
+   <a ui-sref="sales.pos" style="margin-right: 5px" class="btn btn-success btn-lg">Cancelar</a>
+     <button ng-if="vm.activePath !== 'review'"
+     ng-class="{'btn-default' : (vm.activePath === 'pending' && vm.cajaturnoSercices.salesPendingInfo.length > 0),
+     'btn-success' : (vm.activePath === 'pending' &&  vm.cajaturnoSercices.salesPendingInfo.length  <= 0) || (vm.activePath === 'cuadre' &&  vm.cajaturnoSercices.salesPendingInfo.length  <= 0)}"
+     class="btn btn-lg" ng-click="vm.goNext()">Siguiente</button>
+     <button ng-if="vm.activePath === 'review' " class="btn btn-success btn-lg" ng-click="vm.cerrarTurno()">Completar</button>
+   </div>
+</md-whiteframe>
+
+<div class="row" ng-if="vm.activePath === 'pending'">
+   <md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout>
+   <table class="table table-condensed table-striped table-bordered table-hover">
+ <tr >
+  <th class="col-1" >Fecha</th >
+  <th class="col-1" >Hora</th >
+  <th class="col-2" >
+   Id
+  </th >
+  <th class="col-3" >
+   Cliente
+  </th >
+  <th class="col-4" >
+    Total
+  </th>
+  <th class="col-4" >
+    Acción
+   </th>
+  </tr>
+  <tr ng-repeat="sales in vm.cajaturnoSercices.salesPendingInfo " >
+    <td>{{sales.fecha_venta | date}}</td>
+    <td>{{sales.fecha_venta | date : 'HH:mm:ss a'}}</td>
+    <td>{{sales.salesId}}</td>
+    <td><span ng-if="!sales.customer.name">
+      Consumidor Final
+    </span><span ng-if="sales.customer.name">{{sales.customer.name}} {{sales.customer.lastName}}</span></td>
+    <td>{{sales.total | currency}}</td>
+    <td class="pull-right">
+     <button ng-click="vm.deletePending(sales)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+    </td>
+    </tr>
+  </table>
+</md-whiteframe>
+ </div>
+
+ <div layout="row" ng-if="vm.activePath === 'cuadre'">
+<md-whiteframe class="md-whiteframe-19dp" flex layout-padding layout="column">
+<table class="table table-condensed table-striped table-bordered table-hover">
+ <tr >
+ <th></th>
+  <th class="col-1" >Contado</th >
+  <th class="col-1" >Calculado</th >
+  <th class="col-2" >
+   Diferencia
+  </th >
+  <th class="col-2" >
+    Retiro
+  </th >
+  </tr>
+  <tr>
+     <td style="width: 15%;">
+     <span class="cartSpan">Efectivo </span>
+    <button class="btn btn-primary btn-sm" ng-click="vm.openCalculator()"><i class="fa fa-calculator"></i>  </button></td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text"  class="form-control" ui-number-mask="2" ng-change="vm.calculateType('efectivo')" ng-model="vm.cajaturnoSercices.efectivo.contado">  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.efectivo.calculado" readonly>  </td>
+     <td> <input  ng-class="{'shortCierre': vm.cajaturnoSercices.efectivo.contado < vm.cajaturnoSercices.efectivo.calculado,
+     'evenCierre': vm.cajaturnoSercices.efectivo.contado === vm.cajaturnoSercices.efectivo.calculado,
+     'overCierre': vm.cajaturnoSercices.efectivo.contado > vm.cajaturnoSercices.efectivo.calculado}"   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.efectivo.diferencia" readonly> </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2"
+     ng-class="{'shortCierre': vm.cajaturnoSercices.efectivo.contado < vm.cajaturnoSercices.efectivo.retirado}" ng-model="vm.cajaturnoSercices.efectivo.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado e')"
+     ng-disabled="vm.cajaturnoSercices.efectivo.contado <= 0">  </td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Tarjeta</span></td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.tarjeta.contado" ng-change="vm.calculateType('tarjeta')">  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.tarjeta.calculado" readonly> </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.tarjeta.diferencia" ng-class="{'shortCierre': vm.cajaturnoSercices.tarjeta.contado < vm.cajaturnoSercices.tarjeta.calculado,
+     'evenCierre': vm.cajaturnoSercices.tarjeta.contado === vm.cajaturnoSercices.tarjeta.calculado,
+     'overCierre': vm.cajaturnoSercices.tarjeta.contado > vm.cajaturnoSercices.tarjeta.calculado}" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.tarjeta.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado ta')" ng-disabled="vm.cajaturnoSercices.tarjeta.contado <= 0"> </td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Cheque</span>
+     </td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.cheque.contado" ng-change="vm.calculateType('cheque')">  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.cheque.calculado" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.cheque.diferencia" ng-class="{'shortCierre': vm.cajaturnoSercices.cheque.contado < vm.cajaturnoSercices.cheque.calculado,
+     'evenCierre': vm.cajaturnoSercices.cheque.contado === vm.cajaturnoSercices.cheque.calculado,
+     'overCierre': vm.cajaturnoSercices.cheque.contado > vm.cajaturnoSercices.cheque.calculado}" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.cheque.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado c')" ng-disabled="vm.cajaturnoSercices.cheque.contado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Vales</span>
+     </td>
+     <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.vales.contado" ng-change="vm.calculateType('vales')">  </td>
+     <td> <input readonly select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.vales.calculado" >  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.vales.diferencia" ng-class="{'shortCierre': vm.cajaturnoSercices.vales.contado < vm.cajaturnoSercices.vales.calculado,
+     'evenCierre': vm.cajaturnoSercices.vales.contado === vm.cajaturnoSercices.vales.calculado,
+     'overCierre': vm.cajaturnoSercices.vales.contado > vm.cajaturnoSercices.vales.calculado}" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.vales.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado v')" ng-disabled="vm.cajaturnoSercices.vales.contado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Tran.</span>
+    </td>
+    <td> <input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.transferencia.contado" ng-change="vm.calculateType('transferencia')"> </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.transferencia.calculado" readonly> </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.transferencia.diferencia" ng-class="{'shortCierre': vm.cajaturnoSercices.transferencia.contado < vm.cajaturnoSercices.transferencia.calculado,
+     'evenCierre': vm.cajaturnoSercices.transferencia.contado === vm.cajaturnoSercices.transferencia.calculado,
+     'overCierre': vm.cajaturnoSercices.transferencia.contado > vm.cajaturnoSercices.transferencia.calculado}" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.transferencia.retirado" select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}" ng-change="vm.calculateType('retirado t')" ng-disabled="vm.cajaturnoSercices.transferencia.contado <= 0"></td>
+  </tr>
+  <tr>
+     <td><span class="cartSpan">Totales</span>
+    </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.totales.contado" readonly></td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.totales.calculado" readonly> </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.totales.diferencia" ng-class="{'shortCierre': vm.cajaturnoSercices.totales.contado < vm.cajaturnoSercices.totales.calculado,
+     'evenCierre': vm.cajaturnoSercices.totales.contado === vm.cajaturnoSercices.totales.calculado,
+     'overCierre': vm.cajaturnoSercices.totales.contado > vm.cajaturnoSercices.totales.calculado}" readonly>  </td>
+     <td> <input select-on-click   type="text"  class="form-control" ui-number-mask="2" ng-model="vm.cajaturnoSercices.totales.retirado"   readonly>  </td>
+  </tr>
+  </table>
+</md-whiteframe>
+ </div>
+ <div layout="row" ng-if="vm.activePath === 'review'">
+   <md-whiteframe class="md-whiteframe-19dp" flex layout-align="center" layout-padding layout>
+
+ <table class="table table-condensed  table-bordered  tableCuadre">
+  <tr ng-if="vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.efectivo > 0"><td><span>iniciar EFECTIVO</span></td>
+ <td><span></span>{{vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.efectivo | currency}}</td></tr>
+
+ <tr ng-if="vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.tarjeta > 0"> <td><span>iniciar TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.tarjeta | currency}}</span></td></tr>
+ <tr ng-if="vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.cheque > 0"> <td><span>iniciar CHEQUE\</span> </td>
+ <td><span>{{vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.cheque | currency}}</span> </td></tr>
+ <tr ng-if="vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.vales > 0"> <td><span>iniciar VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.vales | currency}}</span></td></tr>
+ <tr ng-if="vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.transferencia > 0"> <td><span>iniciar TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cajaturnoInfo.cuadreOpen.transferencia | currency}}</span>  </td></tr>
+  <tr class="totalCuadre"> <td><span>FONDO DE CAJA</span></td>
+ <td>{{vm.cajaturnoSercices.salesInfo.totalFondo | currency}}</td></tr>
+
+ <tr class="totalCuadre"> <td><span>VENTAS EN EFECTIVO</span></td>
+ <td>{{vm.cajaturnoSercices.salesInfo.ventasEfectivo | currency}}</td></tr>
+ <tr class="totalCuadre"> <td><span>VENTAS A CREDITO</span></td>
+ <td>{{vm.cajaturnoSercices.salesInfo.ventasCredito | currency}}</td></tr>
+
+<tr><td></td><td></td></tr>
+ <tr > <td><span>VENTAS NETAS</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.salesInfo.ventasNetas | currency}}</span> </td></tr>
+ <tr > <td><span>ITBS</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.salesInfo.itbs | currency}}</span></td></tr>
+ <tr class="totalCuadre"> <td><span>VENTAS BRUTOS</span></td>
+ <td>{{vm.cajaturnoSercices.salesInfo.brutos | currency}}</td></tr>
+ <tr><td></td><td></td></tr>
+ <tr><td><span>Entradas</span></td>
+ <td><span>{{vm.cajaturnoSercices.totales.entradas | currency}}</span></td></tr>
+ <tr><td><span>Salidas</span></td>
+ <td><span>{{vm.cajaturnoSercices.totales.salidas | currency}}</span></td></tr>
+  <tr class="totalCuadre"> <td><span>MOVIEMIENTOS</span></td>
+ <td></td></tr>
+
+<tr><td></td><td></td></tr>
+ <tr> <td><span>EFECTIVO</span></td>
+ <td><span>{{vm.cajaturnoSercices.efectivo.calculado | currency}}</span></td></tr>
+ <tr> <td><span>TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.tarjeta.calculado | currency}}</span></td></tr>
+ <tr> <td><span>CHEQUE\</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cheque.calculado | currency}}</span>  </td></tr>
+ <tr> <td><span>VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.vales.calculado  | currency}}</span></td></tr>
+ <tr> <td><span>TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.transferencia.calculado | currency}}</span> </td></tr>
+  <tr class="totalCuadre"> <td><span>CANTIDAD ESPERADA</span></td>
+ <td>{{vm.cajaturnoSercices.totales.calculado | currency}}</td></tr>
+ <tr><td></td><td></td></tr>
+ <tr> <td><span>EFECTIVO</span></td>
+ <td><span>{{vm.cajaturnoSercices.efectivo.contado | currency}}</span></td></tr>
+ <tr> <td><span>TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.tarjeta.contado | currency}}</span></td></tr>
+ <tr> <td><span>CHEQUE\</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cheque.contado | currency}}</span>  </td></tr>
+ <tr> <td><span>VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.vales.contado  | currency}}</span></td></tr>
+ <tr> <td><span>TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.transferencia.contado | currency}}</span> </td></tr>
+  <tr class="totalCuadre"> <td><span>CANTIDAD CONTADO</span></td>
+ <td>{{vm.cajaturnoSercices.totales.contado | currency}}</td></tr>
+
+ <tr><td></td><td></td></tr>
+ <tr> <td><span>EFECTIVO</span></td>
+ <td><span>{{vm.cajaturnoSercices.efectivo.diferencia | currency}}</span></td></tr>
+ <tr> <td><span>TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.tarjeta.diferencia | currency}}</span></td></tr>
+ <tr> <td><span>CHEQUE\</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cheque.diferencia | currency}}</span> </td></tr>
+ <tr> <td><span>VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.vales.diferencia  | currency}}</span></td></tr>
+ <tr> <td><span>TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.transferencia.diferencia | currency}}</span>  </td></tr>
+  <tr class="totalCuadre"> <td><span>DIFERENCIA</span></td>
+ <td>{{vm.cajaturnoSercices.totales.diferencia | currency}}</td></tr>
+ <tr><td></td><td></td></tr>
+ <tr> <td><span>EFECTIVO</span></td>
+ <td><span>{{vm.cajaturnoSercices.efectivo.mantener | currency}}</span></td></tr>
+ <tr> <td><span>TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.tarjeta.mantener | currency}}</span></td></tr>
+ <tr> <td><span>CHEQUE\</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cheque.mantener | currency}}</span> </td></tr>
+ <tr> <td><span>VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.vales.mantener  | currency}}</span></td></tr>
+ <tr> <td><span>TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.transferencia.mantener | currency}}</span>  </td></tr>
+  <tr class="totalCuadre"> <td><span>TOTAL A MANTENER</span></td>
+ <td>{{vm.cajaturnoSercices.totales.mantener | currency}}</td></tr>
+
+ <tr><td></td><td></td></tr>
+ <tr> <td><span>EFECTIVO</span></td>
+ <td><span>{{vm.cajaturnoSercices.efectivo.retirado | currency}}</span></td></tr>
+ <tr> <td><span>TARJETA</span></td>
+ <td><span>{{vm.cajaturnoSercices.tarjeta.retirado | currency}}</span></td></tr>
+ <tr> <td><span>CHEQUE\</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.cheque.retirado | currency}}</span> </td></tr>
+ <tr> <td><span>VALES</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.vales.retirado  | currency}}</span></td></tr>
+ <tr> <td><span>TRANSFERENCIA</span>  </td>
+ <td><span>{{vm.cajaturnoSercices.transferencia.retirado | currency}}</span>  </td></tr>
+  <tr class="totalCuadre"> <td><span>TOTAL A DEPOSITAR</span></td>
+ <td>{{vm.cajaturnoSercices.totales.retirado | currency}}</td></tr>
+ </table>
+
+</md-whiteframe>
+ </div>
+  </div>
+</div>
+

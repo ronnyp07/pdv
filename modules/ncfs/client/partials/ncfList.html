@@ -1,0 +1,25 @@
+<div class="col-sm-12">
+ <table  class="table table-condensed table-bordered table-striped">
+  <th class="col-5 text-center">NCF</th>
+  <th class="col-5 text-center">NCF Code</th>
+  <th class="col-5 text-center">Sec. Inicial</th>
+  <th class="col-5 text-center">Sec. Final</th>
+  <th class="col-5 text-center">Sec. Actual</th>
+  <th class="col-5 text-center">Acción</th>
+  <tr ng-repeat="ncf in vm.ncfServices.ncfsList">
+   <td class="text-center">{{ncf.desc}}</td>
+   <td  class="text-center">{{ncf.code}}</td>
+   <td  class="text-center">{{ncf.secInicial}}</td>
+   <td  class="text-center">{{ncf.secFinal}}</td>
+   <td  class="text-center">{{ncf.secuencia}}</td>
+   <td class="text-center">
+    <div>
+      <a href="#" data-skin="skin-danger" class="btn btn-danger btn-xs"
+      ng-bootbox-confirm="¿Seguro de querer eliminar documento?"
+      ng-bootbox-confirm-action="vm.delete(ncf)"
+      ><i class="fa fa-trash"></i></a>
+    </div>
+  </td>
+</tr>
+</table>
+</div>

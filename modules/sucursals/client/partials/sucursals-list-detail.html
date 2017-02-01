@@ -1,0 +1,84 @@
+<div>
+  <section class="content">
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <!-- Apply any bg-* class to to the icon to color it -->
+        <span class="info-box-icon bg-aqua"><i class="fa fa-building"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Sucursal</span>
+          <span class="info-box-number">{{vm.sucursalServices.total}}</span>
+          <!-- {{vm.test}} -->
+        </div><!-- /.info-box-content -->
+      </div><!-- /.info-box -->
+    </div>
+  </div>
+  <div class="row sucursal">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Información General</h3>
+          <a class="btn btn-app pull-right" ng-click="vm.showCreateSucursalModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-plus"></i> Agregar
+          </a>
+        </div><!-- /.box-header -->
+      <div class="box-body">
+      <div class="row">
+       <div class="col-sm-12">
+
+         <table  class="table table-condensed table-bordered table-striped">
+          <th ng-if="vm.authentication.sucursal == 'superUser'">Sucursal</th>
+          <th class="col-5 text-center">Tipo Documento</th>
+          <th class="col-5 text-center">Documento</th>
+          <th class="col-5 text-center">Representante</th>
+          <th class="col-5 text-center">Teléfono</th>
+          <th class="col-5 text-center">Dirección</th>
+          <th class="col-5 text-center">Email</th>
+          <th class="col-5 text-center">Logo</th>
+          <tr dir-paginate="sucursal in vm.sucursalServices.sucursalsList | itemsPerPage: 15" total-items="vm.sucursalServices.total" current-page="vm.sucursalServices.page">
+           <td class="text-center">{{sucursal.name}}</td>
+           <td class="text-center">{{sucursal.tipoDocumento}}</td>
+           <td  class="text-center">{{sucursal.documento}}</td>
+           <td class="text-center">
+            <span>{{sucursal.representante}}</span>
+          </td>
+          <td class="text-center">
+            <span>{{sucursal.telefono}}</span>
+          </td>
+          <td class="text-center">
+            <span>{{sucursal.direccion}}</span>
+          </td>
+          <td class="text-center">
+            <span>{{sucursal.email}}</span>
+          </td>
+          <td class="text-center">
+          <img ng-src="{{sucursal.picturesURL | defaultImage: 'modules/core/img/no-imagen.jpg'}}" alt="" class=" profile-photo">
+          </td>
+          <td class="text-center">
+            <div>
+              <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="sucursal.systemParam"><i class="fa fa-trash"
+                ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+                ng-bootbox-confirm-action="sucursal.systemParam || vm.delete(sucursal)"></i></a>
+                <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="sucursal.systemParam"><i class="fa fa-edit"  ui-sref="sucursals.edit({sucursalId:sucursal._id})"></i></a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <dir-pagination-controls  on-page-change="vm.loadMore(newPageNumber, oldPageNumer)">
+        </dir-pagination-controls>
+        <div ng-show="vm.sucursalServices.sucursalList.length == 0 && !vm.sucursalServices.isLoading" >
+          <div class="alert alert-info" >
+          <p class="text-center" >Ningun resultado fue encontrado en termino a la busqueda '{{ vm.sucursalServices.sucursalName }}'</p >
+            </div >
+          </div >
+          <cc-spinner is-loading="vm.sucursalServices.isLoading"
+          message="Carando..." ></cc-spinner >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</div>

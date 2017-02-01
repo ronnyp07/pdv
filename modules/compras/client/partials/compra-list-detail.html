@@ -1,0 +1,155 @@
+
+<div class="box box-primary">
+  <div class="box-body" id="compraOrderForm">
+  <div class="row">
+      <div class="col-sm-12">
+           <div class="form-group pull-right" ng-if="vm.compraServices.compraCompleteOrder">
+          <a ui-sref="compras.create" class="btn btn-info"><i class="fa fa-plus"></i> Nueva Orden</a>
+           </div>
+      </div>
+  </div>
+    <div class="row">
+     <div class="col-sm-6">
+       <div class="form-group" ng-if="vm.authentication.sucursal === 'superUser'">
+         <label class="control-label" >Seleccione Sucursal</label>
+         <oi-select
+         oi-options="item.name for item in vm.sucursalList track by item._id"
+         ng-change="vm.searchSucursal()"
+         ng-model="vm.compraServices.compra.sucursalSearch"
+         oi-select-options="{
+         cleanModel: true
+         }"
+       placeholder="Relacionados"
+       ></oi-select>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+  <div class="col-sm-6">
+   <div class="col-sm-6">
+     <div class="form-group">
+      <label class="control-label" >Desde:</label>
+      <p class="input-group">
+        <input  type="text"  id="startDate"  name="startDate"  class="form-control" uib-datepicker-popup="mediumDate"is-open="vm.valuationDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()"
+        ng-change="vm.doSomething()"
+        ng-model="vm.compraServices.startDate"
+        close-text="Cerrar"
+        autocomplete="off"
+        />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default"
+          ng-click="vm.valuationDatePickerOpen($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+    <p class="help-block" ng-show="compraForm.startDate.$error.required && ( !compraForm.$pristine || compraForm.$submitted)">
+      Este campo es requerido
+    </p>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label" >Hasta:</label>
+    <p class="input-group">
+      <input  type="text"  id="endDate"  name="endDate"  class="form-control" uib-datepicker-popup="mediumDate"is-open="vm.valuationDatePickerIsOpen1" ng-click="vm.valuationDatePickerOpen1()"
+      ng-model="vm.compraServices.endDate"
+      ng-change="vm.doSomething()"
+      close-text="Cerrar"
+      autocomplete="off"
+      />
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default"
+        ng-click="vm.valuationDatePickerOpen1($event)">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </button>
+    </span>
+  </p>
+  <p class="help-block" ng-show="compraForm.startDate.$error.required && ( !compraForm.$pristine || compraForm.$submitted)">
+    Este campo es requerido
+  </p>
+
+</div>
+</div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label class="control-label" >Proveedor:</label>
+
+    <oi-select
+    oi-options="item.name for item in vm.providerServices.loadproviders() track by item._id"
+    ng-model="vm.compraServices.provider"
+    ng-change="vm.doSomething()"
+    placeholder="Filtrar proveedor"
+    oi-select-options="{
+    cleanModel: true
+  }"
+  ></oi-select>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <table  class="table table-condensed table-bordered table-striped">
+      <th class="col-3 text-center">No.</th>
+      <th class="col-3 text-center" ng-if="vm.authentication.sucursal === 'superUser'">Almacen</th>
+      <th class="col-3 text-center">Fecha </th>
+      <th class="col-5 text-center">Tip Doc</th>
+      <th class="col-5 text-center">Provedor</th>
+      <th class="col-5 text-center">No. Factura</th>
+      <th class="col-5 text-center">Tipo Pago</th>
+      <th class="col-5 text-center">Total</th>
+      <th class="col-5 text-center">Estado</th>
+      <th class="col-5 text-center" ng-if="!vm.compraServices.compraCompleteOrder">Accion</th>
+      <tr dir-paginate="compra in vm.compraServices.comprasList | itemsPerPage: 10" total-items="vm.compraServices.comprasList.length" pagination-id="order">
+       <td data-title="'#'"  class="text-center" >
+        <button class="btn btn-info" ng-click="vm.showItems(compra)">  {{compra.compraId}}  </button>
+      </td>
+      <td class="text-center" ng-if="vm.authentication.sucursal === 'superUser'">
+        <span>{{compra.sucursalId.name}}</span>
+      </td>
+      <td sortable="'name'" class="text-center">
+       {{compra.fecha_compra | date:'dd/MM/yyyy' }}
+     </span></a>
+   </div>
+ </td>
+ <td class="text-center">
+   {{compra.documentType}}
+ </td>
+ <td class="text-center">
+  <span>{{compra.provider.name}}</span>
+</td>
+<td data-title="'Salida'"  class="text-center">
+ {{compra.noVenta}}
+</td>
+<td class="text-center">
+  {{compra.tipoPago }}
+</td>
+<td class="text-center">
+  {{compra.total}}
+</td>
+<td class="text-center">
+  {{compra.status}}
+</td>
+<td class="text-center" ng-if="!vm.compraServices.compraCompleteOrder">
+  <div>
+    <a ng-if="!vm.compraServices.compraCompleteOrder" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="parameter.systemParam"><i class="fa fa-trash"
+      ng-bootbox-confirm="Esta a punto de eliminar esta compra ¿seguro de querer continuar?"
+      ng-bootbox-confirm-action="vm.removeItem(compra)"></i></a>
+
+      <a href="#" ng-if="!vm.compraServices.compraCompleteOrder" data-skin="skin-red-light" class="btn btn-primary btn-xs" ng-bootbox-confirm="Esta a punto de afectar el inventario, decea continuar?"
+      ng-bootbox-confirm-action="vm.reciveOrder(compra)"><i
+      ></i> Dar Entrada</a>
+    </div>
+  </td>
+</tr>
+</table>
+<dir-pagination-controls  on-page-change="loadMore(newPageNumber, oldPageNumer)">
+</dir-pagination-controls pagination-id="order">
+</div>
+</div>
+
+</div>
+</div>

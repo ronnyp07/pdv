@@ -1,0 +1,143 @@
+.body-style{
+  background: #d2d6de;
+}
+
+.content {
+  margin-top: 10px;
+}
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+/*.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}*/
+.read{
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+.header-profile-image {
+  opacity: 0.8;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.open .header-profile-image,
+a:hover .header-profile-image {
+  opacity: 1;
+}
+.user-header-dropdown-toggle {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
+
+.cusinput{
+   margin-top: 0px;
+   margin-bottom: 0px;
+}
+
+.modal-backdrop.am-fade {
+  opacity: .5;
+  transition: opacity .15s linear;
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      opacity: .5;
+    }
+  }
+  &.ng-leave {
+    opacity: .5;
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+
+.material-txt{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.table>  tr> td{
+  vertical-align: middle;
+}
+
+.table tr td {
+  vertical-align: middle;
+}
+.table tr td .profile-photo {
+        width: 80px;
+    height: 50px;
+}
+
+
+/*
+.table .col-1 {
+  width: 20%; }
+.table .col-2 {
+  width: 40%; }
+.table .col-3 {
+  width: 40%; }
+
+
+.table tr td {
+  vertical-align: middle; }
+  .table tr td .profile-photo {
+    width: 30px;
+    height: 30px; }*/
+
+    /*
+ * Datepicker element
+ */
+
+/*.datepicker.dropdown-menu {
+  width: 250px;
+  height: 270px;
+  button {
+    outline: none;
+    border: 0px;
+  }
+  tbody {
+    height: 180px;
+  }
+  tbody button {
+    padding: 6px;
+  }
+  &.datepicker-mode-1, &.datepicker-mode-2 {
+    tbody button {
+      height: 65px;
+    }
+  }
+  }*/
+
+.navbar .divider-vertical {
+    height: 50px;
+    margin: 0 9px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}
+
+

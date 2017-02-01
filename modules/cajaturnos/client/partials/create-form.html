@@ -1,0 +1,58 @@
+<div class="box box-primary">
+     <div class="box-body">
+<div class="row">
+  <div class="col-sm-8 col-md-6 col-lg-4 col-sm-offset-2 col-md-offset-3 col-lg-offset-4">
+      <div layout="row" column class="marginOpenButton">
+        <div flex>
+    <span class="cartSpan">Efectivo </span>
+    <button class="btn btn-primary" ng-click="vm.openCalculator()"><i class="fa fa-calculator"></i>  </button>
+    </div>
+      <div flex class="text-right">
+        <input select-on-click   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.amount.efectivo">
+
+    </div>
+  </div>
+  <div layout="row" column class="marginOpenButton">
+        <div flex>
+    <span class="cartSpan">Tarjeta</span>
+    </div>
+      <div flex class="text-right">
+        <input select-on-click
+        type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.amount.tarjeta">
+    </div>
+  </div>
+  <div layout="row" column class="marginOpenButton">
+        <div flex>
+    <span class="cartSpan">Cheque</span>
+    </div>
+      <div flex class="text-right">
+        <input  type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.amount.cheque">
+    </div>
+  </div>
+  <div layout="row" column class="marginOpenButton">
+        <div flex>
+    <span class="cartSpan">Tranferencia</span>
+    </div>
+      <div flex class="text-right">
+        <input   type="text" min="0" class="form-control" ui-number-mask="2" ng-model="vm.amount.transferencia">
+    </div>
+  </div>
+  <div layout="row" column class="marginOpenButton">
+        <div flex>
+    <span class="cartSpan">Vales</span>
+    </div>
+      <div flex class="text-right">
+        <input  type="text" min="0" class="form-control" ui-number-mask="2"  ng-model="vm.amount.vales">
+    </div>
+  </div>
+   <div class="row" style="margin-top: 40px">
+        <div class="col-sm-12">
+          <div class="text-center">
+        <button class="btn btn-primary" ng-click="vm.cajaturno()">Abrir Caja</button>
+        </div>
+      </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>

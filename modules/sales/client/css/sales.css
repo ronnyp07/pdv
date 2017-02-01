@@ -1,0 +1,317 @@
+/*body{
+	overflow: hidden;
+}*/
+
+.saleButtonCal{
+	padding-top: 8px;
+}
+
+.saleButtonCalLeft{
+	padding-top: 8px;
+}
+.buttoncalPadding{
+	padding-top: 0px;
+}
+.buttoncal{
+	width: 21%;
+	margin-right: 5px;
+}
+.buttoncalFont{
+	font-weight: bold;
+	font-size: 16px;
+}
+.cartFrame1{
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	height: 50px;
+	background-color: #F5F5F5
+}
+.cartFrame{
+	height: 339px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	background-color: #F5F5F5
+}
+.cartFrameDiv{
+	height: 320px;
+	overflow-y: auto;
+	width: 100%;
+}
+
+.selectedProduct{
+	background-color: #CFD8DC;
+}
+
+#productFrame{
+	padding: 0px;
+	background-color: #607D8B;
+}
+#categoryList{
+	margin: 0px;
+	height: 50px;
+	padding:0px;
+	background-color: #CFD8DC;
+}
+#categoryListDetails{
+	margin: 0px;
+	background-color: #90A4AE;
+	padding-top: 5px;
+}
+#categoryChildren{
+	padding-top: 0px;
+	padding-right: 0px;
+}
+
+#categoryFader{
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+}
+.btn2 {
+	padding: 14px 24px;
+	border: 0 none;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.btn2:focus, .btn2:active:focus, .btn2.active:focus {
+	outline: 0 none;
+}
+
+.btn2-primary {
+	background: #0099cc;
+	color: #ffffff;
+}
+
+.btn2-primary:hover, .btn2-primary:focus, .btn2-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+	background: #33a6cc;
+}
+
+.btn2-primary:active, .btn2-primary.active {
+	background: #007299;
+	box-shadow: none;
+}
+
+.borderRadius {
+	border-radius: 24px;
+}
+
+#productItemContainer{
+	padding-right: 0px;
+	padding-left: 8px;
+}
+
+.productItemContainer2{
+	height: 150px;
+
+}
+#ProductP{
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#productImg{
+	height: 80px;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.productRowPadding{
+	padding-left: 15px;
+	padding-right: 30px;
+	padding-top: 15px;
+}
+.productItemColor{
+	font-size: 14px;
+	font-weight: bold;
+	color: #607D8B;
+}
+.cartSpan{
+	font-size: 20px;
+	font-weight: bold;
+}
+.cartSpanColor{
+	font-size: 25px;
+	font-weight: bold;
+	color: #E64A19
+}
+.detailColor{
+	color: #757575
+}
+#rangoDiv{
+	height: 210px;
+	overflow-y: auto;
+}
+#totalDetails{
+	padding-top: 0px;
+	margin-top: 0px;
+}
+#pagoEfectivoDetails{
+	height: 400px;
+	margin-top: 50px;
+	width:100%;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#pagoCredito{
+	height: 520px;
+	width:100%;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#pagoBottons{
+	margin: 0px;
+	height: 100px;
+	padding: 0px;
+	background-color: #CFD8DC;
+}
+.salesTxt{
+	width: 100%;
+	height: 34px;
+	margin-left: 5px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+}
+
+#pagoEfectivoDetailsFrame{
+	width: 100%;
+}
+
+.paddingFrame{
+	padding: 20px;
+}
+.text-right{
+	text-align: right;
+}
+.pagoLabel{
+	font-size: 20px;
+}
+
+.pagoLabelchange{
+	font-size: 20px;
+	font-weight: bold;
+	color: #FF7043;
+}
+
+.pagoButtonCancel{
+	border-radius: 3px;
+	position: relative;
+	padding: 15px 5px;
+	margin: 0 0 10px 10px;
+	min-width: 80px;
+	height: 60px;
+	text-align: center;
+	color: white;
+	border: 1px solid #EF5350;
+	background-color: #EF5350;
+	font-size: 13px;
+}
+
+.pagoButtonSuccess{
+	border-radius: 3px;
+	position: relative;
+	padding: 15px 5px;
+	margin: 0 0 10px 10px;
+	min-width: 80px;
+	height: 60px;
+	text-align: center;
+	color: white;
+	border: 1px solid #1976D2;
+	background-color: #1976D2;
+	font-size: 13px;
+}
+.pagoButtonSuccess > .fa, .pagoButtonCancel> .fa{
+	font-size: 20px;
+	display: block;
+	color: white;
+}
+
+#pagoResult{
+	text-align: right;
+	font-size: 16px;
+}
+.navb{
+	position: relative;
+	min-height: 50px;
+	margin-bottom: 0px;
+	border: 1px solid
+}
+.navbarPos{
+	background-color: #37474F;
+	border-color: #37474F;
+	padding-bottom: 0px;
+}
+
+#posContainer{
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.posNavLabel{
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+}
+.detailsLabel{
+	font-size: 20px;
+	font-weight: bold;
+	color: #616161;
+}
+#pagoHeader{
+	margin: 0px;
+	height: 80px;
+	padding-top: 15px;
+	background-color: #CFD8DC
+}
+
+.divider{
+	height: 50px;
+	margin: 0 9px;
+	border-right: 2px solid #ffffff;
+	border-left: 2px solid #f2f2f2;
+}
+#customerListModel{overflow-y: auto};
+
+#productMainContainer{
+	height: 200px;
+	overflow-y: auto;
+};
+
+div:focus {outline:0;}
+
+@media screen and (min-width: 1745px) {
+  .cartFrame {
+    height: 339px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
+}
+}
+/*@media (max-width: 1279px) and (min-width: 960px)
+*/
+@media screen and (max-width: 1164px) {
+  .cartFrame {
+    height: 460px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
+}
+}
+

@@ -1,0 +1,24 @@
+<section class="row" data-ng-controller="AccountsController">
+<div class="box box-info">
+  <form name="userForm" ng-submit="vm.saveProduct(vm.userServices.user, userForm.$valid)" id="userForm"  novalidate>
+    <div class="box-body">
+      <div class="col-sm-12">
+        <div class="row">
+        <div class="col-sm-6">
+      <div class="form-group" >
+       <label class="control-label" >Seleccione Sucursal</label>
+       <oi-select
+       oi-options="item.name for item in vm.sucursalList track by item._id"
+       ng-model="sucursalId"
+       placeholder="Relacionados"
+       ></oi-select>
+     </div>
+   </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+
+
+</section>

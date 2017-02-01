@@ -1,0 +1,57 @@
+<div>
+  <section class="content">
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <!-- Apply any bg-* class to to the icon to color it -->
+        <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Terminales</span>
+          <span class="info-box-number">{{vm.cajaRestServices.cajasList.length}}</span>
+          <!-- {{vm.test}} -->
+        </div><!-- /.info-box-content -->
+      </div><!-- /.info-box -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listado de Cajas</h3>
+
+          <a class="btn btn-app pull-right" ng-click="vm.showCreateCajaModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-plus"></i> Agregar
+          </a>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+         <table class="table table-condensed table-striped table-bordered table-hover">
+          <th class="col-5 text-center">Nombre Terminal</th>
+          <th class="col-5 text-center">Almacen</th>
+          <th class="col-5 text-center">Estado</th>
+          <th class="col-5 text-center">Acción</th>
+          <tr dir-paginate="caja in vm.cajaRestServices.cajasList | itemsPerPage: 10" total-items="vm.cajaRestServices.cajasList.length">
+          <td class="text-center">{{caja.name}}</td>
+          <td class="text-center" >{{caja.sucursalId.name}}</td>
+          <td class="text-center" >
+              <span ng-if="caja.isActive" class="label label-info">Activo</span>
+              <span ng-if="!caja.isActive" class="label label-danger">Inactivo</span>
+            </td>
+            <td class="pull-right">
+              <div>
+                <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="caja.systemParam"><i class="fa fa-trash"
+                  ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+                  ng-bootbox-confirm-action="vm.delete(caja)"></i></a>
+                  <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="caja.systemParam"><i class="fa fa-edit"    ng-click="vm.showCreateCajaModal(caja)"></i></a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <dir-pagination-controls  on-page-change="loadMore(newPageNumber, oldPageNumer)">
+          </dir-pagination-controls pagination-id="order">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>

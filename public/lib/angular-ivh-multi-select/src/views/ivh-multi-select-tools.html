@@ -1,0 +1,21 @@
+<a class="ms-tools">
+  <button class="btn btn-default btn-sm"
+      ng-click="ms.enableMultiSelect && ms.selectAllVisible()"
+      ng-if="ms.enableMultiSelect">
+    <span class="glyphicon glyphicon-ok"></span>
+    All
+  </button>
+
+  <button class="btn btn-default btn-sm"
+      ng-click="ms.enableMultiSelect && ms.selectAllVisible(false)"
+      ng-if="ms.enableMultiSelect">
+    <span class="glyphicon glyphicon-remove"></span>
+    None
+  </button>
+
+  <button class="btn btn-default btn-sm"
+      ng-show="ms.filterString.length"
+      ng-click="ms.filterString = '';ms.onFilterChange()">
+    Clear
+  </button>
+</a>

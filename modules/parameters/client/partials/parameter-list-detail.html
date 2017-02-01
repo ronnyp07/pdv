@@ -1,0 +1,48 @@
+<div>
+  <section class="content">
+       <div class="row">
+           <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+            <div class="info-box">
+  <!-- Apply any bg-* class to to the icon to color it -->
+  <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+  <div class="info-box-content">
+    <span class="info-box-text">Parametros</span>
+    <span class="info-box-number">{{total}}</span>
+      <!-- {{vm.test}} -->
+  </div><!-- /.info-box-content -->
+</div><!-- /.info-box -->
+</div>
+</div>
+   <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Listado de Parametros</h3>
+
+              <a class="btn btn-app pull-right" ng-click="vm.showCreateParameterModal()">
+                    <span class="badge bg-purple"></span>
+                    <i class="fa fa-plus"></i> Agregar
+            </a>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+      <table ng-table="tableParams" class="table table-condensed table-striped table-bordered table-hover">
+      <tr ng-repeat="parameter in $data"">
+          <td data-title="'Name'" filter="{name: 'text'}">{{parameter.desc}}</td>
+          <td class="pull-right">
+          <div>
+            <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="parameter.systemParam"><i class="fa fa-trash"
+            ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+            ng-bootbox-confirm-action="parameter.systemParam || vm.delete(parameter)"></i></a>
+            <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="parameter.systemParam"><i class="fa fa-edit"    ng-click="parameter.systemParam || vm.showCreateParameterModal(parameter)"></i></a>
+
+         </div>
+
+       </td>
+        </tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+ </section>
+</div>

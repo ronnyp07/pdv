@@ -1,0 +1,29 @@
+
+<div class="wrapper">
+      <ng-include src="'modules/core/views/menu.left.template.html'" ></ng-include >
+      <div class="content-wrapper">
+            <section class="content-header padding-botton">
+              <h1>
+                Terminal Punto de Ventas (POSs)
+                <small>Entrada</small>
+              </h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Configuración</a></li>
+                <li class="active">Terminal Punto de Ventas</li>
+              </ol>
+            </section>
+            <section class="content">
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div ng-if= "isSaving" class="loadsettings">
+            </div>
+            <div ng-include="'modules/cajaturnos/partials/create-form.html'"></div>
+            </div>
+            </div>
+            </section>
+        </div>
+        <ng-include src="'modules/core/views/menu.footer.template.html'" ></ng-include >
+        </div>
+
+
+

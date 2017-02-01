@@ -1,0 +1,113 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+				</div>
+			</div >
+			<div class="modal-body" >
+				<form ng-submit="vm.save()" name="createLoteForm"
+				novalidate >
+				<div>
+					<div class="box box-default">
+						<div class="box-header with-border">
+						</div><!-- /.box-header -->
+						<div class="box-body">
+
+              <div class="row">
+               <div class="col-sm-12">
+                 <div class="form-group">
+                 <label class=" control-label">Articulo</label>
+                 <input type="text" ng-model="vm.loteServices.product.name" class="form-control" readonly>
+               </div>
+             </div>
+           </div>
+           <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group"                  ng-class="{'has-error': !createLoteForm.noLote.$valid && ( !createLoteForm.$pristine || createLoteForm.$submitted),
+                 'has-success': createLoteForm.noLote.$valid && ( !createLoteForm.$pristine || createLoteForm.$submitted)}">
+               <label class="control-label">No. de Lotes</label>
+               <input type="text" ng-model="vm.lotesForm.noLote" name="noLote" class="form-control" required>
+               <p class="help-block" ng-show="createLoteForm.noLote.$error.required && ( !createLoteForm.$pristine || createLoteForm.$submitted)">
+               Campo requerido
+             </p>
+             </div>
+           </div><!-- /.col -->
+           <div class="col-sm-6">
+            <div class="form-group"
+            ng-class="{'has-error': !createLoteForm.loteExistencia.$valid && ( !createLoteForm.$pristine || createLoteForm.$submitted),
+            'has-success': createLoteForm.loteExistencia.$valid && ( !createLoteForm.$pristine || createLoteForm.$submitted)}">
+            <label class="control-label">Existencias</label>
+
+            <input type="text" select-on-click i-number-mask="2" ng-model="vm.lotesForm.exFinal" name="loteExistencia" class="form-control" required>
+            <p class="help-block" ng-show="createLoteForm.loteExistencia.$error.required && ( !createLoteForm.$pristine || createLoteForm.$submitted)">
+             Campo requerido
+           </p>
+
+         </div>
+       </div><!-- /.col -->
+     </div>
+   </div><!-- /.row -->
+   <div class="row">
+    <div class="col-sm-12">
+     <div class="col-sm-6">
+       <div class="form-group">
+        <label class="control-label" >Desde:</label>
+        <p class="input-group">
+          <input  type="text"  id="startDate"  name="startDate"  class="form-control" uib-datepicker-popup="mediumDate"is-open="vm.valuationDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()"
+          ng-change="vm.doSomething()"
+          ng-model="vm.lotesForm.loteDateCreated"
+          close-text="Cerrar"
+          autocomplete="off"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default"
+            ng-click="vm.valuationDatePickerOpen($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </p>
+      <p class="help-block" ng-show="compraForm.startDate.$error.required && ( !compraForm.$pristine || compraForm.$submitted)">
+        Este campo es requerido
+      </p>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="form-group"
+    ng-class="{'has-error': vm.lotesForm.loteDateCaducidad < vm.lotesForm.loteDateCreated && ( !createLoteForm.$pristine || createLoteForm.$submitted)}"
+    >
+      <label class="control-label" >Hasta:</label>
+      <p class="input-group">
+        <input  type="text"  id="endDate"  name="endDate"  class="form-control" uib-datepicker-popup="mediumDate" is-open="vm.valuationDatePickerIsOpen1" ng-click="vm.valuationDatePickerOpen1()"
+        ng-model="vm.lotesForm.loteDateCaducidad"
+        ng-change="vm.doSomething()"
+        close-text="Cerrar"
+        autocomplete="off"
+        />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default"
+          ng-click="vm.valuationDatePickerOpen1($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+      </span>
+    </p>
+  </div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-center paddingRight">
+    <a  ng-click="vm.cancelNewLotesModal()" class="btn btn-danger">Cancelar</a>
+   <!--  ng-disabled="createPatientForm.$invalid" -->
+    <a ng-disabled="vm.lotesForm.exFinal === undefined || createLoteForm.$invalid" ng-click="vm.saveNewLotes(createLoteForm.$invalid)" class="btn btn-primary">Guardar</a>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</form >
+</div >
+</div >
+</div >
+</div >

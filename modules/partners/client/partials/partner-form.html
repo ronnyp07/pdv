@@ -1,0 +1,97 @@
+<div class="box box-info">
+  <form name="partnerForm" ng-submit="vm.savePartner(vm.partnerServices.partner, partnerForm.$valid)" id="partnerForm"  novalidate>
+    <div class="box-body">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+         <div class="col-sm-3">
+          <fieldset>
+            <div class="form-group text-center">
+              <img data-ng-src="{{vm.imageURL}}" alt="{{user.displayName}}" class="img-thumbnail user-profile-picture">
+            </div>
+            <div class="text-center form-group" ng-if="!vm.uploader.queue.length">
+              <span class="btn btn-default btn-file">
+                Subir Imagen <input ng-model="vm.partnerServices.partner.picturesURL" type="file" nv-file-select uploader="vm.uploader" >
+              </span>
+            </div>
+            <div class="text-center form-group" ng-if="vm.uploader.queue.length">
+             <a class="btn btn-danger btn-sm" data-ng-click="vm.cancel()"><i class="fa fa-trash"></i></a>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <md-switch ng-model="vm.partnerServices.partner.isValid" aria-label="Activo" class="text-center checkMargin">
+               Activo
+             </md-switch>
+           </div>
+         </div>
+     </fieldset>
+   </div>
+<div class="col-sm-9">
+ <div class="row">
+  <div class="col-sm-6">
+    <div class="form-group"
+    ng-class="{'has-error': !partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted),
+    'has-success': partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted)}
+    ">
+    <label class="control-label" >Nombre:</label>
+    <input type="text" ng-model="vm.partnerServices.partner.name" id="name" name="name" autocomplete="off" class="form-control" required>
+    <p class="help-block" ng-show="partnerForm.name.$error.required && ( !partnerForm.$pristine || partnerForm.$submitted)">
+     Este campo es requerido
+   </p>
+ </div>
+</div>
+<div class="col-sm-6">
+    <div class="form-group"
+    ng-class="{'has-error': !partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted),
+    'has-success': partnerForm.name.$valid && ( !partnerForm.$pristine || partnerForm.$submitted)}
+    ">
+    <label class="control-label" >RNC:</label>
+    <input type="text" ng-model="vm.partnerServices.partner.rnc" id="rnc" name="rnc" autocomplete="off" class="form-control">
+ </div>
+</div>
+</div><!-- /.row -->
+
+
+<div class="box-body">
+      <div class="row">
+       <div class="col-sm-12 text-right">
+          <a ng-click="vm.editPorcentaje()" class="btn btn-info btn-sm">
+            <i class="fa fa-plus"></i> Impuesto
+
+          </a>
+       </div>
+     </div>
+
+      <div class="row">
+       <div class="col-sm-12">
+         <table  class="table table-condensed table-bordered table-striped">
+          <th ng-if="vm.authentication.sucursal == 'superUser'"></th>
+          <th class="col-3 text-center">Tipo</th>
+          <th class="col-3 text-center">Impuesto %</th>
+          <th class="col-3 text-center">Moneda</th>
+          <tr ng-repeat="tax in vm.partnerServices.partner.impuestosList">
+           <td class="text-center">{{tax.imp_Type}}</td>
+           <td class="text-center">{{tax.imp_Porcentaje}}</td>
+           <td  class="text-center">{{tax.moneda}}</td>
+          <td class="text-center">
+            <div>
+              <a ng-if="!tax.selectedImpuestos.systemField" href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="partner.systemParam"><i class="fa fa-trash"
+                ng-bootbox-confirm="Está ha punto de eliminar impuesto. Decea continuar?"
+                ng-bootbox-confirm-action="partner.systemParam || vm.deleteTax(tax)"></i></a>
+                <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="partner.systemParam"><i class="fa fa-edit"  ng-click="vm.editPorcentaje($index, tax)"></i></a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        </div>
+   </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-right paddingRight">
+    <a ng-click="vm.cancelForm()" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</div>
+</div>
+</div><!-- /.box-body -->
+</form>
+</div><!-- /.box -->

@@ -1,0 +1,82 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+					<button type="button"
+					class="close"
+					ng-click="vm.ajustarModal.hide()" >&times;</button >
+				</div>
+			</div >
+			<div class="modal-body" >
+<form
+ class="form-horizontal"
+ ng-submit="vm.createNcf(vm.ncf, ncfForm.$valid)" id="ncfForm" name="ncfForm" novalidate>
+	<div class="form-group" ng-class="{'has-error': (!vm.ncf.codes)  && (!ncfForm.$pristine || ncfForm.$submitted),
+    'has-success': (vm.ncf.codes) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4">Tipo NCF</label>
+		<div class="col-sm-6">
+			<oi-select
+			oi-options="item.desc for item in vm.paramRestServices.ncfList track by item.code"
+			ng-model="vm.ncf.codes"
+			placeholder="Tipos de NCF"
+			name="code"
+			></oi-select required>
+		</div>
+	</div>
+  <div class="form-group" ng-class="{'has-error': (ncfForm.serie.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.serie.$valid || ncfForm.serie.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4" for="email">Serie:</label>
+		<div class="col-sm-6">
+			<input maxlength="1" type="text" class="form-control" ng-model="vm.ncf.serie" name="serie" autocomplete="off" required>
+		</div>
+	</div>
+	<div class="form-group" ng-class="{'has-error': (ncfForm.dn.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.dn.$valid || ncfForm.dn.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4" for="email">Div. de Negocios:</label>
+		<div class="col-sm-6">
+			<input maxlength="2" type="text" class="form-control" name="dn" ng-model="vm.ncf.dn" autocomplete="off" required>
+		</div>
+	</div>
+	<div class="form-group" ng-class="{'has-error': (ncfForm.pe.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.pe.$valid || ncfForm.pe.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4" >Punto Emisión:</label>
+		<div class="col-sm-6">
+			<input maxlength="3" type="text" class="form-control" name="pe" ng-model="vm.ncf.pe" autocomplete="off" required>
+		</div>
+	</div>
+	<div class="form-group" ng-class="{'has-error': (ncfForm.ai.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.ai.$valid || ncfForm.ai.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4" >Área de Impresión:</label>
+		<div class="col-sm-6">
+			<input maxlength="3" type="text" class="form-control" name="ai" ng-model="vm.ncf.ai" autocomplete="off" required>
+		</div>
+	</div>
+	<div class="form-group" ng-class="{'has-error': (ncfForm.SecInicial.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.SecInicial.$valid || ncfForm.SecInicial.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4">Sec. Inicial:</label>
+		<div class="col-sm-6">
+			<input type="number" class="form-control" id="email" autocomplete="off" required name="SecInicial" ng-model="vm.ncf.secInicial" min="1">
+		</div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': (ncfForm.SecFinal.$invalid)  && (!ncfForm.$pristine || ncfForm.$submitted),
+  'has-success': (ncfForm.SecFinal.$valid || ncfForm.SecFinal.$valid) && ( !ncfForm.$pristine || ncfForm.$submitted)}">
+		<label class="control-label col-sm-4" >Sec. Final:</label>
+		<div class="col-sm-6">
+			<input type="number" class="form-control" id="email" autocomplete="off" required name="SecFinal" ng-model="vm.ncf.secFinal" min="1">
+		</div>
+	</div>
+   <br>
+<div class="row">
+<div class="col-sm-12 text-center paddingRight">
+			<a ng-click="vm.cancelModal()" class="btn btn-danger">Cancelar</a>
+			<button type="submit" class="btn btn-primary">Guardar</button>
+		</div>
+	</div>
+	<br>
+</form>
+</div>
+</div>
+</div>
+</div>

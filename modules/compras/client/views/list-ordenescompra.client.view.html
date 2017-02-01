@@ -1,0 +1,29 @@
+<div class="wrapper">
+ <ng-include src="'modules/core/views/ top-header.client.view.html'" ></ng-include >
+  <ng-include src="'modules/core/views/menu.left.template.html'" ></ng-include >
+    <div class="content-wrapper">
+     <section class="content-header padding-botton">
+              <h1>
+              Ordenes de Compra
+            </h1>
+            <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i> Compras</a></li>
+              <li class="active">Ordenes de Compra</li>
+            </ol>
+      </section>
+      <section class="content">
+       <div class="row">
+        <div class="col-sm-12">
+            <compra-list></compra-list>
+       </div>
+     </div>
+   </section>
+ </div>
+ <ng-include src="'modules/core/views/menu.footer.template.html'" ></ng-include >
+</div>
+
+
+
+
+
+

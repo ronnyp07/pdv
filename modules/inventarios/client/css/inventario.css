@@ -1,0 +1,32 @@
+.buttonEdit {
+	width: 20%
+}
+.alertPadding{
+	padding: 15px;
+}
+
+.table .invCol-1 {
+  width: 40%; }
+.table .invCol-2 {
+  width: 20%; }
+.table .invCol-3 {
+  width: 15%; }
+.table .invCol-4 {
+  width: 15%; }
+.table .invCol-5 {
+  width: 10%; }
+.table .invCol-6 {
+  width: 25%; }
+
+
+.table tr td {
+  vertical-align: middle;
+}
+
+#importInventory{
+	margin-bottom: 20px;
+}
+
+#inventoryTopHeader{
+  margin-top: 0px;
+}

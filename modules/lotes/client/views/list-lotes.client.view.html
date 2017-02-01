@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Lotes</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="lote in vm.lotes"
+       data-ui-sref="lotes.view({ loteId: lote._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span data-ng-bind="lote.created | date:'mediumDate'"></span>
+        by
+        <span data-ng-if="lote.user" data-ng-bind="lote.user.displayName"></span>
+        <span data-ng-if="!lote.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="lote.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.lotes.$resolved && !vm.lotes.length">
+    No Lotes yet, why don't you <a data-ui-sref="lotes.create">create one</a>?
+  </div>
+</section>

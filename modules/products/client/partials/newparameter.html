@@ -1,0 +1,39 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+					<button type="button"
+					class="close"
+					ng-click="vm.createModal.hide()" >&times;</button >
+
+					<!-- 				<h4 class="modal-title " >Crear Cliente</h4 > -->
+				</div>
+			</div >
+			<div class="modal-body" >
+				<form ng-submit="vm.save()" name="createCustomerForm"
+				class="form-horizontal"
+				novalidate >
+				<div>
+					<div class="box box-default">
+						<div class="box-header with-border">
+                         Decea agregar <span style="
+    font-size: 16px;
+    font-weight: bold;
+">{{vm.newparameter}}</span> como nuevo?
+						</div><!-- /.box-header -->
+						<div class="box-body">
+						<div class="row">
+                <div class="col-sm-12 text-right paddingRight">
+                <a type="submit" ng-click="vm.cancelPopUp('Categoria')" class="btn btn-danger">Cancelar</a>
+                <a ng-click="vm.createParameter(vm.newparameter, Presentacion)" class="btn btn-primary">Guardar</a>
+                </div>
+              </div>
+						</div>
+					</div>
+				</div>
+			</form >
+		</div >
+	</div >
+</div >
+</div >

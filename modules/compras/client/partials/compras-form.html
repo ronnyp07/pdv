@@ -1,0 +1,246 @@
+ <div class="row">
+ <form name="compraForm">
+  <div class="col-sm-8">
+	<div class="box box-primary">
+	 <div class="box-body">
+        <div class="product-promotion-content">
+   <div class="row">
+          <div class="col-sm-12">
+            <p class="bg-danger alertPadding" ng-show="vm.authentication.sucursal === 'superUser' && !vm.compraServices.compras.sucursalId">
+             Para importar compra debe seleccionar el almacen
+           </p>
+         </div>
+     </div>
+     <div class="row">
+           <div class="col-sm-6">
+             <div class="form-group" ng-if="vm.authentication.sucursal === 'superUser' && vm.compraServices.saveMode != 'update'">
+               <label class="control-label" >Seleccione Sucursal</label>
+               <oi-select
+               oi-options="item.name for item in vm.sucursalList track by item._id"
+               ng-change="vm.resetFormSubmit()"
+               ng-model="vm.compraServices.compras.sucursalId"
+               placeholder="Relacionados"
+               ></oi-select>
+             </div>
+           </div>
+         </div>
+     <div class="row" ng-if="(vm.authentication.sucursal === 'superUser' && vm.compraServices.compras.sucursalId) || vm.authentication.sucursal != 'superUser'">
+            <div class="col-sm-2">
+             <div class="form-group">
+               <label class="control-label" >Cant.</label>
+                  <input type="Number" min="1" ng-model="vm.product.qt" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-10">
+              <div class="form-group">
+                <label class="control-label" >Agregar producto</label>
+                 <input type="text" ng-model="vm.compraServices.compra.promotionItems" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in vm.getProductFilter($viewValue)"
+     typeahead-on-select="vm.selectedItem($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+   </div>
+ </div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<table  class="table table-condensed table-bordered table-striped">
+            <th class="col-1 text-center">#</th>
+            <th class="col-1 text-center">Cantidad</th>
+            <th class="col-2 text-center">Producto</th>
+            <th class="col-3 text-center">Marca</th>
+            <th class="col-4 text-center">Precio</th>
+            <th class="col-5 text-center">Importe</th>
+
+            <tr dir-paginate="product in vm.productServices.product.listproductPromotion | itemsPerPage: 10">
+             <td data-title="'#'" header-class="'text-center'" class="text-center col-1" >
+              <span>{{product.productId}}</span>
+            </td>
+            <td data-title="'Producto'" header-class="'text-center'" sortable="'name'" class="text-center col-2">
+             <div ng-if="vm.editMode && (product._id === vm.productServices.tempSelectedproduct._id)">
+              <input class="form-control" id="editable" min="1" type="Number" ng-model="vm.product.Editvalue" />
+              <a class="btn btn-sm btn-success buttonEdit" ng-click="vm.saveField($index, product);vm.editMode = false"><span>
+               Guardar
+             </span></a>
+           </div>
+           <div ng-if="!vm.editMode">
+            <a class="btn btn-sm btn-info buttonEditCompras" ng-click="vm.editMode = true; vm.editAppKey(product)"><span>
+             {{product.quantity}}
+           </span></a>
+         </div>
+            </td>
+            <td data-title="'Marca'" header-class="'text-center'" class="text-center col-2">
+                       {{product.name}}
+            </td>
+          <td class="text-center col-3" header-class="'text-center'" data-title="'Saldo Inicial'" >
+              <span>{{product.brand}}</span>
+      </td>
+
+      <td data-title="'Salida'" header-class="'text-center'" class="text-center col-5">
+		 <div ng-if="vm.editModePrices && (product._id === vm.productServices.tempSelectedproduct._id)" class="text-center">
+            <p class="input-group">
+              <input type="text" data-ng-model="vm.product.EditvaluePrices" id="price" name="price" autocomplete="off" ui-number-mask="2">
+              <a class="btn btn-sm btn-success" ng-click="vm.saveFieldPrices($index, product);vm.editModePrices = false"><span>
+               Guardar
+             </span></a>
+             </p>
+           </div>
+           <div ng-if="!vm.editModePrices">
+            <a class="btn btn-sm btn-primary buttonEditPrice" ng-click="vm.editModePrices = true ; vm.editAppKey(product)"><span >{{product.cost | currency}}</span></a>
+         </div>
+      </td>
+      <td data-title="'Saldo'" header-class="'text-center'" class="text-center col-5">
+        {{product.total | currency}}
+      </td>
+      <td class="pull-right" header-class="'text-center'" class="text-center">
+        <div>
+          <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="parameter.systemParam"><i class="fa fa-trash"
+            ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+            ng-bootbox-confirm-action="parameter.systemParam || vm.removeItem($index)"></i></a>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <dir-pagination-controls  on-page-change="loadMore(newPageNumber, oldPageNumer)">
+    </dir-pagination-controls>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12 text-center">
+		<a ng-click="vm.productServices.product.listproductPromotion.length <=0 || vm.saveOrder(vm.compraServices.compras)" class="btn btn-success" ng-disabled="vm.productServices.product.listproductPromotion.length <=0">GUARDAR COMPRA</a>
+		<a ng-click="vm.clearCart()" class="btn btn-danger">
+			VACIAR CARRITO
+		</a>
+	</div>
+</div>
+ </div>
+</div>
+  </div>
+     </div>
+			<div class="col-sm-4">
+			<div class="box box-primary">
+			<div class="box-body">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="alert alert-info text-center">
+							<h1>$/ {{vm.product.total | currency}}</h1>
+						</div>
+					</div>
+				</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label class="control-label" >DOCUMENTO</label>
+			<select data-ng-model="vm.compraServices.compras.documentType" id="documentType" class="form-control" name="documentType"
+			ng-options="item._id as item.name for item in vm.tipoFacturaList"
+			>
+			<option value="" class="">-- Selecione Seguro --</option>
+
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label class="control-label" >TIPO PAGO</label>
+            <select
+             class="form-control"
+             name="tipoPago"
+             id="tipoPago"
+             ng-options="item._id as item.name for item in vm.tipoPagoList"
+             data-ng-model = "vm.compraServices.compras.tipoPago">
+             </select>
+			<!-- <oi-select
+			oi-options="item.name for item in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Tipo Pago') track by item._id"
+			ng-model="vm.compraServices.compras.documentType"
+			placeholder="Relacionados"
+			></oi-select> -->
+		</div>
+		</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label class="control-label" >SERIE</label>
+			<input type="text" ng-model="vm.compraServices.compras.serie" id="name" name="name" autocomplete="off" class="form-control">
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label class="control-label" >No. DE VANTA</label>   <input type="text" ng-model="vm.compraServices.compras.noVenta" id="name" name="name" autocomplete="off" class="form-control" >
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+		<label class="control-label" >Fecha de Compra</label>
+
+<p class="input-group">
+<input  type="text"  id="createdDate"  name="createdDate"  class="form-control" uib-datepicker-popup="mediumDate"is-open="vm.valuationDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()"
+ng-model="vm.compraServices.compras.fecha_compra"
+close-text="Cerrar"
+autocomplete="off"
+/>
+<span class="input-group-btn">
+	<button type="button" class="btn btn-default"
+	ng-click="vm.valuationDatePickerOpen($event)">
+	<i class="glyphicon glyphicon-calendar"></i>
+</button>
+</span>
+</p>
+<p class="help-block" ng-show="compraForm.createdDate.$error.required && ( !compraForm.$pristine || compraForm.$submitted)">
+Este campo es requerido
+</p>
+
+</div>
+</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+			<label class="control-label" >PROOVEDORES</label>
+			<oi-select
+			oi-options="item.name for item in vm.providerServices.loadproviders() track by item._id"
+			ng-model="vm.compraServices.compras.provider"
+			placeholder="Relacionados"
+			></oi-select>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+	<div class="info-box">
+	  <div class="row">
+         <div class="col-sm-8">
+           <label>SUB TOTAL</label>
+         </div>
+         <div class="col-sm-4">
+          <label class="pull-right">{{vm.product.subtotal | currency}}</label>
+         </div>
+	  </div>
+	  <div class="row">
+         <div class="col-sm-8">
+           <label>ITBS</label>
+         </div>
+         <div class="col-sm-4">
+          <label class="pull-right">{{vm.product.itbs | currency}}</label>
+         </div>
+	  </div>
+	  <div class="row">
+         <div class="col-sm-8">
+           <label>Total</label>
+         </div>
+         <div class="col-sm-4">
+          <label class="pull-right">{{vm.product.total | currency}}</label>
+         </div>
+	  </div>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+

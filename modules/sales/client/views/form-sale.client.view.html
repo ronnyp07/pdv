@@ -1,0 +1,24 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.sale._id ? 'Edit Sale' : 'New Sale'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.saleForm" class="form-horizontal" ng-submit="vm.save(vm.form.saleForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.sale.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.saleForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Sale name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.sale._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

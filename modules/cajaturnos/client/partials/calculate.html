@@ -1,0 +1,51 @@
+<div  class="modal" >
+  <div class="modal-dialog" >
+    <div class="modal-content" >
+      <div class="modal-header" >
+        <div class="modeltitle">
+          <button type="button"
+          class="close"
+          ng-click="vm.createModal.hide()" >&times;</button >
+        </div>
+      </div>
+      <div class="modal-body" id="customerListModel">
+        <div>
+
+     <div class="box-body">
+      <form name="cierreturnoForm" class="form-horizontal" ng-submit="vm.save(cierreturnoForm.$valid)" novalidate>
+        <table  class="table table-condensed table-bordered table-striped">
+          <th>Unidad de Monedas</th>
+          <th>Cantidad</th>
+          <th>Subtotal de apertura</th>
+          <tr ng-repeat="input in  vm.cierreList">
+            <td>{{input.moneda | currency}}</td>
+            <td><input select-on-click  ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"   type="text" min="0" class="form-control" type="number" min="0" ng-change="vm.refreshData($index, input)" name="cantidad" ng-model="input.cantidad"></td>
+            <td>{{input.total | currency}}</td>
+          </tr>
+        </table>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="pull-right">
+             <span class="cartsLabelsTop">Total: </span>  <span class="cartsLabelsTop">{{vm.total | currency }}</span>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+        <div class="col-sm-12">
+          <div class="text-center">
+        <button class="btn btn-primary" ng-click="vm.selectCalculate()">Guardar</button>
+        </div>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

@@ -1,0 +1,55 @@
+
+<table class="table table-condensed table-bordered"
+ >
+ <tr id="loteRowHead">
+  <th class="col-1" >No. Lotes</th >
+  <th class="col-1" >
+    Fecha Caducidad
+  </th >
+  <th class="col-1" ng-if="!vm.editMode">
+   Exis. Inicial
+  </th >
+  <th class="col-1">
+                 Exis. Actual</th>
+  </tr>
+  <tr ng-repeat="lote in vm.loteServices.lotesList"
+  ng-class="{'shortCierre': lote.action === 'd'}"
+  >
+    <td class="col-1">{{lote.noLote}}</td>
+    <td class="col-1">{{lote.loteDateCaducidad | date}}</td>
+    <td ng-if="!vm.editMode" class="col-1">{{lote.exInicial}}</td>
+    <!-- <td>{{lote.exFinal}}</td> -->
+    <td ng-class="{'col-1': !vm.editMode,
+                 'col-4': vm.editMode }">
+    <div ng-if="vm.editMode && ($index === vm.loteServices.loteSelected.index)">
+     <input class="form-control" id="editableLote" min="1" type="Number" ng-model="vm.lote.Editvalue" />
+     <a id="buttonEditLote" class="btn btn-sm btn-primary" ng-click="vm.saveLoteEditable($index, lote); vm.editMode = false"><i class="fa fa-check"></i>
+     </a>
+     </div>
+     <div ng-if="!vm.editMode"">
+      <a ng-if="lote.action !== 'd'" class="btn btn-sm btn-info buttonEditLote" ng-click="vm.editMode = true; vm.editAppKey($index, lote)"><span>
+       {{lote.exFinal}}
+       </span></a>
+       <span ng-if="lote.action === 'd'"> {{lote.exFinal}} </span>
+      </div>
+      </td>
+    <td class="pull-right" ng-if="!vm.editMode">
+      <div ng-if="lote.action !== 'd'">
+        <a href="#" data-skin="skin-blue" class="btn btn-danger btn-xs"><i class="fa fa-trash"  ng-click="vm.deleteLote(lote)"></i></a>
+        </div>
+      </td>
+    </tr>
+  </table>
+<!--    <dir-pagination-controls  on-page-change="vm.loadMore(newPageNumber, oldPageNumer)">
+  </dir-pagination-controls> -->
+
+  <div ng-show="vm.loteServices.lotesList.length == 0 && !vm.loteServices.isLoading" >
+  <div class="alert alert-info" >
+    <p class="text-center" >Ningun resultado fue encontrado en termino a la busqueda </p >
+    </div >
+
+  </div >
+  <cc-spinner is-loading="vm.loteServices.isLoading"
+  message="Cargando..." ></cc-spinner>
+
+

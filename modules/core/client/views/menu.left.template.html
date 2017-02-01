@@ -1,0 +1,174 @@
+<!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+    <div class="user-panel">
+            <div class="pull-left image">
+            <img data-ng-src="{{vm.userimageURL}}" alt="{{vm.authentication.user.displayName}}"
+            class="img-circle">
+            </div>
+            <div class="pull-left info">
+              <p>{{vm.authentication.user.displayName}}</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+    </div>
+      <!-- Sidebar user panel -->
+      <!--         <ng-include src="'modules/core/template/user-panel.html'"></ng-include> -->
+      <!-- search form -->
+      <!--          <ng-include src="'modules/core/template/search-form.html'"></ng-include> -->
+
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a ><i class="fa fa-circle-o"></i> Perfil</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview" ng-if="vm.authentication.filterMenu('Almacen') || vm.authentication.cacheData">
+          <a href="#">
+            <i class="fa fa-archive"></i>
+            <span>Almacen</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ><i class="fa fa-circle-o"></i>Categoria</a></li>
+            <li><a ><i class="fa fa-circle-o"></i> Presentación</a></li>
+            <li><a ui-sref="products"><i class="fa fa-circle-o"></i> Marca</a></li>
+            <li><a ng-href="/products"><i class="fa fa-circle-o"></i> Producto</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview" ng-if="vm.authentication.filterMenu('Clientes')">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Clientes</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a  ui-sref="customers.list"><i class="fa fa-circle-o"></i>Maestro Cliente</a></li>
+            <li><a ui-sref="products.create"><i class="fa fa-circle-o"></i> Cambiar Imagen</a></li>
+            <li><a ><i class="fa fa-circle-o"></i> Perfil</a></li>
+            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span>Configuración</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="parameters.list"><i class="fa fa-circle-o"></i> Parametros</a></li>
+
+            <li><a ui-sref="cajas.list"><i class="fa fa-circle-o"></i>Terminal Punto de Ventas</a></li>
+
+            <li><a ui-sref="partners.list"><i class="fa fa-circle-o"></i>Cuenta Asociada</a></li>
+            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Sucursales</a></li>
+          <!--   <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Empleados</a></li> -->
+            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Tipo Documento</a></li>
+          </ul>
+        </li>
+        <li class="treeview" ng-if="vm.authentication.filterMenu('Compras')">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>Compras</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="providers.list"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+            <li><a ui-sref="compras.create"><i class="fa fa-circle-o"></i> Ordenes de Compras</a></li>
+            <li><a ui-sref="compras.list"><i class="fa fa-circle-o"></i> Consultar Compras</a></li>
+            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Entrada de Orden</a></li>
+            <li><a href="pages/UI/timeline.html"></a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>Operaciones Diarias</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="sessions.openSession"><i class="fa fa-circle-o"></i> Su sesión</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Todas la sesionces</a></li>
+            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Resumen de ventas</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i> <span>Inventario</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="inventarios.list"><i class="fa fa-circle-o"></i> Inventario Inicial</a></li>
+            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="pages/calendar.html">
+            <i class="fa fa-calendar"></i> <span>Calendar</span>
+            <small class="label pull-right bg-red">3</small>
+          </a>
+        </li>
+        <li>
+          <a href="pages/mailbox/mailbox.html">
+            <i class="fa fa-envelope"></i> <span>Mailbox</span>
+            <small class="label pull-right bg-yellow">12</small>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Examples</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+            <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+            <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+            <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+            <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+            <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Multilevel</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li>
+              <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+          </ul>
+        </li>
+        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li class="header">LABELS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

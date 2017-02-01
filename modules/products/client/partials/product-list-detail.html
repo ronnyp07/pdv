@@ -1,0 +1,132 @@
+<div>
+  <section class="content">
+   <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <!-- Apply any bg-* class to to the icon to color it -->
+        <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Productos</span>
+          <span class="info-box-number">{{vm.productServices.total}}</span>
+          <!-- {{vm.test}} -->
+        </div><!-- /.info-box-content -->
+      </div><!-- /.info-box -->
+    </div>
+  </div>
+  <div class="row product">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header text-center">
+          <a class="btn btn-app" ng-click="vm.showCreateProductModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-plus"></i> Agregar
+          </a>
+
+          <a class="btn btn-app" ng-click="vm.showAjustarModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-edit"></i> Ajustar
+          </a>
+
+          <a class="btn btn-app" ng-click="vm.showLotesModal()">
+            <span class="badge bg-purple"></span>
+            <i class="fa fa-square"></i> Lotes
+          </a>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+           <div class="col-sm-6">
+            <div class="form-group" ng-if="vm.authentication.sucursal === 'superUser'">
+             <label class="control-label" >Seleccione Sucursal</label>
+             <oi-select
+             oi-options="item.name for item in vm.sucursalList track by item._id"
+             ng-change="vm.search()"
+             ng-model="vm.productServices.product.sucursalId"
+             oi-select-options="{
+             cleanModel: true }"
+             placeholder="Relacionados"
+             <option value="1">Something Else</option>
+             ></oi-select>
+           </div>
+         </div>
+         <div class="col-sm-6">
+          <div class="form-group">
+            <label class="control-label" >Filtrar Nombre</label>
+            <input
+            type="text"
+            name="name"
+            ng-model="vm.productServices.productName"  placeholder="Buscar..."
+            ng-model-options="{ debounce: 900 }"
+            ng-change="vm.search()"
+            class="form-control"
+            autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+       <div class="col-sm-12">
+         <table  class="table table-condensed table-bordered table-striped">
+          <th ng-if="vm.authentication.sucursal == 'superUser'">Almacen</th>
+          <th ng-class="{'col-3 text-center': vm.authentication.sucursal == 'superUser',
+          'col-1 text-center': vm.authentication.sucursal !== 'superUser'}">Producto</th>
+          <th class="col-5 text-center">Marca</th>
+          <th class="col-5 text-center">Presentación</th>
+          <th class="col-5 text-center">S. Minimo</th>
+          <th class="col-5 text-center">Stock</th>
+          <th class="col-5 text-center">P. Compra</th>
+          <th class="col-5 text-center">Precio</th>
+          <th class="col-5 text-center">Accion</th>
+          <tr ng-click="vm.productServices.selectedProduct = product" dir-paginate="product in vm.productServices.productList | itemsPerPage: 15" total-items="vm.productServices.total" current-page="vm.productServices.page" ng-style="{
+          'background-color': product._id == vm.productServices.selectedProduct._id ? 'lightgray' : ''}">
+          <td ng-if="vm.authentication.sucursal == 'superUser'">{{product.sucursalId.name}}</td>
+          <td >{{product.name}}</td>
+          <td  class="text-center">{{product.brand}}</td>
+          <td class="text-center">
+            <span>{{product.presentation}}</span>
+          </td>
+          <td class="text-center">
+            {{product.minimumStock}}
+          </td>
+          <td class="text-center" ng-class="{'minimunProduct': product.minimumStock > product.inStock}">
+            <span>{{product.inStock }}</span>
+          </td>
+          <td class="text-center" >
+            {{product.cost | currency}}
+          </td>
+          <td class="text-center" >
+            {{product.price | currency}}
+          </td>
+          <td class="text-center">
+            <div>
+              <a href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="product.systemParam"><i class="fa fa-trash"
+                ng-bootbox-confirm="Al eliminar este item eliminara su dependencia ¿seguro de querer eliminar parametro?"
+                ng-bootbox-confirm-action="product.systemParam || vm.delete(product)"></i></a>
+                <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="product.systemParam"><i class="fa fa-edit"  ui-sref="products.edit({productId:product._id})"></i></a>
+
+                <!-- <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="product.systemParam"><i class="fa fa-edit"  ng-click="vm.edit(product)"></i></a> -->
+              </div>
+            </td>
+          </tr>
+        </table>
+        <dir-pagination-controls  on-page-change="vm.loadMore(newPageNumber, oldPageNumer)">
+        </dir-pagination-controls>
+        <div ng-show="vm.productServices.productList.length == 0 && !vm.productServices.isLoading" >
+          <div class="alert alert-info" >
+            <p class="text-center" >Ningun resultado fue encontrado en termino a la busqueda '{{ vm.productServices.productName }}'</p >
+            </div >
+          </div >
+          <cc-spinner is-loading="vm.productServices.isLoading"
+          message="Carando..." ></cc-spinner >
+        <!-- <div class="spinner"
+        ng-show="isLoading" >
+        <span us-spinner="{radius:8, width:5, length: 3, lines:9}" ></span >
+
+          <p >{{ message }}</p >
+          </div > -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+</div>

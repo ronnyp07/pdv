@@ -1,0 +1,48 @@
+<div layout="row" >
+	<md-whiteframe id="pagoHeader"  class="md-whiteframe-1dp cartFrame1"  layout layout-align="center center" flex layout-padding layout >
+	<div  class="text-center">
+		<span class="detailsLabel" ng-if="!vm.salesServices.printMode && vm.product.formaPago === 'efectivo'">Pago Efectivo</span>
+		<span class="detailsLabel" ng-if="!vm.salesServices.printMode && vm.product.formaPago === 'credito'">Pago Crédito</span>
+	</div>
+
+	<div layout="row" column ng-if="vm.salesServices.printMode">
+	    <div flex class="text-right">
+	    <a class="btn pagoButtonCancel" ng-click="vm.printRecive()">
+                 <i class="fa fa-print"></i>
+                 Imprimir
+                  </a>
+	    <a class="btn pagoButtonSuccess"  ng-click="vm.nexOrder()">
+                 <i class="fa fa-check"></i> Continuar
+                  </a>
+	  </div>
+	</div>
+	</md-whiteframe>
+</div>
+
+<div layout="row" >
+<div ng-if="(vm.product.formaPago === 'efectivo' && !vm.salesServices.printMode)" ng-include="'modules/sales/partials/efectivo-tpl.html'" flex-sm="85" flex-offset-sm="5"
+ flex-offset-gt-sm="5" flex-gt-sm="85" flex-offset-md= "5" flex-md="85" flex-offset-gt-md= "5" flex-gt-md="85" flex-offset-lg="15" flex-lg="70">
+</div>
+<div ng-if="vm.product.formaPago === 'credito' && !vm.salesServices.printMode " ng-include="'modules/sales/partials/credito-tpl.html'" flex-sm="85" flex-offset-sm="5"
+ flex-offset-gt-sm="5" flex-gt-sm="85" flex-offset-md= "5" flex-md="85" flex-offset-gt-md= "5" flex-gt-md="85" flex-offset-lg="15" flex-lg="70">
+</div>
+
+<div class="ticketContainer" ng-show="vm.salesServices.printMode" ng-include="'modules/sales/partials/ticket.html'"  flex-sm="45" flex-offset-sm="25"
+ flex-offset-gt-sm="35" flex-gt-sm="45" flex-offset-md= "30" flex-md="40" flex-offset-gt-md= "30" flex-gt-md="40" flex-offset-lg="30" flex-lg="40">
+ </div>
+
+ <cc-spinner is-loading="vm.salesServices.isSaving"
+  message="Guardando..." ></cc-spinner>
+
+</div>
+
+
+
+
+<!-- <div layout="row" >
+	<md-whiteframe id="pagoBottons"  class="md-whiteframe-1dp "  layout layout-align="center center" flex layout-padding layout >
+	<div  class="text-center">
+		<span>Pago Efectivo</span>
+	</div>
+	</md-whiteframe>
+</div> -->
