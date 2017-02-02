@@ -95,12 +95,15 @@
     'loadparameters': function(){
 
     },'categoryTree': function(param){
+      var defer = $q.defer();
       parametersService.get({parameterId: param}, function(data){
-           self.category = data;
+          self.category = data;
            self.getParamsFilterByParent(null, data._id).then(function(result){
              self.children = result;
+             defer.resolve(self.children);
            });
       });
+      return defer.promise;
     },getParamsFilterByParent: function(val, parent){
       var data = {
         id: val,
@@ -187,8 +190,6 @@
       self.isSaving = true;
       var parameter = new parametersService(param);
       parameter.$update(function(data){
-            // self.loadcars();
-            // self.loadParamList();
             self.parameter = null;
             self.tempParent = null;
             defer.resolve();

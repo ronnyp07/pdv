@@ -111,14 +111,14 @@
   var contains = {};
   if (req.query.search){
     var search = JSON.parse(req.query.search);
+   // { category: { $in: [req.body.categories] }}
     if(search.sucursalId || search.name || search.category){
       contains = {
         isActive: true,
         sucursalId : search.sucursalId ? search.sucursalId : '',
         name: search.name ? search.name : '',
-        category: search.category ? search.category : ''
+        category: _.isArray(search.category) ? { $in: [search.categories] } : search.category
       };
-      console.log(contains);
     }else{
       contains = {
         sucursalId : ''

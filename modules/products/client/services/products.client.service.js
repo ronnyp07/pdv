@@ -88,18 +88,13 @@
            category: self.category},
            'ordering': self.ordering
          };
-         console.log(params);
-
          productsService.get(params, function(data){
-          self.total = data.total;
-        //self.count = parseInt(data.options.count);
-
+          self.total = data.total;        //self.count = parseInt(data.options.count);
         if(data){
          angular.forEach(data.results, function(item){
           self.productList.push(item);
         });
        }
-
        if(self.productList.length >= data.total){
         self.hasMore = false;
       }

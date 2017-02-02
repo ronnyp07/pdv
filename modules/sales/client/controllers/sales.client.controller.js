@@ -53,6 +53,7 @@
     vm.userimageURL = vm.authentication.user.profileImageURL;
     vm.productServices = ProductRestServices;
     vm.cajaturnoInfo = vm.authentication.cajaturno.get('cajaturno');
+
     //vm.sucursalInfo = SucursalsService.get({sucursalId: vm.sale.cajaturnoInfo.sucursalId});
 
     vm.productServices.sucursalSearch = vm.cajaturnoInfo.sucursalId;
@@ -95,6 +96,44 @@
     vm.salesPedingList = [];
   }
   init();
+
+   //Filtra por categoria y anade la categoria actual
+   //Created By: Ronny Morel
+  vm.getCategories = function(category){
+    vm.categorieList = [];
+    resetProductCounter();
+    var param = [];
+    vm.parameterServices.categoryTree(category).then(function(){
+      vm.categorieList =  vm.parameterServices.category.ancestors;
+      vm.categorieList.push(vm.parameterServices.category._id);
+      _.remove(vm.categorieList, function(n) {
+           return n  === 'Categoria';
+       });
+        if(vm.parameterServices.children.length > 0){
+            _.forEach(vm.parameterServices.children, function(i){
+                param.push(i._id);
+             });
+        }
+      vm.productServices.category = param.length > 0 ? param: vm.parameterServices.category._id;
+      // vm.parameterServices.category._id;
+      vm.productServices.loadScrollproducts();
+    }, function(error){
+      alertify.alert('Ha ocurrido un error en el sistema!');
+    });
+  };
+
+  //vm.getCategoryProducts
+
+  vm.getCategoryProducts = function(value){
+
+   //resetProductCounter();
+   vm.selectedCategory = value._id ? value._id : value;
+   vm.getCategories(value._id ? value._id : value);
+  //vm.parameterServices.categoryTree(value._id ? value._id : value);
+   vm.productServices.category = value._id;
+   //vm.productServices.loadScrollproducts();
+  };
+
 
   //Search the product
   vm.getProductFilter = function(param){
@@ -278,7 +317,7 @@ vm.saveOrder = function(order){
   vm.ticketTime = moment().format("hh: mm A");
   vm.salesServices.isSaving = true;
 
-   vm.printReport();
+  vm.printReport();
   if(!vm.salesServices.selectedSale){
     vm.salesServices.create(vm.product).then(function(data){
      if(order !== 'hold'){
@@ -353,20 +392,8 @@ function saveProces(data){
    }
  };
 
- vm.getCategoryProducts = function(value){
-   var param = {
-    sucursalId: vm.cajaturnoInfo.sucursalId,
-    categories : value._id ? value._id : value
-  };
-  vm.selectedCategory = value._id ? value._id : value;
-  vm.parameterServices.categoryTree(value._id ? value._id : value);
-  vm.productServices.sucursalSearch = vm.cajaturnoInfo.sucursalId;
-  vm.productServices.category = value._id;
-  resetProductCounter();
-  vm.productServices.loadScrollproducts();
-};
 
-vm.setAccionValue = function(value){
+ vm.setAccionValue = function(value){
   vm.product.qt = vm.product.qt + '' + value;
 };
 
@@ -436,7 +463,7 @@ vm.changePrice = function(){
 vm.openSalesList = function(){
  vm.salesServices.getSales({cajaturno: vm.cajaturnoInfo._id}).then(function(pedingOrder){
   vm.salesPedingList = pedingOrder;
- });
+});
  salesPopUp();
 };
 
@@ -474,7 +501,7 @@ vm.selectCustomer = function(){
    show: true
              // placement: 'center'
            });
-resetProductFilter();
+ resetProductFilter();
 };
 
 function resetProductFilter(){
@@ -499,11 +526,11 @@ vm.getHold = function(){
  var val = {
   status : vm.parameterServices.paramEnum.details.sales_status_espera,
   cajaturno : vm.cajaturnoInfo._id
- };
- vm.salesServices.getSales(val).then(function(pedingOrder){
+};
+vm.salesServices.getSales(val).then(function(pedingOrder){
   vm.salesPedingList = pedingOrder;
 });
- salesPopUp();
+salesPopUp();
 };
 
 function salesPopUp(){
