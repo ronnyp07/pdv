@@ -1,0 +1,58 @@
+ <div  class="modal" >
+  <div class="modal-dialog" >
+    <div class="modal-content" >
+      <div class="modal-header" >
+        <div class="modeltitle">
+          <button type="button"
+          class="close"
+          ng-click="vm.ajustarModal.hide()" >&times;</button >
+
+          <!--        <h4 class="modal-title " >Crear Cliente</h4 > -->
+        </div>
+      </div >
+  <div class="modal-body" >
+   <div class="login-box">
+    <div class="login-box-body">
+     <form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
+      <div class="row">
+        <div class="col-sm-12">
+         <md-input-container class="md-icon-float md-block md-icon-left" style="margin-bottom: 0px;">
+          <!-- Use floating label instead of placeholder -->
+          <label for="input_228">Usuario</label>
+          <md-icon><i class="fa fa-user iconform hidden-xs"></i></md-icon>
+          <input ng-model="credentials.username" type="text" class="ng-valid md-input ng-dirty ng-valid-parse ng-empty ng-touched" id="input_228" aria-invalid="false"><div class="md-errors-spacer"></div>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <md-input-container class="md-icon-float md-block md-icon-left cusinput">
+          <!-- Use floating label instead of placeholder -->
+          <label for="input_228">Contraseña</label>
+          <md-icon><i class="fa fa-eye iconform hidden-xs"></i></md-icon>
+          <input  ng-model="credentials.password" type="password" class="ng-valid md-input ng-dirty ng-valid-parse ng-empty ng-touched" id="input_228" aria-invalid="false"><div class="md-errors-spacer"></div>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label>
+          <input type="checkbox"> Mostrar Contraseña
+        </label>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-sm-12">
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary form-control">Entrar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
+    </div >
+  </div >
+</div >
+</div >
+

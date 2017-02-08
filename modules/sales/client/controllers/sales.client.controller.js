@@ -53,7 +53,7 @@
     vm.userimageURL = vm.authentication.user.profileImageURL;
     vm.productServices = ProductRestServices;
     vm.cajaturnoInfo = vm.authentication.cajaturno.get('cajaturno');
-
+    vm.focusinControl = {};
     //vm.sucursalInfo = SucursalsService.get({sucursalId: vm.sale.cajaturnoInfo.sucursalId});
 
     vm.productServices.sucursalSearch = vm.cajaturnoInfo.sucursalId;
@@ -121,11 +121,8 @@
       alertify.alert('Ha ocurrido un error en el sistema!');
     });
   };
-
   //vm.getCategoryProducts
-
   vm.getCategoryProducts = function(value){
-
    //resetProductCounter();
    vm.selectedCategory = value._id ? value._id : value;
    vm.getCategories(value._id ? value._id : value);
@@ -133,7 +130,6 @@
    vm.productServices.category = value._id;
    //vm.productServices.loadScrollproducts();
   };
-
 
   //Search the product
   vm.getProductFilter = function(param){
@@ -218,8 +214,6 @@ vm.selectedItem = function(product){
     //       p_porMayor: 130
     //     }
     // };
-
-    //console.log(vm.cartService.orderBy(precios, vm.product.qt));
     vm.salesServices.selectedProduct = product;
     vm.product.subtotal = vm.cartService.getSubTotal(data.items);
     vm.product.total = vm.cartService.getTotalCart();
@@ -249,8 +243,6 @@ vm.setCredit = function(){
  vm.setDatePay();
 }
 };
-
-
 
 function getInteresAmount(){
   return (Number(vm.product.total) * Number(vm.product.interes ? vm.product.interes : 0)) / 100;
@@ -448,6 +440,7 @@ vm.saveField = function(index, product) {
 };
 
 vm.changePrice = function(){
+  vm.focusinControl.show();
   if(vm.productServices.product.listproductPromotion.length > 0){
     vm.cartService.getItemIndex(vm.salesServices.selectedProduct).then(function(index){
       vm.cartService.updateItemPrice(index, vm.product.qt).then(function(){

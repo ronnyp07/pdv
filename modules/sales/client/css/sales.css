@@ -20,11 +20,16 @@
 	font-weight: bold;
 	font-size: 16px;
 }
+
+.buttonAccion{
+	margin-bottom: 10px;
+}
+
 .cartFrame1{
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 10px;
-	height: 50px;
+	height: 100px;
 	background-color: #F5F5F5
 }
 .cartFrame{
@@ -88,8 +93,36 @@
 	color: #ffffff;
 }
 
+.cartSpan{
+	font-size: 20px;
+	font-weight: bold;
+}
+.cartSpanColor{
+	font-size: 25px;
+	font-weight: bold;
+	color: #E64A19
+}
+
+.frameButton{
+	margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+/*    height: 100px;*/
+    background-color: #F5F5F5;
+}
+
 .btn2-primary:hover, .btn2-primary:focus, .btn2-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
 	background: #33a6cc;
+}
+
+.btn.pagoButtonSuccess:hover{
+	background: #0099cc;
+	color: #ffffff;
+}
+
+.btn.pagoButtonSuccess:focus{
+	color: #ffffff;
+	background-color: #1976D2;
 }
 
 .btn2-primary:active, .btn2-primary.active {
@@ -133,14 +166,17 @@
 	font-weight: bold;
 	color: #607D8B;
 }
-.cartSpan{
-	font-size: 20px;
-	font-weight: bold;
+
+.cartSpanDetail{
+	font-size: 16px;
+    font-weight: bold;
+    color: gray;
 }
+
 .cartSpanColor{
 	font-size: 25px;
 	font-weight: bold;
-	color: #E64A19
+	color: gray;
 }
 .detailColor{
 	color: #757575
@@ -282,6 +318,10 @@
 	margin: 0 9px;
 	border-right: 2px solid #ffffff;
 	border-left: 2px solid #f2f2f2;
+}
+.total{
+    padding-top: 0px;
+	padding-bottom: 0px;
 }
 #customerListModel{overflow-y: auto};
 

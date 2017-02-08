@@ -1,6 +1,6 @@
 <div layout="row" >
 <md-whiteframe id="categoryList" class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
- <div  id="categoryFader" >
+ <div flex="70"  id="categoryFader" >
 	<ul class="nav nav-pills">
 	<li ng-class="{active :  vm.selectedCategory === 'Categoria'}"><a  ng-click="vm.getCategories('Categoria'); vm.setCategoryValue('Categoria'); vm.getCategoryProducts()"><i class="fa fa-home"></i>
 	</a>
@@ -13,10 +13,18 @@
 							</li>
 						</ul>
 </div>
+<div flex="10">
+<input id="qt" select-on-click type="text"  ng-model="vm.product.qt" select-on-click ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"  ui-number-mask="0" class="form-control">
+</div>
+
+<div flex="20">
+ <input type="text" ng-model="vm.salesCart" autofocus ng-disabled="vm.product.formaPago" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in vm.getProductFilter($viewValue)"
+					typeahead-on-select="vm.selectedItem($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+</div>
 </md-whiteframe>
 </div>
 <div layout="row" ng-if="vm.parameterServices.children.length > 0">
-	<md-whiteframe id="categoryListDetails"class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
+	<md-whiteframe id="categoryListDetails" class="md-whiteframe-1dp" flex layout-padding layout >
 		<div id="categoryChildren" ng-repeat="children in vm.parameterServices.children">
 			<button  class="btn btn-primary borderRadius" ng-click="vm.getCategoryProducts(children)">
 				{{children.name}}

@@ -21,17 +21,17 @@
   	</ul>
 
   	<ul class="nav navbar-nav navbar-right">
-  	 <form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedSale">
-        <a ng-click="vm.removeHoldSale(vm.salesServices.selectedSale)" class="btn btn-danger"><i class="fa fa-edit"></i> {{vm.salesServices.selectedSale.salesId}}</a>
-      </form>
-  	 <form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedCustomer">
-        <a ng-click="vm.resetCustomer()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-      </form>
-  	<li class="divider" ng-if="vm.salesServices.selectedCustomer" ><a class="posNavLabel"<span class="posNavLabel"><i class="fa fa-user"></i> {{vm.salesServices.selectedCustomer.name}} {{vm.salesServices.selectedCustomer.lastName}}</span></a></li>
-       <form class="navbar-form navbar-left">
-       <button ng-click="vm.openSalesList()" class="btn btn-warning">Eliminar Ticket </button>
-        <button ng-click="vm.selectCustomer()" class="btn btn-success">Selecionar Cliente {{nav}}</button>
-      </form>
+  		<form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedSale">
+  			<a ng-click="vm.removeHoldSale(vm.salesServices.selectedSale)" class="btn btn-danger"><i class="fa fa-edit"></i> {{vm.salesServices.selectedSale.salesId}}</a>
+  		</form>
+  		<form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedCustomer">
+  			<a ng-click="vm.resetCustomer()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+  		</form>
+  		<li class="divider" ng-if="vm.salesServices.selectedCustomer" ><a class="posNavLabel"<span class="posNavLabel"><i class="fa fa-user"></i> {{vm.salesServices.selectedCustomer.name}} {{vm.salesServices.selectedCustomer.lastName}}</span></a></li>
+  		<form class="navbar-form navbar-left">
+  			<button ng-click="vm.openSalesList()" class="btn btn-warning">Eliminar Ticket </button>
+  			<button ng-click="vm.selectCustomer()" class="btn btn-success">Selecionar Cliente {{nav}}</button>
+  		</form>
   		<!-- <li ng-click=""><a class="btn btn-info" ><span> Selecionar Cliente</span></a></li> -->
   		<li class="dropdown">
   			<a href="#" class="dropdown-toggle posNavLabel" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gears"></i> Opciones<span class="caret"></span></a>
@@ -74,21 +74,9 @@
 <div layout="row" id="posContainer" layout-padding layout-fill layout-xs="column"  >
 	<div flex="40" class="color1">
 		<div layout="row">
-			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" flex layout-padding layout >
-				<div flex>
-					<span class="cartSpan">Itbs: </span>
-					<span class="cartSpan cartSpanColor"> {{vm.product.itbs | currency}}</span>
-				</div>
-				<div flex>
-					<span class="cartSpan">Total:</span>
-					<span class="cartSpan cartSpanColor"> {{vm.product.total | currency}} </span>
-				</div>
-			</md-whiteframe>
-		</div>
-		<div layout="row">
 			<md-whiteframe class="md-whiteframe-19dp cartFrame" flex layout-padding layout >
 				<div scroll-glue id="cartFrameDiv" class="cartFrameDiv">
-			  <div  layout="row" column ng-repeat="product in vm.productServices.product.listproductPromotion" ng-class="{'selectedProduct': product._id === vm.salesServices.selectedProduct._id}" ng-click="vm.setSelectedProduct(product)">
+					<div  layout="row" column ng-repeat="product in vm.productServices.product.listproductPromotion" ng-class="{'selectedProduct': product._id === vm.salesServices.selectedProduct._id}" ng-click="vm.setSelectedProduct(product)">
 
 						<div class="col-sm-8">
 							<span class="cartSpan">{{product.name}}</span>
@@ -102,25 +90,74 @@
 				</div>
 			</md-whiteframe>
 		</div>
-		<div layout="row">
-			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" flex layout-padding layout >
-				<div flex="20">
-					<input id="qt" select-on-click type="text"  ng-model="vm.product.qt" select-on-click ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"  ui-number-mask="0"class="form-control">
+		<div layout="column" >
+			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" layout-padding>
+				<div class="text-right" flex style="padding-bottom: 0px;">
+					<span class="cartSpanDetail">descuentos: </span>
+					<span class="cartSpanDetail"> {{vm.product.itbs | currency}}</span>
 				</div>
-				<div flex="80">
-					<input type="text" ng-model="vm.salesCart" autofocus ng-disabled="vm.product.formaPago" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in vm.getProductFilter($viewValue)"
-					typeahead-on-select="vm.selectedItem($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
+				<div flex class="text-right" style=" padding-top: 0px; padding-bottom: 0px;">
+					<span class="cartSpanDetail">impuestos:</span>
+					<span class="cartSpanDetail"> {{vm.product.total | currency}} </span>
+				</div>
+				<div flex class="text-right" style=" padding-top: 0px; padding-bottom: 0px;">
+					<span class="cartSpanColor">Total:</span>
+					<span class="cartSpanColor"> {{vm.product.total | currency}} </span>
 				</div>
 			</md-whiteframe>
 		</div>
-<div layout="row" style="margin-top:15PX;">
+		<div layout="row" layout-wrap>
+			<md-whiteframe class="md-whiteframe-1dp frameButton" flex  layout-padding layout >
+				<div layout="column" flex="30" >
+					<div flex class="buttonAccion">
+					<a  class="btn btn-lg btn-block btn-warning buttonAccion">
+							Efectivo
+						</a>
+
+					</div>
+
+					<div flex>
+						<a  class="btn btn-lg btn-block btn-warning">
+							Credito
+						</a>
+					</div>
+				</div>
+				<div layout="column"  flex="30">
+					<div flex class="buttonAccion">
+						<a href="" class="btn btn-lg btn-block btn-info ">
+							Efectivo
+						</a>
+					</div>
+					<div flex>
+						<a user-authorized="vm.focusinControl" ng-click="vm.changePrice()" class="btn btn-lg btn-block btn-danger">
+							<i class="fa fa-eraser "></i>
+						</a>
+					</div>
+				</div>
+				<div layout="column" flex="40" >
+					<div flex class="buttonAccion">
+						<a ng-disabled="vm.productServices.product.listproductPromotion.length > 0"
+							ng-click="vm.setPageMode('efectivo')" class="btn btn-lg btn-block btn-success">
+							Efectivo
+						</a>
+					</div>
+					<div flex>
+						<a ng-click="vm.setCredit('credito')" class="btn btn-lg btn-block btn-primary">
+							Crédito
+						</a>
+					</div>
+				</div>
+			</md-whiteframe>
+		</div>
+
+<!-- <div layout="row" style="margin-top:15PX;">
 <div style="padding-left: 10PX; flex-sm="50"   hide-xs flex-gt-sm="50" flex-gt-md="50" flex-gt-xs="40" flex-xs="40" flex-gt-lg="40">
 		<on-screen-keyboard rows="[['1','2', '3','4'],['5','6','7','8'], ['9','0', '.', {type: 'erase', colspan: 1, text: '&lArr;'}]]"></on-screen-keyboard >
 		</div>
 	    <div style="padding-right: 10PX;" flex-sm="40"   hide-xs flex-gt-sm="30" flex-gt-md="50" flex-gt-xs="40" flex-xs="40" flex-gt-lg="40">
 		<button-action></button-action>
 		</div>
-		</div>
+	</div> -->
 
 		<!-- <div layout="row">
 			<div flex-sm="40"   hide-xs flex-gt-sm="40" flex-gt-md="40" flex-gt-xs="30" flex-xs="30" layout-padding ><button class="btn btn-default form-control" ng-click="vm.setPageMode('efectivo')">Efectivo</button></div>
