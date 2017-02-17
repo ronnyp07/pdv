@@ -104,22 +104,27 @@
       contains = {
         sucursalId : search.sucursalId,
         customer: search.customer,
-        status: search.status
+        status: search.status,
+        isPOS: search.isPOS ? search.isPOS : ''
        };
      }else if(search.customer && !search.sucursalId){
       contains = {
         customer: search.customer,
-        status: search.status
+        status: search.status,
+        isPOS: search.isPOS ? search.isPOS : ''
+
        };
      }
      else if(!search.customer && search.sucursalId){
       contains = {
         sucursalId : search.sucursalId,
-        status: search.status
+        status: search.status,
+        isPOS: search.isPOS ? search.isPOS : ''
        };
      }else{
       contains = {
-        status: search.status
+        status: search.status,
+        isPOS: search.isPOS ? search.isPOS : ''
        };
      }
     }

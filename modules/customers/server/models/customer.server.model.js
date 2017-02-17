@@ -36,6 +36,14 @@ var CustomerSchema = new Schema({
   fullName : {
     type: String
   },
+  identity : {
+     type: String,
+     trim: true
+  },
+  price : {
+    type: String,
+    trim: true
+  },
   autorizedCredit: {
     type: Boolean,
     default: false

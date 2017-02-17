@@ -1,6 +1,6 @@
 <div layout="row" >
 <md-whiteframe id="categoryList" class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
- <div flex="70"  id="categoryFader" >
+ <div flex="60"  id="categoryFader" >
 	<ul class="nav nav-pills">
 	<li ng-class="{active :  vm.selectedCategory === 'Categoria'}"><a  ng-click="vm.getCategories('Categoria'); vm.setCategoryValue('Categoria'); vm.getCategoryProducts()"><i class="fa fa-home"></i>
 	</a>
@@ -13,11 +13,11 @@
 							</li>
 						</ul>
 </div>
-<div flex="10">
+<div flex="15">
 <input id="qt" select-on-click type="text"  ng-model="vm.product.qt" select-on-click ng-virtual-keyboard="{kt: 'Numerico', relative: false, keyCenter: 4, numberPad: true, customClass: 'myCustomizedVkt'}"  ui-number-mask="0" class="form-control">
 </div>
 
-<div flex="20">
+<div flex="25">
  <input type="text" ng-model="vm.salesCart" autofocus ng-disabled="vm.product.formaPago" placeholder="Filtrar Producto" uib-typeahead="param as param.name for param in vm.getProductFilter($viewValue)"
 					typeahead-on-select="vm.selectedItem($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
 </div>
@@ -38,12 +38,12 @@
  infinite-scroll-container="'#productMainContainer'"
  infinite-scroll="vm.loadMoreProduct()"
  infinite-scroll-distance="1">
-	<div class="col-md-3 col-lg-2 col-sm-3"  id="productItemContainer" ng-repeat="product in vm.productServices.productList">
+	<div class="col-md-3 col-lg-2 col-sm-3"  id="productItemContainer" ng-repeat="product in vm.productServices.productList | filter: {isPOS: true}">
 		<div ng-click="vm.selectedItem(product)" class="well well-sm productItemContainer2" >
 			<div class="row" >
 				<div>
 					<div class="col-md-12" >
-						<span class="badge bg-green">{{product.price | currency}}</span>
+						<span class="badge bg-green">{{product.precios.uno.p_ventaNeto | currency}}</span>
 						<img id="productImg" ng-src="{{ product.picturesURL  | defaultImage: 'modules/core/img/no-imagen.jpg'}}"
 						alt=""
 						class="img-rounded img-responsive " />

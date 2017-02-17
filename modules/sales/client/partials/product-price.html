@@ -1,0 +1,75 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+					<button type="button"
+					class="close"
+					ng-click="vm.cancelPriceChange()" >&times;</button >
+				</div>
+
+			</div>
+
+			<div class="modal-body" id="productPrice">
+				<div class="panel panel-info text-center">
+					<div class="panel-heading">
+					<h4>Cambio de Precio</h4>
+					Producto: {{vm.salesServices.selectedProduct.name}} / Precio de Venta: <span>{{vm.salesServices.selectedProduct.precios.uno.pVenta | currency}}</span></div>
+				</div>
+				<div class="box box-danger">
+				<div class="row">
+				 <div class="col-sm-12">
+				<table class="table no-margin">
+						<thead>
+							<tr>
+								<th class="col-1">Número</th>
+								<th class="col-1">Mayoreo</th>
+								<th class="col-1">Precio</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-click="vm.setNewPrice()" ng-repeat="(key, value) in vm.salesServices.selectedProduct.precios | precio">
+								<td>{{value.no}}</td>
+								<td>{{value.p_porMayor}}</td>
+								<td>{{value.pVenta | currency}}</td>
+							</tr>
+						</tbody>
+					</table>
+				 </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+                    <form  name="priceForm">
+                    <div class="row" style="margin-top: 20px;">
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">Descuento <i class="fa fa-percent"></i></label>
+                        <div class="col-sm-9">
+          <input type="text" ng-model="vm.percent" id="percent" name="percent" autocomplete="off" class="form-control">
+                        </div>
+                        	</div>
+                    </div>
+                     <div class="row" style="margin-top: 5px;">
+                        	  <div class="form-group">
+                        	  <label class="col-sm-3 control-label">Precio <i class="fa fa-usd"></i></label>
+                        <div class="col-sm-9">
+          <input type="text" ng-model="vm.priceChangeAmount" id="priceChangeAmount" name="priceChangeAmount" autocomplete="off" class="form-control">
+                        </div>
+                        </div>
+                                 </div>
+
+                        </form>
+				  </div>
+				</div>
+
+				<div class="row text-center" style="margin-top: 15px;">
+
+                <a ng-click="vm.savePriceChange()" class="btn btn-primary">Guardar</a>
+                </div>
+              </div>
+						</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

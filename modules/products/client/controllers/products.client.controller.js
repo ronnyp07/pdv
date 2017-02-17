@@ -67,25 +67,29 @@ var productModule = angular.module('parameters')
           pVenta : 0,
           m_utilidad: 0,
           p_ventaNeto: 0,
-          p_porMayor: 0
+          p_porMayor: 0,
+          no: 1
         },
         dos: {
           pVenta : 0,
           m_utilidad: 0,
           p_ventaNeto: 0,
-          p_porMayor: 0
+          p_porMayor: 0,
+          no: 2
         },
         tres: {
           pVenta : 0,
           m_utilidad: 0,
           p_ventaNeto: 0,
-          p_porMayor: 0
+          p_porMayor: 0,
+          no: 3
         },
         cuatro: {
           pVenta : 0,
           m_utilidad: 0,
           p_ventaNeto: 0,
-          p_porMayor: 0
+          p_porMayor: 0,
+          no:4
         }
       }
     };
@@ -336,8 +340,8 @@ vm.saveProduct = function(product, isValid){
 
 vm.addToCart = function(product){
   product.qt = Number(vm.product.qt) === null ? Number(vm.product.qt) : 1 ;
-  product.total = Number(product.qt) * Number(product.price);
-  vm.productServices.product.listProductPromotion.push({product: product._id, name: product.name, qt: product.qt, total: product.total, cost: product.cost, price: product.price});
+  product.total = Number(product.qt) * Number(product.precios.uno.p_ventaNeto);
+  vm.productServices.product.listProductPromotion.push({product: product._id, name: product.name, qt: product.qt, total: product.total, cost: product.cost, price: product.precios.uno.p_ventaNeto});
   resetPromoForm();
 };
 
@@ -346,7 +350,7 @@ vm.selectedProduct = function(product){
   if(_.findIndex(vm.productServices.product.listProductPromotion, function(o) { return o.product === product._id; }) >=0){
    var index = _.findIndex(vm.productServices.product.listProductPromotion, function(o) { return o.product === product._id; });
    vm.productServices.product.listProductPromotion[index].qt += Number(vm.product.qt) ? Number(vm.product.qt) : 1;
-   vm.productServices.product.listProductPromotion[index].total = Number(vm.productServices.product.listProductPromotion[index].qt) * Number(product.price);
+   vm.productServices.product.listProductPromotion[index].total = Number(vm.productServices.product.listProductPromotion[index].qt) * Number(product.precios.uno.p_ventaNeto);
    vm.productServices.product.promotionItems= null;
    vm.product.qt = 1;
  }else{

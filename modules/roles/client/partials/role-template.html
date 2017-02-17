@@ -1,0 +1,104 @@
+ <div  class="modal" >
+  <div class="modal-dialog" >
+    <div class="modal-content" >
+      <div class="modal-header" >
+        <div class="modeltitle">
+          <button type="button"
+          class="close"
+          ng-click="vm.createModal.hide()" >&times;</button >
+
+          <!--        <h4 class="modal-title " >Crear Cliente</h4 > -->
+        </div>
+      </div >
+      <div class="modal-body" >
+        <div class="row">
+          <div class="col-sm-6">
+           <div class="panel panel-info">
+             <div class="panel-heading">
+              <h1 class="panel-title">
+               <i class="glyphicon glyphicon-th"> </i> Menu
+             </h1>
+           </div>
+           <div class="panel-body menuRole">
+             <ul class="roleList">
+             <li ng-click="vm.setSubMenu('almacen')">
+               <input type="checkbox" value="{{col.name}}"
+               ng-model="vm.menu[vm.parameterServices.paramEnum.menu.almacen]" /><span>Almacen</span>
+              </li>
+              <li>
+               <input type="checkbox"
+               ng-model="vm.menu[vm.parameterServices.paramEnum.menu.OpDiarias]" /><span>Operaciones Diarias</span>
+              </li>
+
+              <!--  <li ng-repeat="col in vm.parameterServices.paramEnum.menu">
+                <input type="checkbox"  name="cols[]" value="{{col.name}}"
+
+                ng-change="vm.setSubMenu(vm.menu[col.model], $index)"
+                ng-checked="col.checked" ng-model="vm.menu[col.model]" /><span>{{col.name}}</span>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-info">
+         <div class="panel-heading">
+          <h1 class="panel-title">
+           <i class="glyphicon glyphicon-th"> </i> Sub-Menu
+         </h1>
+       </div>
+       <div class="panel-body menuRole">
+         <ul class="roleList">
+              <li ng-if="vm.selectedMenu === 'almacen'" ng-click="vm.setSubMenu('almacen')">
+               <input type="checkbox"
+               ng-model="vm.menu[vm.parameterServices.paramEnum.menu.producto]" /><span>Producto</span>
+              </li>
+              <li ng-if="vm.selectedMenu === 'almacen'" >
+               <input type="checkbox"
+               ng-model="vm.menu[vm.parameterServices.paramEnum.menu.marca]" /><span>Marca</span>
+              </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+   <div class="panel panel-warning">
+     <div class="panel-heading">
+      <h1 class="panel-title">
+       <i class="glyphicon glyphicon-th"> </i> Permisos
+     </h1>
+   </div>
+   <div class="panel-body permisionRole">
+
+   </div>
+ </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-center paddingRight">
+    <a ng-click="vm.saveRole()" class="btn btn-primary">Guardar</a>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div >
+</div >
+</div >
+</div >
+

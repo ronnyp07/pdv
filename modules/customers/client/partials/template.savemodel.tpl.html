@@ -6,16 +6,12 @@
 				<button type="button"
 				        class="close"
 				        ng-click="vm.createModal.hide()" >&times;</button >
-				   <h4 class="modal-title " >Crear Cliente</h4 >
-
 		  </div>
-				
 			</div >
 			<div class="modal-body" >
 				<form ng-submit="vm.save()" name="createCustomerForm"
 				      class="form-horizontal"
 				      novalidate >
-
 					<ng-include src="'modules/customers/partials/customer-form.html'" ></ng-include >
 				</form >
 			</div >

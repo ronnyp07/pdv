@@ -28,6 +28,7 @@
      'authentication': Authentication,
      'prodcutName': '',
      'category': '',
+     'isPOS': '',
      'product': {},
     'saveMode': '',
     'hasMore': true,
@@ -51,7 +52,8 @@
         'page': self.page,
         'search': {sucursalId: self.sucursalSearch,
          name: self.productName,
-         category: self.category},
+         category: self.category,
+         isPOS: self.isPOS},
          'ordering': self.ordering
        };
 
@@ -85,7 +87,8 @@
           'page': self.page,
           'search': {sucursalId: self.sucursalSearch,
            name: self.productName,
-           category: self.category},
+           category: self.category,
+           isPOS: self.isPOS},
            'ordering': self.ordering
          };
          productsService.get(params, function(data){
@@ -150,7 +153,6 @@
  },amountAfterTax: function(amount, discauntTax){
    return amount - discauntTax;
  },'filterProductBySucursal': function(val){
-   console.log(val);
    var data = {
     sucursalId: val.sucursalId,
     categories: val.categories ? JSON.stringify(val.categories) : null
@@ -471,7 +473,6 @@
   },applyTax : function(){
     self.product.taxcost = self.amountAfterTax(self.product.cost, self.getTaxAmount(self.product.cost, self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));
     self.product.d_cost = self.amountAfterTax((self.product.cost / self.product.unidades), self.getTaxAmount((self.product.cost / self.product.unidades), self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));
-
   },pVentaUnoTax: function(amout){
    return self.amountAfterTax(amout, self.getTaxAmount(amout, self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));
 

@@ -22,10 +22,10 @@
         	            </div>
         	       </div>
         	       <div class="col-sm-1 noPaddingLeft">
-              		 <a ng-click="vm.showNewLoteModal(vm.productServices.selectedProduct)" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
+              		 <a ng-if="!vm.loteServices.loteview" ng-click="vm.showNewLoteModal(vm.productServices.selectedProduct)" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></a>
               	   </div>
         	       </div>
-        	       <div class="row">
+        	       <div class="row" ng-if="!vm.loteServices.loteview">
         	       <div class="col-sm-6">
                     <div class="form-group">
                        <label class="col-sm-3 control-label">Cantidad</label>
@@ -58,7 +58,7 @@
 			 <div class="row">
                 <div class="col-sm-12 text-center paddingRight">
                 <a  ng-click="vm.cancelLotesModal()" class="btn btn-danger">Cancelar</a>
-                <a ng-click="vm.saveLotes()" class="btn btn-primary">Guardar</a>
+                <a ng-click="vm.saveLotes()" class="btn btn-primary" ng-if="!vm.loteServices.loteview">Guardar</a>
                 </div>
               </div>
 						</div>

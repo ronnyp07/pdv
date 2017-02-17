@@ -30,7 +30,7 @@
  customersModule.service('CustomerRestServices',  ['$q', '$http', '$timeout', 'CustomersService', '$rootScope', function($q, $http, $timeout, CustomersService, $rootScope){
     var self ={
      'customers': [],
-     'customer': null,
+     'customer': {},
      'saveMode': '',
      'hasMore': true,
      'page': 1,

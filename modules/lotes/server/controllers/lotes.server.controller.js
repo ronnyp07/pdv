@@ -167,13 +167,24 @@
   var contains = {};
     //var search = JSON.parse(req.query.search);
     if(req.query.sucursalId || req.query.noLote || req.query.productId){
-      contains = {
-         noLote: req.query.noLote ? {$regex: req.query.noLote,  $options: '-i' } : '',
-         sucursalId: req.query.sucursalId,
-         productId: req.query.productId,
-         isActive: true
-       };
+        if(req.query.sucursalId){
+          contains.sucursalId = req.query.sucursalId;
+        }
+        if(req.query.productId){
+          contains.productId = req.query.productId;
+        }
+        if(req.query.noLote){
+          contains.noLote =  {$regex: req.query.noLote,  $options: '-i' };
+        }
+        contains.isActive = true;
 
+        console.log(contains);
+      // contains = {
+      //    noLote: req.query.noLote ? {$regex: req.query.noLote,  $options: '-i' } : undefined,
+      //    sucursalId: req.query.sucursalId ? req.query.sucursalId: undefined,
+      //    productId: req.query.productId,
+      //    isActive: true
+      //  };
       // query = {
       //   isActive: true,
       //   sucursalId : search.sucursalId ? search.sucursalId : '',

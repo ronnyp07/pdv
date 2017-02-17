@@ -165,14 +165,16 @@
 
  exports.getfilterNcf = function(req, res){
   var contains = {};
-   console.log(req.query);
+
     if(req.query.sucursalId){
       contains = {
          sucursalId: req.query.sucursalId,
+         code: req.query.noNcf,
          isActive: true
        };
    }
-     console.log(contains);
+   console.log(contains);
+
   var filter = {
     filters: {
       mandatory: {

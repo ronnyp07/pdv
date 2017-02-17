@@ -14,7 +14,7 @@
     vm.userimageURL = vm.authentication.user.profileImageURL;
     vm.partnerServices = PartnersRestServices;
     vm.partnerServices.partner = PartnersService.get({partnerId: $stateParams.partnerId}, function(data){
-    vm.imageURL = data.picturesURL ? data.picturesURL : 'modules/core/img/no-imagen.jpg';
+      vm.imageURL = data.picturesURL ? data.picturesURL : 'modules/core/img/no-imagen.jpg';
     });
 
   // Create file uploader instance
@@ -31,7 +31,7 @@
     }
   });
 
- vm.uploader.onBeforeUploadItem = function (item) {
+  vm.uploader.onBeforeUploadItem = function (item) {
    vm.partnerServices.partner.modeOn = 'update';
    item.formData.push(vm.partnerServices.partner);
  };
@@ -41,11 +41,11 @@
   vm.uploader.cancelAll();
   vm.uploader.clearQueue();
   vm.imageURL = 'modules/core/img/no-imagen.jpg';
- };
+};
 
- vm.cancelForm = function(){
+vm.cancelForm = function(){
   $state.go('partners.list');
- };
+};
 
 
 
@@ -64,42 +64,45 @@
 
 vm.editPorcentaje = function(index, saveParam){
   //console.log(saveParam);
-   if(!saveParam){
-           vm.partnerServices.saveMode = 'create';
-           vm.partnerServices.selectedImpuestos = {};
-           vm.partnerServices.selectedImpuestos.isValid = true;
-        }else{
-           vm.partnerServices.saveMode = 'update';
-           vm.partnerServices.indexImpuesto = index;
-           vm.partnerServices.selectedImpuestos = saveParam;
-        }
-    vm.createModal = $modal({
-             scope: $scope,
-             'templateUrl': 'modules/partners/partials/porcentaje-form.tpl.html',
-             show: true,
-             onBeforeHide: function(){
+  if(!saveParam){
+   vm.partnerServices.saveMode = 'create';
+   vm.partnerServices.selectedImpuestos = {};
+   vm.partnerServices.selectedImpuestos.isValid = true;
+ }else{
+   vm.partnerServices.saveMode = 'update';
+   vm.partnerServices.indexImpuesto = index;
+   vm.partnerServices.selectedImpuestos = saveParam;
+ }
+ vm.createModal = $modal({
+   scope: $scope,
+   'templateUrl': 'modules/partners/partials/porcentaje-form.tpl.html',
+   show: true,
+   onBeforeHide: function(){
               // console.log('before hide');
-             }
-    });
+            }
+          });
 };
 
 vm.resetPorcentajeForm = function(){
-   vm.partnerServices.selectedImpuestos = {};
-   vm.partnerServices.indexImpuesto = null;
-   vm.createModal.hide();
+ vm.partnerServices.selectedImpuestos = {};
+ vm.partnerServices.indexImpuesto = null;
+ vm.createModal.hide();
 };
 
 vm.deleteTax = function(index){
-vm.partnerServices.partner.impuestosList.splice(index, 1);
-vm.savePartner(vm.partnerServices.partner, true);
-vm.resetPorcentajeForm();
+  console.log(index);
+  vm.partnerServices.partner.impuestosList.splice(index, 1);
+  console.log(vm.partnerServices.partner.impuestosList);
+  vm.savePartner(vm.partnerServices.partner, true);
+  // vm.resetPorcentajeForm();
 };
 
-vm.createPorcentaje = function(index, impuestos){
-  if(vm.partnerServices.saveMode === 'create'){
-   vm.partnerServices.partner.impuestosList.push({imp_Type : impuestos.imp_Type, imp_Porcentaje: impuestos.imp_Porcentaje, moneda: impuestos.moneda, systemField: false, isValid: impuestos.isValid});
-    vm.savePartner(vm.partnerServices.partner, true, false);
-    vm.resetPorcentajeForm();
+vm.createPorcentaje = function(isValid, impuestos){
+ if(!isValid){
+   if(vm.partnerServices.saveMode === 'create'){
+     vm.partnerServices.partner.impuestosList.push({imp_Type : impuestos.imp_Type, imp_Porcentaje: impuestos.imp_Porcentaje, moneda: impuestos.moneda, systemField: false, isValid: impuestos.isValid});
+     vm.savePartner(vm.partnerServices.partner, true, false);
+     vm.resetPorcentajeForm();
    }else{
     vm.partnerServices.partner.impuestosList[vm.partnerServices.indexImpuesto].imp_Type = impuestos.imp_Type;
     vm.partnerServices.partner.impuestosList[vm.partnerServices.indexImpuesto].imp_Porcentaje = impuestos.imp_Porcentaje;
@@ -107,24 +110,25 @@ vm.createPorcentaje = function(index, impuestos){
     vm.partnerServices.partner.impuestosList[vm.partnerServices.indexImpuesto].isValid = impuestos.isValid;
     vm.savePartner(vm.partnerServices.partner, true, false);
     vm.resetPorcentajeForm();
-   }
+  }
+}
 };
 
 
 
 vm.savePartner = function(partner, isValid){
-    if ( isValid){
-      if(vm.uploader.queue.length > 0){
-        vm.uploader.uploadAll();
-        alertify.success('Acción realizada exitosamente!!');
-        Notify.sendMsg('refreshCompany', {nothing: ''});
+  if ( isValid){
+    if(vm.uploader.queue.length > 0){
+      vm.uploader.uploadAll();
+      alertify.success('Acción realizada exitosamente!!');
+      Notify.sendMsg('refreshCompany', {nothing: ''});
         // if(redirect){
         // $state.go('partners.list');
         // }
-         $state.go('partners.list');
+        $state.go('partners.list');
       }else{
 
-         vm.partnerServices.update(partner).then(function(){
+       vm.partnerServices.update(partner).then(function(){
          vm.authentication.sucursalCache.put('company', partner);
          Notify.sendMsg('refreshCompany', {nothing: ''});
          // if(redirect){
@@ -136,10 +140,10 @@ vm.savePartner = function(partner, isValid){
          //console.log(err);
          alertify.error(err.data.message);
        });
-      }
-    }else{
-      alertify.error('Completar los campos requeridos');
-    }
+     }
+   }else{
+    alertify.error('Completar los campos requeridos');
+  }
 };
 }
 })();

@@ -9,56 +9,68 @@
 				</div>
 			</div >
 			<div class="modal-body" >
-			<div class="box box-info">
-			 <div class="box-body">
-				<form ng-submit="vm.save()" name="porcentajeForm" class="form-horizontal"
-				novalidate >
-				<div class="row" ng-if="!vm.partnerServices.selectedImpuestos.systemField">
-				<div class="col-sm-12 text-right">
-					<div class="form-group">
-						<md-switch ng-model="vm.partnerServices.selectedImpuestos.isValid" class="pull-right" aria-label="Activo">
-								Activo
-							</md-switch>
+				<div class="box box-info">
+					<div class="box-body">
+						<form ng-submit="vm.createPorcentaje(porcentajeForm.$invalid,vm.partnerServices.selectedImpuestos)" name="porcentajeForm" class="form-horizontal"
+						novalidate >
+						<div class="row" ng-if="!vm.partnerServices.selectedImpuestos.systemField">
+							<div class="col-sm-12 text-right">
+								<div class="form-group">
+									<md-switch ng-model="vm.partnerServices.selectedImpuestos.isValid" class="pull-right" aria-label="Activo">
+										Activo
+									</md-switch>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-sm-4 colcontrol-label text-right" for="patientPolisa">Impuesto:</label>
+							<div class="col-sm-8">
+								<div class="form-group"
+								ng-class="{'has-error': !porcentajeForm.name.$valid && ( !porcentajeForm.$pristine || porcentajeForm.$submitted),
+								'has-success': porcentajeForm.name.$valid && ( !porcentajeForm.$pristine || porcentajeForm.$submitted)}
+								">
+									<input type="text" ng-model="vm.partnerServices.selectedImpuestos.imp_Type" id="nameImpuesto" name="name" autocomplete="off" class="form-control" required>
+									<p class="help-block" ng-show="porcentajeForm.name.$error.required && ( !porcentajeForm.$pristine || porcentajeForm.$submitted)">
+									Este campo es requerido
+								</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-sm-4 control-label text-right" for="patientPolisa">Porcentaje impuesto:</label>
+							<div class="col-sm-8">
+								<div class="form-group"
+						  ng-class="{'has-error': !porcentajeForm.impuesto.$valid && ( !porcentajeForm.$pristine || porcentajeForm.$submitted),
+						  'has-success': porcentajeForm.impuesto.$valid && ( !porcentajeForm.$pristine || porcentajeForm.$submitted)}
+						  ">
+						  <input type="text" ui-number-mask="2" ng-model="vm.partnerServices.selectedImpuestos.imp_Porcentaje" id="impuesto" name="impuesto" autocomplete="off" class="form-control" required>
+						  <p class="help-block" ng-show="porcentajeForm.impuesto.$error.required && ( !porcentajeForm.$pristine || porcentajeForm.$submitted)">
+							 Este campo es requerido
+						  </p>
+							</div>
+						</div>
+					</div><!-- /.row -->
+					<div class="row">
+						<label class="col-sm-4 control-label text-right" >Simbolo de Moneda</label>
+						<div class="col-sm-8">
+							<div class="form-group">
+								<input type="text" ng-model="vm.partnerServices.selectedImpuestos.moneda" id="moneda" name="moneda" autocomplete="off" class="form-control">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<label class="col-sm-4 colcontrol-label text-right" for="patientPolisa">Impuesto:</label>
-					<div class="col-sm-8">
-						<div class="form-group">
-							<input type="text" ng-model="vm.partnerServices.selectedImpuestos.imp_Type" id="name" name="name" autocomplete="off" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<label class="col-sm-4 control-label text-right" for="patientPolisa">Porcentaje impuesto:</label>
-					<div class="col-sm-8">
-						<div class="form-group">
-							<input type="text" ui-number-mask="2" ng-model="vm.partnerServices.selectedImpuestos.imp_Porcentaje" id="name" name="name" autocomplete="off" class="form-control">
-						</div>
-					</div>
-				</div><!-- /.row -->
-				<div class="row">
-					<label class="col-sm-4 control-label text-right" >Simbolo de Moneda</label>
-					<div class="col-sm-8">
-						<div class="form-group">
-							<input type="text" ng-model="vm.partnerServices.selectedImpuestos.moneda" id="moneda" name="moneda" autocomplete="off" class="form-control">
-						</div>
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col-sm-12 text-right paddingRight">
-						<a ng-click="vm.resetPorcentajeForm()" class="btn btn-danger">Cancelar</a>
-						<a ng-click="vm.createPorcentaje(null,vm.partnerServices.selectedImpuestos)" class="btn btn-primary">Guardar</a>
-		     </div>
-		    </div>
-		   </form >
-	      </div>
-		 </div>
-		</div >
-	   </div >
-      </div >
+					<div class="row">
+						<div class="col-sm-12 text-right paddingRight">
+							<a ng-click="vm.resetPorcentajeForm()" class="btn btn-danger">Cancelar</a>
+							<button type="submit"  class="btn btn-primary">Guardar</button>
+						</div>
+					</div>
+				</form >
+			</div>
+		</div>
+	</div >
+</div >
+</div >
 </div >
 
 

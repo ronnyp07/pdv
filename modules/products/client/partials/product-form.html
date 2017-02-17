@@ -50,7 +50,7 @@
       <div class="form-group">
         <div class="col-sm-12">
           <md-switch ng-model="vm.productServices.product.isPOS" aria-label="Activo" class="text-center checkMargin">
-           Visualizar en POS
+           Visualizar en Caja
          </md-switch>
        </div>
      </div>
@@ -114,8 +114,8 @@
     ng-class="{'has-error': !productForm.name.$valid && ( !productForm.$pristine || productForm.$submitted),
     'has-success': productForm.name.$valid && ( !productForm.$pristine || productForm.$submitted)}
     ">
-    <label class="col-sm-2 control-label" >Nombre:</label>
-    <div class="col-sm-10">
+    <label class="col-sm-3 control-label" >Nombre:</label>
+    <div class="col-sm-9">
       <input type="text" ng-model="vm.productServices.product.name" id="name" name="name" autocomplete="off" class="form-control" required>
       <p class="help-block" ng-show="productForm.name.$error.required && ( !productForm.$pristine || productForm.$submitted)">
        Este campo es requerido
@@ -135,11 +135,10 @@
 <div class="form-group" ng-class="{'has-error': !productForm.bardCode.$valid && ( !productForm.$pristine || productForm.$submitted),
 'has-success': productForm.bardCode.$valid && ( !productForm.$pristine || productForm.$submitted)}
 ">
-<label class="col-sm-3 control-label">Cod. Barra</label>
+<label class="col-sm-3 control-label noPadding">Cod. Barra</label>
 <div class="col-sm-9">
   <div>
     <input type="text" data-ng-model="vm.productServices.product.bardCode" id="bardCode" name="bardCode" autocomplete="off" class="form-control" required>
-    <a ng-click="vm.generateKey()" class="btn btn-success"><i class="fa fa-key"> </i></a>
   </div>
   <p class="help-block" ng-show="productForm.bardCode.$error.required && ( !productForm.$pristine || productForm.$submitted)">
    Este campo es requerido
@@ -155,11 +154,11 @@
   <div class="col-sm-6">
     <div class="form-group" ng-class="{'has-success': vm.productServices.product.category}
    ">
-      <label class="col-sm-2 control-label" for="patientPolisa">Categoría:</label>
+      <label class="col-sm-3 control-label" for="patientPolisa">Categoría:</label>
 <!--       <input type="text" ng-model="vm.productServices.product.category" placeholder="Categoria" uib-typeahead="param._id as param.name for param in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Categoria')"
       typeahead-on-select="onSelectDoctor($item, $model, $label)" typeahead-no-results="noResults" class="form-control">
     -->
-    <div class="col-sm-10">
+    <div class="col-sm-9">
       <oi-select
       oi-options="item.desc for item in vm.paramRestServices.getParamByAncestors() track by item._id"
       ng-change="vm.categoryChange(vm.productServices.product.category)"
@@ -177,7 +176,7 @@
   </div>
   <div class="col-sm-6">
     <div class="form-group">
-      <label class="col-sm-3 control-label" for="patientPolisa">Marca:</label>
+      <label class="col-sm-3 control-label noPadding" for="patientPolisa">Marca:</label>
       <div class="col-sm-9">
      <!--    <oi-select
         oi-options="item.name for item in vm.subCategoryList track by item._id"
@@ -204,7 +203,7 @@
    <div class="row">
     <div class="col-sm-4">
       <div class="form-group text-left">
-        <label class="col-sm-5 control-label" for="patientPolisa">Uni. Compra</label>
+        <label class="col-sm-5 control-label noPadding" for="patientPolisa">Uni. Compra</label>
         <div class="col-sm-7">
           <oi-select
           ng-change="vm.productServices.validateUnits()"
@@ -216,7 +215,7 @@
   </div>
   <div class="col-sm-4">
     <div class="form-group">
-      <label class="col-sm-4 control-label" for="patientPolisa">Uni. Venta</label>
+      <label class="col-sm-4 control-label noPadding" for="patientPolisa">Uni. Venta</label>
       <div class="col-sm-8">
         <oi-select
         oi-options="item.name for item in vm.paramRestServices.getParamsFilterByParent($viewValue, 'Tipo Unidades') track by item._id"
@@ -228,7 +227,7 @@
 </div>
 <div class="col-sm-4">
   <div class="form-group">
-    <label class="col-sm-4 control-label">
+    <label class="col-sm-4 control-label noPadding">
       Unidades
     </label>
     <div class="col-sm-8">
@@ -243,8 +242,8 @@
 <div class="row">
   <div class="col-sm-4">
     <div class="form-group">
-      <label class="col-sm-5 control-label" for="patientPolisa">Pre. Compra</label>
-      <div class="col-sm-7">
+      <label class="col-sm-6 control-label noPadding" for="patientPolisa">Precio Compra</label>
+      <div class="col-sm-6">
         <input type="text" select-on-click ui-number-mask="2" ng-model="vm.productServices.product.cost"
         ng-change="vm.productServices.changeCost()"
         class="form-control">
@@ -297,14 +296,14 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <div class="col-sm-12">
+    <div class="col-sm-12 product">
       <table class="table table-condensed table-striped table-bordered table-hover">
         <tr>
           <th></th>
-          <th class="col-1 text-center">1</th>
-          <th class="col-2 text-center">2</th>
-          <th class="col-3 text-center">3</th>
-          <th class="col-4 text-center">4</th>
+          <th class="col-1 text-center">Precio: 1</th>
+          <th class="col-1 text-center">Precio: 2</th>
+          <th class="col-1 text-center">Precio: 3</th>
+          <th class="col-1 text-center">Precio: 4</th>
         </tr>
         <tr>
           <td style="width: 20%;"><label class="control-label">Margen Beneficio</label></td>
@@ -377,7 +376,7 @@
      <div class="row">
       <div class="col-sm-4">
         <div class="form-group">
-          <label class="col-sm-6 control-label">Inv. Minimano</label>
+          <label class="col-sm-6 control-label noPadding">Inv. Minimano</label>
           <div class="col-sm-6">
             <input type="Number" select-on-click data-ng-model="vm.productServices.product.minimumStock" min="0" id="minimumStock" name="minimumStock" autocomplete="off" class="form-control">
           </div>
@@ -385,7 +384,7 @@
       </div>
       <div class="col-sm-4">
         <div class="form-group">
-          <label class="col-sm-6 control-label">Inv. Maximo</label>
+          <label class="col-sm-6 control-label noPadding">Inv. Maximo</label>
           <div class="col-sm-6">
             <input type="Number" select-on-click data-ng-model="vm.productServices.product.maximumStock" min="0" id="maximumStock" name="maximumStock" autocomplete="off" class="form-control" ng-class="{ 'shortCierre': (vm.productServices.product.minimumStock > 0 && (vm.productServices.product.maximumStock >= 1 && vm.productServices.product.minimumStock >= vm.productServices.product.maximumStock))}" data-type="info" data-animation="am-fade-and-scale" data-trigger="manual" bs-tooltip ="{title: 'Valor minimo es mayor'}" data-placement="bottom-left" data-bs-show="(vm.productServices.product.minimumStock > 0 && (vm.productServices.product.maximumStock >= 1 && vm.productServices.product.minimumStock >= vm.productServices.product.maximumStock))">
           </div>
@@ -393,7 +392,7 @@
       </div>
       <div class="col-sm-4">
         <div class="form-group">
-          <label class="col-sm-4 control-label">Localización</label>
+          <label class="col-sm-4 control-label noPadding">Localización</label>
           <div class="col-sm-6">
             <input type="text" data-ng-model="vm.productServices.product.localizacion" min="0"  name="localizacion" autocomplete="off" class="form-control">
           </div>
@@ -437,14 +436,14 @@
       </div><!-- /.box-header -->
       <div class="box-body">
        <md-content flex layout-padding>
-         <div class="product-promotion-content">
+         <div class="product-promotion-content product">
 
           <table class="table table-bordered table-hover table-condensed">
-           <th class="col-1">Producto</th>
+           <th class="col-2">Producto</th>
            <th class="col-2">Cantidad</th>
-           <th class="col-3">Costo</th>
-           <th class="col-4">Precio</th>
-           <th class="col-5">Importe</th>
+           <th class="col-2">Costo</th>
+           <th class="col-2">Precio</th>
+           <th class="col-2">Importe</th>
 
            <tr ng-repeat="product in vm.productServices.product.listProductPromotion">
             <td data-title="'#'">
@@ -457,18 +456,18 @@
               <a class="btn btn-sm btn-success" ng-click="vm.saveField($index, product);vm.editMode = fase"><span>
                Guardar
              </span></a>
-           </div>
+            </div>
            <div ng-if="!vm.editMode">
             <a class="btn btn-sm btn-success buttonEditCompras" ng-click="vm.editMode = true; vm.editAppKey(product)"><span>
              {{product.qt}}
            </span></a>
          </div>
        </td>
-       <td data-title="'Costo'">
+       <td>
         <span >{{product.cost | currency }}</span>
       </td>
 
-      <td data-title="'Costo'">
+      <td>
         <span >{{product.price | currency}}</span>
       </td>
       <td data-title="'Pago'">
@@ -505,6 +504,7 @@
 <div class="row">
   <div class="col-sm-12 text-center paddingRight">
     <a ng-click="vm.cancelForm()" class="btn btn-danger">Cancelar</a>
+     <a ng-click="vm.generateKey()" class="btn btn-success"><i class="fa fa-key"> </i></a>
     <button type="submit" ng-disabled="((vm.productServices.product.precios.dos.pVenta > 0 && vm.productServices.product.precios.dos.p_porMayor <= 0) || (vm.productServices.product.minimumStock > 0 && (vm.productServices.product.maximumStock >= 1 && vm.productServices.product.minimumStock >= vm.productServices.product.maximumStock)))" class="btn btn-primary">Guardars</button>
     <!--   <a ng-click="vm.generateKey()" class="btn btn-success">Generar Clave</a> -->
   </div>

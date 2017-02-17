@@ -1,0 +1,41 @@
+<div  class="modal" >
+	<div class="modal-dialog" >
+		<div class="modal-content" >
+			<div class="modal-header" >
+				<div class="modeltitle">
+					<button type="button"
+					class="close"
+					ng-click="vm.cancelNcf()" >&times;</button >
+				</div>
+			</div>
+			<div class="modal-body" id="customerListModel">
+				<div class="box box-info">
+					<div class="box-body">
+						<form ng-submit="vm.saveNcf(rncForm.$invalid,vm.rnc)" name="rncForm" class="form-horizontal"
+						novalidate >
+						<div class="row">
+							<label class="col-sm-4 colcontrol-label text-right" for="patientPolisa">RNC/Cédula:</label>
+							<div class="col-sm-8">
+								<div class="form-group"
+								ng-class="{'has-error': !rncForm.rnc.$valid && ( !rncForm.$pristine || rncForm.$submitted),
+								'has-success': rncForm.rnc.$valid && ( !rncForm.$pristine || rncForm.$submitted)}
+								">
+								<input type="text" ng-model="vm.rnc" name="rnc" autocomplete="off" class="form-control" required>
+								<p class="help-block" ng-show="rncForm.rnc.$error.required && ( !rncForm.$pristine || rncForm.$submitted)">
+									Este campo es requerido
+								</p>
+							</div>
+						</div>
+					</div>
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<button type="submit"  class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					</div>
+				</div>
+			</form >
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>

@@ -9,6 +9,7 @@ userModule.factory('Authentication', ['$window', 'CacheFactory',
       hideNavBar : false,
       sucursalIndo: null,
 			sucursal: null,
+      adminRole: 'superUser',
 			selectedSucural: null,
       companyCache: CacheFactory('companyCache', { storageMode: 'localStorage'}),
 			cajaturno: CacheFactory('cajaturno', { storageMode: 'localStorage' }),
@@ -16,9 +17,9 @@ userModule.factory('Authentication', ['$window', 'CacheFactory',
 			'filterMenu' : function(param){
 				var hasAccess = false;
 				auth.sucursal = auth.sucursalCache.get('sucursal');
-               if(auth.sucursal === 'superUser'){
+         if(auth.sucursal === auth.adminRole){
                  hasAccess = true;
-               }else{
+         }else{
 				_.find(auth.sucursal.permision, function(o){
 					if(param === o){
 						hasAccess = true;
@@ -27,6 +28,24 @@ userModule.factory('Authentication', ['$window', 'CacheFactory',
 			}
 			return hasAccess;
 		  },
+      isLoggedIn : function(){
+        return auth.user != null;
+      },
+      userHasPermission : function(permissions){
+        if(!auth.isLoggedIn()){
+            return false;
+        }
+
+        var found = false;
+        angular.forEach(permissions, function(permission, index){
+            if ($sessionStorage.user.user_permissions.indexOf(permission) >= 0){
+                found = true;
+                return;
+            }
+        });
+
+        return found;
+      },
       sessionCheck : function(param){
 
       },'loadSucursal' : function(){

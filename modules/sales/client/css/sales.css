@@ -6,6 +6,10 @@
 	padding-top: 8px;
 }
 
+div:focus {
+    outline:none;
+}
+
 .saleButtonCalLeft{
 	padding-top: 8px;
 }
@@ -16,6 +20,10 @@
 	width: 21%;
 	margin-right: 5px;
 }
+.formButtonNav{
+  padding-right: 0px;
+}
+
 .buttoncalFont{
 	font-weight: bold;
 	font-size: 16px;
@@ -29,7 +37,7 @@
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-top: 10px;
-	height: 100px;
+	height: 110px;
 	background-color: #F5F5F5
 }
 .cartFrame{
@@ -329,7 +337,24 @@
 
 div:focus {outline:0;}
 
-@media screen and (max-width: 1300px) and (min-width: 960px) {
+@media screen and (max-width: 1100px) and (min-width: 700px) {
+  .cartFrame {
+    height: 356px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
+}
+
+ #productMainContainer{
+	height: 540px;
+	overflow-y: auto;
+  };
+
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1100px) {
   .cartFrame {
     height: 400px;
     margin-left: 10px;

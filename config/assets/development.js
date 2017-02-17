@@ -12,6 +12,7 @@ module.exports = {
         'public/modules/core/css/site.css',
         'public/modules/products/css/product.css',
         'public/modules/sales/css/sales.css',
+        'public/modules/roles/css/roles.css',
         'public/modules/inventarios/css/inventario.css',
         'public/lib/bootstrap-additions/dist/bootstrap-additions.min.css',
         'public/lib/angular-bootstrap/ui-bootstrap-csp.css',

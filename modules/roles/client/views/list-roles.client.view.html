@@ -1,0 +1,131 @@
+<div class="wrapper">
+  <ng-include src="'modules/core/views/top-header.client.view.html'"></ng-include>
+  <ng-include src="'modules/core/views/menu.left.template.html'" ></ng-include >
+    <div class="content-wrapper">
+      <section class="content-header padding-botton">
+              <!-- <h1>
+                Terminal Punto de Ventas (POSs)
+                <small>Entrada</small>
+              </h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Configuración</a></li>
+                <li class="active">Terminal Punto de Ventas</li>
+              </ol> -->
+            </section>
+            <section class="content">
+             <div class="row">
+              <div class="col-sm-12">
+                <!--    <div ng-include="'modules/products/partials/product-form.html'"></div> -->
+                <div>
+                  <section class="content">
+   <!-- <div class="row">
+     <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-4 col-sm-offset-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-aqua"><i class="fa fa-archive"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Productos</span>
+          <span class="info-box-number">{{vm.productServices.total}}</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row product">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header text-center">
+          <a class="btn btn-primary" style="width: 80px;" ng-click="vm.showRoleModal()">
+            <i class="fa fa-plus"></i></br> Agregar
+          </a>
+          <a class="btn btn-success" style="width: 80px;" ng-click="vm.showAjustarModal()">
+            <i class="fa fa-edit"></i> </br>
+            Editar
+          </a>
+          <a class="btn btn-danger" style="
+          width: 80px;" ng-click="vm.showLotesModal()">
+          <i class="fa fa-trash"></i></br> Eliminar
+        </a>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+         <div class="col-sm-6">
+          <div class="form-group">
+            <label class="control-label" >Buscar</label>
+            <input
+            type="text"
+            name="name"
+            ng-model="vm.productServices.productName"  placeholder="Buscar..."
+            ng-model-options="{ debounce: 900 }"
+            ng-change="vm.search()"
+            class="form-control"
+            autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+         <div class="panel panel-primary">
+           <div class="panel-heading">
+            <h1 class="panel-title">
+             <i class="glyphicon glyphicon-th"> </i> Nombre
+           </h1>
+         </div>
+         <div class="panel-body roleList">
+
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-8">
+      <div class="row">
+        <div class="col-sm-6">
+         <div class="panel panel-info">
+           <div class="panel-heading">
+            <h1 class="panel-title">
+             <i class="glyphicon glyphicon-th"> </i> Menu
+           </h1>
+         </div>
+         <div class="panel-body menuRole">
+
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+      <div class="panel panel-info">
+       <div class="panel-heading">
+        <h1 class="panel-title">
+         <i class="glyphicon glyphicon-th"> </i> Sub-Menu
+       </h1>
+     </div>
+     <div class="panel-body permisionRole">
+
+     </div>
+   </div>
+ </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+   <div class="panel panel-warning">
+     <div class="panel-heading">
+      <h1 class="panel-title">
+       <i class="glyphicon glyphicon-th"> </i> Permisos
+     </h1>
+   </div>
+   <div class="panel-body">
+
+   </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</section>
+</div>
+<ng-include src="'modules/core/views/menu.footer.template.html'" ></ng-include >
+</div>

@@ -7,6 +7,10 @@
 	margin-top: 0px;
 }
 
+.app-modal-window .modal-dialog {
+  width: 700px;
+}
+
 tr:focus {
     outline:none !important;
 }
@@ -109,7 +113,9 @@ margin-bottom: 0px;
 .col-4 { width: 40%; }
 
 .product .table .col-1 {
-  width: 30%; }
+  width: 20%;
+  text-align: center;
+}
 .product .table .col-2 {
   width: 20%; }
 .product .table .col-3 {
@@ -200,7 +206,6 @@ margin-bottom: 0px;
 
 #bardCode{
     float: left;
-    width: 85%;
     margin-right: 5px;
 }
 

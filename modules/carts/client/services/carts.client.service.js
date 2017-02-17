@@ -17,19 +17,19 @@
     });
   }
 
-  cartModule.service('cartService', function ($resource, $rootScope, $q, PartnersService) {
-
-
+  cartModule.service('cartService', function ($resource, $rootScope, $q, PartnersService, ProductRestServices) {
     var cart = {
       client: {_id: 'default', name: 'Consumidor Final', address: ''},
       items:[],
       subtotal: 0,
-      tax: 0
+      tax: 0,
+      taxList: []
     }, order, self = {state: 'compra', client: null};
 
     PartnersService.get(function(data){
       if(data){
-       cart.tax = Number(data.results[0].imp_Porcentaje) ? Number(data.results[0].imp_Porcentaje): 0;
+        //cart.tax = Number(data.results[0].imp_Porcentaje) ? Number(data.results[0].imp_Porcentaje): 0;
+        cart.taxList = data.results[0].impuestosList;
        }
     });
 
@@ -70,16 +70,25 @@
       if(!cart.items){
         cart.items = [];
       }
+
+      console.log(item);
       var itemIndex = _.findIndex(cart.items, function(o) { return o._id === item._id; });
+      var priceGet = null;
       //
 
       if(itemIndex >=0){
        cart.items[itemIndex].quantity = Number(qt) ? cart.items[itemIndex].quantity + Number(qt) : 1;
-       cart.items[itemIndex].total = Number(cart.items[itemIndex].quantity) * Number(self.state === 'compra' ? cart.items[itemIndex].cost : cart.items[itemIndex].price);
+       priceGet = orderBy(item, cart.items[itemIndex].quantity);
+       cart.items[itemIndex].price = priceGet.p_ventaNeto;
+       cart.items[itemIndex].total = Number(cart.items[itemIndex].quantity) * Number(self.state === 'compra' ? cart.items[itemIndex].cost : priceGet.p_ventaNeto);
+       getTotalTax();
      }else{
        item.quantity = qt;
-       item.total = Number(item.quantity) * Number(self.state === 'compra' ? item.cost : item.price);
+       priceGet = orderBy(item, item.quantity);
+       item.price = priceGet.p_ventaNeto;
+       item.total = Number(item.quantity) * Number(self.state === 'compra' ? item.cost : priceGet.p_ventaNeto);
        cart.items.push(item);
+       getTotalTax();
      }
 
      defer.resolve(cart);
@@ -134,13 +143,15 @@
       state = state;
     }
 
-
     function setOrder(_order_){
       order = _order_;
     }
 
     function getOrder(){
       return order;
+    }
+    function getTax(){
+      return cart.tax;
     }
 
     function changeTax (tax) {
@@ -175,8 +186,8 @@
    }
 
 
-   function orderBy(param, qt){
-    var result = _.orderBy(param, ['p_porMayor'], ['desc']);
+function orderBy(param, qt){
+    var result = _.orderBy(param.precios, ['p_porMayor'], ['desc']);
     var price = {};
     var keepGoing = true;
         angular.forEach(result, function(o){
@@ -184,6 +195,8 @@
           if(o.p_porMayor > 0 &&  Number(qt) >= o.p_porMayor){
                price = o;
                keepGoing = false;
+           }else{
+            price = param.precios.uno;
            }
          }
         });
@@ -273,12 +286,14 @@ function getSubTotal (items) {
   var subtotal = 0;
   if (items) {
     _.forEach(items, function (item) {
-      var itemValue = self.state === 'compra' ? item.cost : item.price;
-      subtotal = subtotal + (Number(item.quantity) * Number(itemValue));
+      var itemValue = self.state === 'compra' ? item.cost : item.total;
+      //subtotal = subtotal + (Number(item.quantity) * Number(itemValue));
+      subtotal += ProductRestServices.amountAfterTax(itemValue, ProductRestServices.getTaxAmount(itemValue, ProductRestServices.getTax(item.taxesFlag, cart.taxList)));
     });
   }
   return subtotal;
 }
+
 function getChange(value){
  var total = getTotalCart();
  return value - total;
@@ -291,8 +306,17 @@ function getTotalCart() {
   return (subtotal + totalTax) - totalDiscounts;
 }
 
-function getTotalTax () {
-  return getSubTotal(cart.items) * (cart.tax/100);
+function getTotalTax() {
+  var tax = 0;
+  _.forEach(cart.items, function (item) {
+     tax += ProductRestServices.getTaxAmount(item.total, ProductRestServices.getTax(item.taxesFlag, cart.taxList));
+      // var itemValue = self.state === 'compra' ? item.cost : item.price;
+      // subtotal = subtotal + (Number(item.quantity) * Number(itemValue));
+    });
+  console.log(tax);
+  changeTax(tax);
+  return tax;
+  //return getSubTotal(cart.items) * (cart.tax/100);
 }
 });
 })();

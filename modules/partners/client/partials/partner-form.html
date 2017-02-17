@@ -76,7 +76,7 @@
             <div>
               <a ng-if="!tax.selectedImpuestos.systemField" href="#" data-skin="skin-red-light" class="btn btn-danger btn-xs" ng-disabled="partner.systemParam"><i class="fa fa-trash"
                 ng-bootbox-confirm="Está ha punto de eliminar impuesto. Decea continuar?"
-                ng-bootbox-confirm-action="partner.systemParam || vm.deleteTax(tax)"></i></a>
+                ng-bootbox-confirm-action="partner.systemParam || vm.deleteTax($index)"></i></a>
                 <a href="#" data-skin="skin-blue" class="btn btn-primary btn-xs" ng-disabled="partner.systemParam"><i class="fa fa-edit"  ng-click="vm.editPorcentaje($index, tax)"></i></a>
               </div>
             </td>

@@ -3,6 +3,22 @@
     position: fixed;
   }
 }
+
+.roleList{
+  height: 400px;
+}
+
+.menuRole{
+  height: 200px;
+}
+
+.permisionRole{
+  height: 138px;
+}
+
+.buttonTopMenu{
+    width: 80px;
+}
 .social-account-container {
   display: inline-block;
   position: relative;

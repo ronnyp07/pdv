@@ -59,24 +59,6 @@
             <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-cog"></i>
-            <span>Configuración</span>
-            <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a ui-sref="parameters.list"><i class="fa fa-circle-o"></i> Parametros</a></li>
-
-            <li><a ui-sref="cajas.list"><i class="fa fa-circle-o"></i>Terminal Punto de Ventas</a></li>
-
-            <li><a ui-sref="partners.list"><i class="fa fa-circle-o"></i>Cuenta Asociada</a></li>
-            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Sucursales</a></li>
-          <!--   <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Empleados</a></li> -->
-            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Tipo Documento</a></li>
-          </ul>
-        </li>
         <li class="treeview" ng-if="vm.authentication.filterMenu('Compras')">
           <a href="#">
             <i class="fa fa-laptop"></i>
@@ -84,7 +66,6 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a ui-sref="providers.list"><i class="fa fa-circle-o"></i> Proveedores</a></li>
             <li><a ui-sref="compras.create"><i class="fa fa-circle-o"></i> Ordenes de Compras</a></li>
             <li><a ui-sref="compras.list"><i class="fa fa-circle-o"></i> Consultar Compras</a></li>
             <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Entrada de Orden</a></li>
@@ -98,8 +79,13 @@
           </a>
           <ul class="treeview-menu">
             <li><a ui-sref="cajaturno.opencajaturno"><i class="fa fa-circle-o"></i> Su sesión</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Todas la sesionces</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Resumen de ventas</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Nota de Crédito</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Factura</a></li>
+             <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Pedidos</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Corte de Caja</a></li>
+            <li><a ui-sref="providers.list"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i>Clientes</a></li>
+            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i>Lotes</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -112,6 +98,45 @@
             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span>Reportes</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="parameters.list"><i class="fa fa-circle-o"></i>Global</a></li>
+            <li><a ui-sref="cajas.list"><i class="fa fa-circle-o"></i>Ventas</a></li>
+            <li><a  ui-sref="partners.list"><i class="fa fa-circle-o"></i>Utilidad</a></li>
+            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Compras</a></li>
+            <li><a ui-sref="roles.list"><i class="fa fa-circle-o"></i>Notas de Credito</a></li>
+            <li><a  ui-sref="users.list"><i class="fa fa-circle-o"></i>Cliente</a></li>
+            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Proveedores</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Articulo</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Movimiento</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Clientes</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Corte de Caja</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cog"></i>
+            <span>Configuración</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a ui-sref="parameters.list"><i class="fa fa-circle-o"></i> Parametros</a></li>
+            <li><a ui-sref="cajas.list"><i class="fa fa-circle-o"></i>Terminales</a></li>
+            <li><a  ui-sref="partners.list"><i class="fa fa-circle-o"></i>Cuenta Asociada</a></li>
+            <li><a ng-if="vm.authentication.filterMenu('Sucursales')" ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Sucursales</a></li>
+            <li><a ui-sref="roles.list"><i class="fa fa-circle-o"></i>Roles</a></li>
+            <li><a ng-if="vm.authentication.filterMenu('Usuario')"  ui-sref="users.list"><i class="fa fa-circle-o"></i>Usuario</a></li>
+          <!--   <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Empleados</a></li> -->
+            <li><a ui-sref="sucursals.list"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+            <li><a ui-sref="ncfs.list"><i class="fa fa-circle-o"></i>Tipo Documento</a></li>
+          </ul>
+        </li>
+
         <!-- <li>
           <a href="pages/calendar.html">
             <i class="fa fa-calendar"></i> <span>Calendar</span>

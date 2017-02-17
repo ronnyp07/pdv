@@ -76,26 +76,42 @@ var productModule = angular.module('parameters')
      show: true,
      backdrop: 'static'
    });
+  }else{
+     alertify.alert('Debe seleccionar un producto').setHeader('<i class="fa fa-warning"></i> ');
   }
 };
 
   //Action de la pantalla del listado de lotes
-  vm.createLotesModel = function(){
+ vm.createLotesModel = function(){
   //alertify.alert('This is an alert dialog.').setHeader('<i class="fa fa-plus"></i> ');
   vm.showNewLoteModal();
-};
+ };
 
  //Abre la pantalla del listado de lotes
  vm.showLotesModal = function(product){
-  if(vm.productServices.selectedProduct !== null){
+  if(vm.productServices.selectedProduct !== null && vm.productServices.selectedProduct.lotes === true){
     vm.lotesModal = $modal({
      scope: $scope,
      'templateUrl': 'modules/products/partials/lotes.html',
      show: true,
+     windowClass: 'app-modal-window',
      backdrop: 'static'
    });
+    vm.loteServices.product.name = vm.productServices.selectedProduct.name;
+
   }
-};
+ };
+ vm.showListofLote = function(product){
+  if(vm.productServices.selectedProduct !== null && vm.productServices.selectedProduct.lotes === true){
+   vm.loteServices.loteview = true;
+     var param = {
+      productId : vm.productServices.selectedProduct._id
+    };
+    vm.loteServices.getLoteFilter(param).then(function(data){
+       vm.showLotesModal();
+    });
+  }
+ };
 
  //Abre el formulario para los nuevos lotes
  vm.showNewLoteModal = function(product){
@@ -118,15 +134,21 @@ var productModule = angular.module('parameters')
  //cierra la pantalla de Ajustar existencia
  vm.cancelAjustarModal = function(){
    vm.ajustarModal.hide();
+   vm.productServices.selectedProduct = null;
  };
  //Cierre la pantalla de ajustar listado de lotes
  vm.cancelLotesModal = function(){
+  if(!vm.loteServices.loteview){
    if(vm.loteServices.product.loteRest !== 0){
     vm.lotesModal.hide();
     alertify.alert('No se pudo realizar los cambios en lotes').setHeader('<i class="fa fa-warning"></i> ');
   }else{
     vm.lotesModal.hide();
   }
+ }else{
+  vm.loteServices.loteview = false;
+  vm.lotesModal.hide();
+ }
 };
  //Cierre la pantalla de ajustar nuevo lote
  vm.cancelNewLotesModal = function(){

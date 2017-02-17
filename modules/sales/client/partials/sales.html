@@ -3,17 +3,17 @@
  >
  <tr >
   <th class="col-1" >Folio</th >
-  <th class="col-2" >
+  <th class="col-1" >
    Fecha
   </th >
-  <th class="col-3" >
+  <th class="col-1" >
    Cliente
   </th >
-  <th class="col-4" >
+  <th class="col-1" >
     Total
   </th>
   </tr>
-  <tr ng-repeat="sales in vm.salesPedingList " ng-click="vm.pedingSale(sales)">
+  <tr ng-repeat="sales in vm.salesPedingList" ng-click="vm.pedingSale(sales)">
     <td>{{sales.salesId}}</td>
     <td>{{sales.fecha_venta | date}}</td>
     <td><span ng-if="!sales.customer.name">

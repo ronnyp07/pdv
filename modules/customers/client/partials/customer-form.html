@@ -1,6 +1,5 @@
 <div class="row">
 <div class="col-sm-10 col-sm-offset-1">
-
  <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Información General">
@@ -24,7 +23,7 @@
 		      <input ng-model="services.customer.name" type="text" placeholder="Nombre" required>
 	 </md-input-container>
 
-		
+
 	</div>
 	<div class="col-sm-6">
 		<md-input-container md-no-float class="md-block cusinput material-txt">
@@ -36,17 +35,31 @@
 <div class="row">
 	<div class="col-sm-12">
 		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
+		      <md-icon><i class="fa  fa-id-badge iconform hidden-xs"></i></md-icon>
+		      <input ng-model="vm.services.customer.identity" name="identity" type="text" placeholder="RNC/Cédula" class="form-control">
+		</md-input-container>
+
+		<md-input-container md-no-float class="md-block cusinput visible-xs-block, hidden-sm hidden-md hidden-lg material-txt">
+		      <input ng-model="vm.services.customer.identity" name="identity" type="text" placeholder="Email" >
+
+		</md-input-container>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
 		      <md-icon><i class="fa fa-phone iconform hidden-xs"></i></md-icon>
 		      <input ng-model="vm.services.customer.phone" name="phone" type="text" placeholder="Telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/" class="form-control">
 
-		        <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>  
-           
+		        <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>
+
 		</md-input-container>
 
 		<md-input-container md-no-float class="md-block cusinput visible-xs-block, hidden-sm hidden-md hidden-lg material-txt">
 		      <input ng-model="vm.services.customer.phone" name="Email" type="text" placeholder="Email" ng-pattern="/^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/">
 
-		      <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>  
+		      <span class="requiredIcon" ng-show="createCustomerForm.phone.$dirty && createCustomerForm.phone.$invalid">Numero de teléfono inválido</span>
 		</md-input-container>
 	</div>
 </div>
@@ -55,7 +68,7 @@
 	<div class="col-sm-12">
 		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
 		      <md-icon><i class="fa  fa-envelope iconform hidden-xs"></i></md-icon>
-		      <input ng-model="vm.services.customer.email" name="email" type="text" placeholder="E.j email@hotmail.com" class="form-control">           
+		      <input ng-model="vm.services.customer.email" name="email" type="text" placeholder="E.j email@hotmail.com" class="form-control">
 		</md-input-container>
 	</div>
 </div>
@@ -63,7 +76,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<md-input-container md-no-float class="md-block cusinput hidden-xs material-txt">
-		<md-icon class="form-icon"><i class="fa fa-male iconform hidden-xs"></i></md-icon>
+		<md-icon class="form-icon"><i class="fa fa-address-book iconform hidden-xs"></i></md-icon>
 		      <input ng-model="vm.services.customer.address.street" type="text" placeholder="Direccion" required>
 		</md-input-container>
 
@@ -71,7 +84,7 @@
 		      <input ng-model="vm.services.customer.address.street" type="text" placeholder="Direccion" required>
 	 </md-input-container>
 
-		
+
 	</div>
 </div>
 
@@ -95,6 +108,21 @@
 		<md-input-container md-no-float class="md-block cusinput material-txt">
 		      <input ng-model="vm.services.customer.autorizedAmmount" type="text" placeholder="E.j 10,000">
 		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+	<div class="form-control">
+     <label style="padding-left: 0px; font-size: 16px;" class="col-sm-2 control-label" >Precio:</label>
+    <div class="col-sm-4">
+    <select data-ng-model="vm.services.customer.price"  class="form-control" id="cusPrice" name="price">
+    <option value="uno" class="">1</option>
+    <option value="dos" class="">2</option>
+    <option value="tres" class="">3</option>
+    <option value="cuatro" class="">4</option>
+      </select>
+     </div>
+	</div>
 	</div>
 </div>
 

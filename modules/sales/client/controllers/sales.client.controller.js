@@ -23,7 +23,8 @@
   '$modal',
   'CreditpaysRestServices',
   'MovimientoRestServices',
-  '$rootScope'];
+  '$rootScope',
+  'NcfsRestServices'];
   function SalesController (
     $scope,
     $state,
@@ -42,7 +43,8 @@
     $modal,
     CreditpaysRestServices,
     MovimientoRestServices,
-    $rootScope) {
+    $rootScope,
+    NcfsRestServices) {
     var vm = this;
     vm.sale = sale;
     $rootScope.nav = true;
@@ -61,6 +63,7 @@
     vm.salesServices = SalesRestServices;
     vm.inventoryServices = InventoryRestServices;
     vm.inventoryServices.saveMode = 'create';
+    vm.ncfServices = NcfsRestServices;
     vm.creditServices = CreditpaysRestServices;
     vm.movimientoServices = MovimientoRestServices;
     vm.setCategoryValue = function(value){
@@ -72,6 +75,7 @@
    });
    vm.productServices.product.listproductPromotion = [];
    vm.cartService = cartService;
+   vm.cartService.resetCart();
    vm.cartService.self.state = 'ventas';
    vm.parameterServices.getParamsFilterByParent('', vm.parameterServices.paramEnum.headers.tipo_sales_pago).then(function(data){
      vm.tipoPagoList = data;
@@ -82,6 +86,7 @@
     vm.customerServices.scrollMore();
 
     vm.product = {};
+    vm.product.descuento = 0;
     vm.product.qt = 1;
     vm.product.efectivo = 0;
     vm.product.tarjeta = 0;
@@ -94,12 +99,13 @@
     vm.product.change = 0;
     vm.product.subtotal = 0;
     vm.salesPedingList = [];
+    vm.productServices.isPOS = null;
   }
   init();
 
    //Filtra por categoria y anade la categoria actual
    //Created By: Ronny Morel
-  vm.getCategories = function(category){
+   vm.getCategories = function(category){
     vm.categorieList = [];
     resetProductCounter();
     var param = [];
@@ -107,13 +113,13 @@
       vm.categorieList =  vm.parameterServices.category.ancestors;
       vm.categorieList.push(vm.parameterServices.category._id);
       _.remove(vm.categorieList, function(n) {
-           return n  === 'Categoria';
-       });
-        if(vm.parameterServices.children.length > 0){
-            _.forEach(vm.parameterServices.children, function(i){
-                param.push(i._id);
-             });
-        }
+       return n  === 'Categoria';
+     });
+      if(vm.parameterServices.children.length > 0){
+        _.forEach(vm.parameterServices.children, function(i){
+          param.push(i._id);
+        });
+      }
       vm.productServices.category = param.length > 0 ? param: vm.parameterServices.category._id;
       // vm.parameterServices.category._id;
       vm.productServices.loadScrollproducts();
@@ -127,16 +133,17 @@
    vm.selectedCategory = value._id ? value._id : value;
    vm.getCategories(value._id ? value._id : value);
   //vm.parameterServices.categoryTree(value._id ? value._id : value);
-   vm.productServices.category = value._id;
+  vm.productServices.category = value._id;
    //vm.productServices.loadScrollproducts();
-  };
+ };
 
   //Search the product
-  vm.getProductFilter = function(param){
+ vm.getProductFilter = function(param){
     var defer = $q.defer();
     var parm = {
       bardCode: param,
-      sucursalId: vm.cajaturnoInfo.sucursalId
+      sucursalId: vm.cajaturnoInfo.sucursalId,
+      isPOS: true
     };
     vm.productServices.getProductFilter(parm)
     .then(function(data){
@@ -318,7 +325,7 @@ vm.saveOrder = function(order){
     }
   });
   }else{
-    vm.product.status = null;
+    vm.product.status = order === 'hold' ? vm.parameterServices.paramEnum.details.sales_status_espera : null;
     vm.product._id = vm.salesServices.selectedSale._id;
     vm.salesServices.update(vm.product).then(function(data){
       saveProces(data);
@@ -376,7 +383,8 @@ function saveProces(data){
   };
 
   vm.setHold = function(){
-    if(vm.productServices.product.listproductPromotion.length > 0 && vm.salesPedingList.length <= 5 && !vm.salesServices.selectedSale){
+  if(vm.productServices.product.listproductPromotion.length > 0){
+    //if(vm.productServices.product.listproductPromotion.length > 0 && vm.salesPedingList.length <= 5 && !vm.salesServices.selectedSale){
      vm.saveOrder('hold');
      vm.nexOrder();
    }else{
@@ -440,7 +448,7 @@ vm.saveField = function(index, product) {
 };
 
 vm.changePrice = function(){
-  vm.focusinControl.show();
+  //vm.focusinControl.show();
   if(vm.productServices.product.listproductPromotion.length > 0){
     vm.cartService.getItemIndex(vm.salesServices.selectedProduct).then(function(index){
       vm.cartService.updateItemPrice(index, vm.product.qt).then(function(){
@@ -533,6 +541,80 @@ function salesPopUp(){
    show: true
  });
 }
+
+//Open la ventana de comprovante
+vm.setComprovante = function(){
+ var param = {
+  sucursalId: vm.productServices.sucursalSearch,
+  noNcf: vm.comprovante
+};
+vm.ncfServices.getNcfFilter(param).then(function(data){
+  if(data.length > 0){
+    vm.salesServices.selectedNcf = data[0];
+    if(Number(vm.salesServices.selectedNcf.secInicial) < Number(vm.salesServices.selectedNcf.secFinal)){
+     if(vm.comprovante !== '02'){
+       vm.createModalComprovante = $modal({
+        scope: $scope,
+        'templateUrl': 'modules/sales/partials/comprovante.html',
+        show: true,
+        backdrop: 'static'
+      });
+     }
+   }else{
+    vm.comprovante = '';
+    alertify.alert('El comprovante no tiene secuencia disponible').setHeader('<i class="fa fa-warning"></i> ');
+  }
+
+}else{
+ vm.comprovante = '';
+ alertify.alert('El comprovante no tiene secuencia disponible').setHeader('<i class="fa fa-warning"></i> ');
+}
+}, function(err){
+  alertify.alert('Se ha producido un error en el sistema').setHeader('<i class="fa fa-warning"></i> ');;
+});
+};
+
+//Cancelar ncf
+vm.cancelNcf = function(){
+  vm.comprovante = '';
+  vm.createModalComprovante.hide();
+};
+
+//Set ncf
+vm.saveNcf = function($isValid, ncf){
+  if(!$isValid){
+    if(vm.ncfServices.validateNCF(vm.rnc)){
+      vm.ncfSerie = vm.salesServices.selectedNcf.serie + vm.salesServices.selectedNcf.dn + vm.salesServices.selectedNcf.pe + vm.salesServices.selectedNcf.ai + vm.salesServices.selectedNcf.code;
+      vm.cancelNcf();
+    }else{
+     alertify.alert('RNC/Cédula invalida').setHeader('<i class="fa fa-warning"></i> ');
+   }
+ }
+};
+
+//reset NCF after selected
+vm.resetNCF = function(){
+   vm.ncfSerie = null;
+   vm.salesServices.selectedNcf = null;
+};
+
+//Open price list
+vm.openPriceModal = function(){
+ if(vm.salesServices.selectedProduct !== null){
+  vm.priceModal = $modal({
+        scope: $scope,
+        'templateUrl': 'modules/sales/partials/product-price.html',
+        show: true,
+        backdrop: 'static'
+   });
+ }
+};
+
+vm.cancelPriceChange = function(){
+   vm.priceModal.hide();
+   vm.salesServices.selectedProduct = null;
+};
+
 
 vm.removeHoldSale = function(sale){
  vm.salesServices.delete(sale);

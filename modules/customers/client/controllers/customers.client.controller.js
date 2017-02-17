@@ -2,19 +2,24 @@
 
   // Customers controller
   var customerModule = angular.module('customers');
-  
-  customerModule.controller('CustomersController', 
-    ['$scope', 
-    '$state', 
-    'Authentication', 
+
+  customerModule.controller('CustomersController',
+    ['$scope',
+    '$state',
+    'Authentication',
     'customerResolve',
     'CustomerRestServices',
     '$modal',
     function CustomersController ($scope, $state, Authentication, customer, CustomerRestServices, $modal) {
-    var vm = this;
-    vm.services = CustomerRestServices;
-    vm.authentication = Authentication;
+        var vm = this;
+        vm.services = CustomerRestServices;
+        vm.imageURL = 'modules/users/img/profile/default.png';
+        vm.authentication = Authentication;
+        vm.userimageURL = vm.authentication.user.profileImageURL;
     // vm.customer = customer;
+    vm.services.customer = {
+        price : 'uno'
+    };
     vm.error = null;
     vm.form = {};
 
@@ -24,15 +29,15 @@
         // vm.services.create(vm.services.customer).then(function(){
         //     vm.createModal.hide();
         //     vm.services.saveMode = '';
-        // }); 
-        // } 
+        // });
+        // }
 
         // if(vm.services.saveMode === 'update'){
         //     vm.services.updatecustomer(vm.services.customer).then(function(){
         //     vm.createModal.hide();
         //     vm.services.saveMode = '';
-        // }); 
-        // }    
+        // });
+        // }
     };
 
 
@@ -41,7 +46,7 @@
     //         console.log('customer created!!');
     //    });
     // };
-    
+
 
      // Save Category
     // function save(isValid) {
@@ -70,11 +75,11 @@
 
 }]);
 
-customerModule.directive('customerList', function(){
+  customerModule.directive('customerList', function(){
     return {
-    restrict: 'E',
-    transclude: true,
-    templateUrl: 'modules/customers/views/customer-list.template.html'
-   };
+        restrict: 'E',
+        transclude: true,
+        templateUrl: 'modules/customers/views/customer-list.template.html'
+    };
 });
 
