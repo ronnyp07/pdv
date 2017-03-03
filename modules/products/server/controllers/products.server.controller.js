@@ -109,21 +109,32 @@
   var count = req.query.count || 15;
   var page = req.query.page || 1;
   var contains = {};
-  if (req.query.search){
+  if(req.query.search){
     var search = JSON.parse(req.query.search);
-   // { category: { $in: [req.body.categories] }}
-    if(search.sucursalId || search.name || search.category){
-      contains = {
-        isActive: true,
-        sucursalId : search.sucursalId ? search.sucursalId : '',
-        name: search.name ? search.name : '',
-        category: _.isArray(search.category) ? { $in: [search.categories] } : search.category
-      };
-    }else{
-      contains = {
-        sucursalId : ''
-      };
+    contains.isActive = true;
+    contains.sucursalId = search.sucursalId;
+
+    if(search.name){
+      contains.name = search.name;
     }
+    if(search.category){
+       contains.category = search.category;
+    }
+    if(search.isPOS){
+      contains.isPOS = search.isPOS;
+    }
+    // if(search.sucursalId || search.name || search.category){
+    //   contains = {
+    //     isActive: true,
+    //     sucursalId : search.sucursalId ? search.sucursalId : '',
+    //     name: search.name ? search.name : '',
+    //     category: _.isArray(search.category) ? { $in: [search.categories] } : search.category
+    //   };
+    // }else{
+    //   contains = {
+    //     sucursalId : ''
+    //   };
+    // }
   }
 
   var pagination = {

@@ -324,14 +324,14 @@
                   ></td>
                 </tr>
                 <tr>
-                  <td><label class="control-label">Precio Venta</label></td>
+                  <td><label class="control-label">Precio Venta Neto</label></td>
                   <td class="text-right"><label class="control-label text-right">{{vm.productServices.product.precios.uno.pVenta | currency}} </label></td>
                   <td class="text-right"><label class="control-label text-right"> </label>{{vm.productServices.product.precios.dos.pVenta | currency}} </td>
                   <td class="text-right"><label class="control-label text-right"> </label> {{vm.productServices.product.precios.tres.pVenta | currency}}</td>
                   <td class="text-right"><label class="control-label text-right"> </label> {{vm.productServices.product.precios.cuatro.pVenta | currency}}</td>
                 </tr>
                 <tr>
-                  <td><label class="control-label">Precio Venta Neto</label> </td>
+                  <td><label class="control-label">Precio Venta</label> </td>
                   <td> <input type="text" ng-disabled="vm.productServices.product.unidades === null" select-on-click ui-number-mask="2" ng-model="vm.productServices.product.precios.uno.p_ventaNeto" class="form-control text-right"
                     ng-change="vm.productServices.unoVentaNetoChange()"></td>
                     <td><input type="text" ng-disabled="vm.productServices.product.unidades === null" select-on-click ui-number-mask="2"  ng-model="vm.productServices.product.precios.dos.p_ventaNeto" ng-change="vm.productServices.dosVentaNetoChange()" class="form-control text-right"></td>

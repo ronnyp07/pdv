@@ -22,8 +22,10 @@ var productModule = angular.module('parameters')
     vm.productServices.product.category = {_id: load.category, desc: load.category};
     vm.productServices.product.brand = {_id: load.brand, name: load.brand};
     vm.imageURL = load.picturesURL ? load.picturesURL : 'modules/products/img/no-imagen.jpg';
-    vm.productServices.product.taxcost = vm.productServices.amountAfterTax(vm.productServices.product.cost, vm.productServices.getTaxAmount(vm.productServices.product.cost, vm.productServices.getTax(vm.productServices.product.taxesFlag, vm.productServices.companyInfo.impuestosList)));
-    vm.productServices.product.d_cost = vm.productServices.amountAfterTax((vm.productServices.product.cost / vm.productServices.product.unidades), vm.productServices.getTaxAmount((vm.productServices.product.cost / vm.productServices.product.unidades), vm.productServices.getTax(vm.productServices.product.taxesFlag, vm.productServices.companyInfo.impuestosList)));
+    vm.productServices.changeCost();
+    // vm.productServices.product.taxcost = vm.productServices.amountAfterTax(vm.productServices.product.cost, vm.productServices.getTaxAmount(vm.productServices.product.cost, vm.productServices.getTax(vm.productServices.product.taxesFlag, vm.productServices.companyInfo.impuestosList)));
+    // vm.productServices.product.d_cost = vm.productServices.amountAfterTax((vm.productServices.product.cost / vm.productServices.product.unidades), vm.productServices.getTaxAmount((vm.productServices.product.cost / vm.productServices.product.unidades), vm.productServices.getTax(vm.productServices.product.taxesFlag, vm.productServices.companyInfo.impuestosList)));
+
   }
 
    // Create file uploader instance

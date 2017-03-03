@@ -12,9 +12,7 @@
 
     vm.authentication = Authentication;
     vm.userimageURL = vm.authentication.user.profileImageURL;
-    console.log(vm.authentication.filterMenu('Comprs'));
     vm.dashboards = DashboardsService.query();
-    console.log(vm.authentication.sucursalCache.get('sucursal'));
    // vm.filterLinks = function(param){
    //   var isValid = false;
    //   _.find(vm.authentication.sucursal.permision, function(o){

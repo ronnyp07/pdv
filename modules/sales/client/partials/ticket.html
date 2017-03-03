@@ -25,7 +25,7 @@
      <hr class="hr" />
      <div id="ticketnotes">
       <table>
-       <tr ng-repeat="product in vm.productServices.product.listproductPromotion">
+       <tr ng-repeat="product in vm.cartList">
          <td><p class="compraDetail"><div class="ticketproductInfo">  {{product.quantity}} - {{product.name}}</div>
           <div class="ticketprices">{{product.price | currency}}</div> <div class="pull-right">{{product.total | currency}}</div></p></td>
         </tr>

@@ -18,7 +18,6 @@
         vm.cajaturnoInfo = vm.cajaturno.uploadCajaturnoInfo();
         function init(){
 		vm.cajaRestServices.loadcajas().then(function(){
-			console.log(vm.cajaRestServices.cajasList);
 			vm.cajaList = _.chain(vm.cajaRestServices.cajasList)
 			.groupBy("sucursalId.name")
 			.sortBy("sucursalId.name")

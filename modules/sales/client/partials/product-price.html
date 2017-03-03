@@ -28,10 +28,30 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-click="vm.setNewPrice()" ng-repeat="(key, value) in vm.salesServices.selectedProduct.precios | precio">
+							<!-- <tr ng-click="vm.setNewPrice(value)" ng-repeat="(key, value) in vm.salesServices.selectedProduct.precios | precio">
 								<td>{{value.no}}</td>
 								<td>{{value.p_porMayor}}</td>
 								<td>{{value.pVenta | currency}}</td>
+							</tr> -->
+							<!-- <tr ng-click="vm.setNewPrice(value)" ng-repeat="(key, value) in vm.salesServices.selectedProduct.precios | precio">
+								<td>{{value.no}}</td>
+								<td>{{value.p_porMayor}}</td>
+								<td>{{value.pVenta | currency}}</td>
+							</tr> -->
+							<tr ng-click="vm.changeSelected(vm.salesServices.selectedProduct.precios.dos)">
+								<td>2</td>
+								<td>{{vm.salesServices.selectedProduct.precios.dos.p_porMayor}}</td>
+								<td>{{vm.salesServices.selectedProduct.precios.dos.pVenta | currency}}</td>
+							</tr>
+							<tr ng-click="vm.changeSelected(vm.salesServices.selectedProduct.precios.tres);">
+								<td>3</td>
+								<td>{{vm.salesServices.selectedProduct.precios.tres.p_porMayor}}</td>
+								<td>{{vm.salesServices.selectedProduct.precios.tres.pVenta | currency}}</td>
+							</tr>
+							<tr ng-click="vm.changeSelected(vm.salesServices.selectedProduct.precios.cuatro)">
+								<td>4</td>
+								<td>{{vm.salesServices.selectedProduct.precios.cuatro.p_porMayor}}</td>
+								<td>{{vm.salesServices.selectedProduct.precios.cuatro.pVenta | currency}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -44,7 +64,7 @@
                       <div class="form-group">
                         <label class="col-sm-3 control-label">Descuento <i class="fa fa-percent"></i></label>
                         <div class="col-sm-9">
-          <input type="text" ng-model="vm.percent" id="percent" name="percent" autocomplete="off" class="form-control">
+          <input type="text" ng-model="vm.percent" id="percent" name="percent" ng-change="vm.percentChange()" ui-number-mask="2" autocomplete="off" class="form-control">
                         </div>
                         	</div>
                     </div>
@@ -52,18 +72,17 @@
                         	  <div class="form-group">
                         	  <label class="col-sm-3 control-label">Precio <i class="fa fa-usd"></i></label>
                         <div class="col-sm-9">
-          <input type="text" ng-model="vm.priceChangeAmount" id="priceChangeAmount" name="priceChangeAmount" autocomplete="off" class="form-control">
+          <input type="text" ng-model="vm.priceChangeAmount" ng-change="vm.priceChange(vm.priceChangeAmount)"
+          ui-number-mask="2" id="priceChangeAmount" name="priceChangeAmount" autocomplete="off" class="form-control">
                         </div>
                         </div>
                                  </div>
-
                         </form>
 				  </div>
 				</div>
-
 				<div class="row text-center" style="margin-top: 15px;">
 
-                <a ng-click="vm.savePriceChange()" class="btn btn-primary">Guardar</a>
+                <a ng-click="vm.saveChangePrice(vm.priceChangeAmount)" class="btn btn-primary">Guardar</a>
                 </div>
               </div>
 						</div>

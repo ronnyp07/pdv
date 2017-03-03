@@ -30,40 +30,40 @@
      </div><!-- /.box-header -->
      <div class="box-body">
        <md-content flex layout-padding>
-         <div class="inventory-promotion-content">
+         <div class="inventory-promotion-content product">
 
           <table  class="table table-condensed table-bordered table-striped">
-            <th class="col-1 text-center">#</th>
-            <th class="col-1 text-center">Producto</th>
-            <th class="col-2 text-center">Marca</th>
-            <th class="col-3 text-center">Saldo Inicial</th>
-            <th class="col-4 text-center">Entrada</th>
+            <th class="col-5 text-center">#</th>
+            <th class="col-2 text-center">Producto</th>
+            <th class="col-5 text-center">Marca</th>
+            <th class="col-5 text-center">Saldo Inicial</th>
+            <th class="col-5 text-center">Entrada</th>
             <th class="col-5 text-center">Salida</th>
             <th class="col-5 text-center">Saldo</th>
 
             <tr dir-paginate="inventory in vm.inventoryServices.inventory.listinventoryPromotion | itemsPerPage: 50">
-             <td data-title="'#'" header-class="'text-center'" class="text-center col-1" >
+             <td data-title="'#'" header-class="'text-center'" class="text-center" >
               <span>{{inventory.productId}}</span>
             </td>
-            <td data-title="'Producto'" header-class="'text-center'" sortable="'name'" class="text-center col-2">{{inventory.name}}</td>
-            <td data-title="'Marca'" header-class="'text-center'" class="text-center col-2">
+            <td data-title="'Producto'" header-class="'text-center'" sortable="'name'" class="text-center">{{inventory.name}}</td>
+            <td data-title="'Marca'" header-class="'text-center'" class="text-center">
               <span>{{inventory.marca }}</span>
             </td>
-            <td class="text-center col-3" header-class="'text-center'" data-title="'Saldo Inicial'" >
+            <td class="text-center" header-class="'text-center'" data-title="'Saldo Inicial'" >
              <div >
               <span>
                {{inventory.saldoIni}}
              </span>
            </div>
          </td>
-         <td data-title="'Entrada'" header-class="'text-center'" class="text-center col-4">
+         <td data-title="'Entrada'" header-class="'text-center'" class="text-center">
           <span >{{inventory.entrada}}</span>
         </td>
 
-        <td data-title="'Salida'" header-class="'text-center'" class="text-center col-5">
+        <td data-title="'Salida'" header-class="'text-center'" class="text-center">
           <span >{{inventory.salida}}</span>
         </td>
-        <td data-title="'Saldo'" header-class="'text-center'" class="text-center col-5">
+        <td data-title="'Saldo'" header-class="'text-center'" class="text-center">
           {{inventory.saldo}}
         </td>
       </tr>

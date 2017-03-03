@@ -109,7 +109,6 @@ var inventoryModule = angular.module('inventarios')
      inventory.inStock = 0;
    }
    vm.inventoryServices.inventory.listinventoryPromotion.push({inventory: inventory._id, productId: inventory.productId, name: inventory.name, marca: inventory.brand,  saldoIni: almacen ? inventory.inStock: vm.inventory.qt, entrada: 0, salida: 0, saldo: 0});
-   console.log(vm.inventoryServices.inventory.listinventoryPromotion);
    resetPromoForm();
  };
 

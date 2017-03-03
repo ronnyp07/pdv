@@ -81,7 +81,6 @@
   };
 
   vm.showCreateModal = function(saveParam){
-
     if(!saveParam){
      vm.services.customer = {};
      vm.services.saveMode = 'create';

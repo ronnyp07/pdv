@@ -5,7 +5,7 @@
 	padding: 15px;
 }
 
-.table .invCol-1 {
+/*.table .invCol-1 {
   width: 40%; }
 .table .invCol-2 {
   width: 20%; }
@@ -17,11 +17,26 @@
   width: 10%; }
 .table .invCol-6 {
   width: 25%; }
-
-
-.table tr td {
-  vertical-align: middle;
+*/
+.table-fixed thead {
+  width: 97%;
 }
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+
+/*.table tr td {
+  vertical-align: middle;
+}*/
 
 #importInventory{
 	margin-bottom: 20px;

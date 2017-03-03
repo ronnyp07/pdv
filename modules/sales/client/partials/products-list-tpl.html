@@ -2,12 +2,12 @@
 <md-whiteframe id="categoryList" class="md-whiteframe-1dp cartFrame1" flex layout-padding layout >
  <div flex="60"  id="categoryFader" >
 	<ul class="nav nav-pills">
-	<li ng-class="{active :  vm.selectedCategory === 'Categoria'}"><a  ng-click="vm.getCategories('Categoria'); vm.setCategoryValue('Categoria'); vm.getCategoryProducts()"><i class="fa fa-home"></i>
+	<li ng-class="{active :  vm.selectedCategory === 'Categoria'}"><a  ng-click="vm.getCategories('Categoria');"><i class="fa fa-home"></i>
 	</a>
 	</li>
 
 	 <li role="presentation" ng-repeat="category in vm.categorieList" ng-class="{active :  vm.selectedCategory ===  category}">
-	  <a  ng-click="vm.getCategories(category); vm.setCategoryValue(category); vm.getCategoryProducts(category)" >
+	  <a href="#"  ng-click="vm.getCategories(category); vm.setCategoryValue(category);" >
 									<span ng-if="category != 'Categoria'">{{category}}</span>
 								</a>
 							</li>
@@ -32,6 +32,8 @@
 		</div>
 	</md-whiteframe>
 </div>
+<!-- <cc-spinner is-loading="vm.productServices.isLoading"
+  message="Cargando..." ></cc-spinner> -->
 <div class="row productRowPadding">
 <div class="col-sm-12 productMainContainer"  id="productMainContainer"
  infinite-scroll-parent
@@ -43,7 +45,7 @@
 			<div class="row" >
 				<div>
 					<div class="col-md-12" >
-						<span class="badge bg-green">{{product.precios.uno.p_ventaNeto | currency}}</span>
+						<span class="badge bg-green">{{product.precios.uno.pVenta | currency}}</span>
 						<img id="productImg" ng-src="{{ product.picturesURL  | defaultImage: 'modules/core/img/no-imagen.jpg'}}"
 						alt=""
 						class="img-rounded img-responsive " />

@@ -20,7 +20,7 @@
   		</li>
   	</ul>
 
-  	<ul class="nav navbar-nav navbar-right">
+  	<ul class="nav navbar-nav navbar-right" id="ulMenu">
   		<form class="navbar-form navbar-left" ng-if="vm.salesServices.selectedSale">
   			<a ng-click="vm.removeHoldSale(vm.salesServices.selectedSale)" class="btn btn-danger"><i class="fa fa-edit"></i> {{vm.salesServices.selectedSale.salesId}}</a>
   		</form>
@@ -85,11 +85,15 @@
 		<div layout="row">
 			<md-whiteframe class="md-whiteframe-19dp cartFrame" flex layout-padding layout >
 				<div scroll-glue id="cartFrameDiv" class="cartFrameDiv">
-					<div  layout="row" column ng-repeat="product in vm.productServices.product.listproductPromotion" ng-class="{'selectedProduct': product._id === vm.salesServices.selectedProduct._id}" ng-click="vm.setSelectedProduct(product)">
+					<div  layout="row" column ng-repeat="product in vm.cartList" ng-class="{'selectedProduct': product._id === vm.salesServices.selectedProduct._id,
+					'discountProduct': product.discount && product._id != vm.salesServices.selectedProduct._id}" ng-click="vm.setSelectedProduct(product)">
 
 						<div class="col-sm-8">
 							<span class="cartSpan">{{product.name}}</span>
-							<p class="detailColor" ng-if="product.quantity > 1">{{product.quantity}} <span ng-if="product.unidadVenta"> {{product.unidadVenta}} </span> <span ng-if="!product.unidadVenta"> Unidades </span> a {{product.price | currency}} / <span ng-if="product.unidadVenta"> {{product.unidadVenta}} </span> <span ng-if="!product.unidadVenta"> Unidades </span></p>
+							<p class="detailColor" ng-if="product.quantity > 1 || product.discount > 0">{{product.quantity}} <span ng-if="product.unidadVenta"> {{product.unidadVenta}} </span> <span ng-if="!product.unidadVenta"> Unidades </span> a {{product.price | currency}} / <span ng-if="product.unidadVenta"> {{product.unidadVenta}} </span> <span ng-if="!product.unidadVenta"> Unidades </span>
+                            <span ng-if="product.discount > 0" style="color: #DD2C00;">
+                            Des: {{product.discount | currency}} <i class="fa fa-percent"></i> </span>
+							</p>
 						</div>
 						<div class="col-sm-4 pull-right">
 							<span class="cartSpan">{{product.total | currency}}</span>
@@ -103,7 +107,7 @@
 			<md-whiteframe class="md-whiteframe-1dp cartFrame1" id="totalDetails" layout-padding>
 			 <div flex class="text-right" style=" padding-top: 5px; padding-bottom: 0px;">
 					<span class="cartSpanDetail">descuento:</span>
-					<span class="cartSpanDetail"> {{vm.product.descuento | currency}} </span>
+					<span class="cartSpanDetail"> {{vm.product.discount | currency}} <i class="fa fa-percent"></i><i></i> </span>
 				</div>
 				<div flex class="text-right" style=" padding-top: 0px; padding-bottom: 0px;">
 					<span class="cartSpanDetail">impuestos:</span>
@@ -147,7 +151,7 @@
 				</div>
 				<div layout="column" flex="40" >
 					<div flex class="buttonAccion">
-					<a ng-disabled="vm.productServices.product.listproductPromotion.length <= 0"
+					<a ng-disabled="vm.cartList.length <= 0"
 					ng-click="vm.setPageMode('efectivo')" class="btn btn-lg btn-block btn-success">
 							<i class="fa fa-money"></i>  EFECTIVO
 						</a>
@@ -208,8 +212,8 @@
 			</div> -->
 		</div>
 		<div flex="60"  id="productFrame">
-			<div ng-if="!vm.product.formaPago || vm.productServices.product.listproductPromotion.length <= 0 " ng-include="'modules/sales/partials/products-list-tpl.html'">	</div>
-			<div ng-if="vm.product.formaPago && vm.productServices.product.listproductPromotion.length > 0" ng-include="'modules/sales/partials/pagos-tpl.html'">	</div>
+			<div ng-if="!vm.product.formaPago || vm.cartList.length <= 0 " ng-include="'modules/sales/partials/products-list-tpl.html'">	</div>
+			<div ng-if="vm.product.formaPago && vm.cartList.length > 0" ng-include="'modules/sales/partials/pagos-tpl.html'">	</div>
 		</div>
 	</div>
 </div>

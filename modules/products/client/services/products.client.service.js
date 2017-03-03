@@ -81,7 +81,7 @@
       var sucursalInfo = Authentication.sucursalCache.get('sucursal');
       self.sucursalSearch = sucursalInfo !=='superUser' ? sucursalInfo.sucursalId._id: null;
     },'loadScrollproducts': function(){
-      if (self.hasMore && !self.isLoading){
+      if(self.hasMore && !self.isLoading){
         self.isLoading = true;
         var params = {
           'page': self.page,
@@ -91,7 +91,7 @@
            isPOS: self.isPOS},
            'ordering': self.ordering
          };
-         productsService.get(params, function(data){
+        productsService.get(params, function(data){
           self.total = data.total;        //self.count = parseInt(data.options.count);
         if(data){
          angular.forEach(data.results, function(item){
@@ -148,10 +148,12 @@
 
   });
     return totalTax;
-  },getTaxAmount: function(amount, tax){
-   return amount * tax / 100;
+ },getTaxAmount: function(amount, tax){
+   return Number(amount) * tax / 100;
  },amountAfterTax: function(amount, discauntTax){
-   return amount - discauntTax;
+   return Number(amount) + discauntTax;
+ },amountRemoveTax: function(amount, discauntTax){
+   return Number(amount) - discauntTax;
  },'filterProductBySucursal': function(val){
    var data = {
     sucursalId: val.sucursalId,
@@ -367,7 +369,7 @@
   }
 });
 
-  $rootScope.$watch(function () {
+ $rootScope.$watch(function () {
     if(!self.product.precios)
       {return;
       }else{
@@ -471,7 +473,7 @@
     }
     return result;
   },applyTax : function(){
-    self.product.taxcost = self.amountAfterTax(self.product.cost, self.getTaxAmount(self.product.cost, self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));
+    self.product.taxcost = Number(self.amountAfterTax(self.product.cost, self.getTaxAmount(self.product.cost, self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList))));
     self.product.d_cost = self.amountAfterTax((self.product.cost / self.product.unidades), self.getTaxAmount((self.product.cost / self.product.unidades), self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));
   },pVentaUnoTax: function(amout){
    return self.amountAfterTax(amout, self.getTaxAmount(amout, self.getTax(self.product.taxesFlag, self.companyInfo.impuestosList)));

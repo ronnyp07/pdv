@@ -12,7 +12,6 @@ userModule.directive('userAuthorized', [ '$modal', function($modal){
 
     // },
     link: function(scope, element, attrs) {
-      console.log('from directive');
       scope.internalControl = scope.focusinControl || {};
 
       // scope.internalControl = scope.control || {};

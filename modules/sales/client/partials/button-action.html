@@ -7,7 +7,7 @@
                 ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"
                 class="{{key.type}}"  ng-bind-html="'DEL'">
             </td>
-            <td ng-disabled="vm.productServices.product.listproductPromotion.length > 0"
+            <td ng-disabled="vm.cartList > 0"
           ng-click="vm.setPageMode('efectivo')"
                 colspan="2"
                 ng-class="{'button': key.type !== 'margin', 'letter': key.type !== 'margin'}"

@@ -22,7 +22,7 @@
             <i class="fa fa-plus"></i> </br> Agregar
           </a>
         </div><!-- /.box-header -->
-        <div class="box-body">
+        <div class="box-body product" >
          <table ng-table="tableParams" class="table table-condensed table-striped table-bordered table-hover">
           <tr ng-repeat="inventory in $data | filter: (vm.authentication.sucursal !== 'superUser' ? vm.authentication.sucursal.sucursalId._id : '')">
           <td data-title="'Sucursal'" >{{inventory.sucursalId.name}}</td>

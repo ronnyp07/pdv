@@ -68,8 +68,8 @@
           <th ng-if="vm.authentication.sucursal == 'superUser'">Almacen</th>
           <th ng-class="{'col-3 text-center': vm.authentication.sucursal == 'superUser',
           'col-1 text-center': vm.authentication.sucursal !== 'superUser'}">Producto</th>
-          <th class="col-5 text-center">Marca</th>
-          <th class="col-5 text-center">Presentación</th>
+          <th class="col-5 text-center">Categoria</th>
+          <!-- <th class="col-5 text-center">Presentación</th> -->
           <th class="col-5 text-center">S. Minimo</th>
           <th class="col-5 text-center">Stock</th>
           <th class="col-5 text-center">P. Compra</th>
@@ -80,10 +80,10 @@
           'background-color': product._id == vm.productServices.selectedProduct._id ? 'lightgray' : ''}">
           <td ng-if="vm.authentication.sucursal == 'superUser'">{{product.sucursalId.name}}</td>
           <td >{{product.name}}</td>
-          <td  class="text-center">{{product.brand}}</td>
-          <td class="text-center">
+          <td  class="text-center">{{product.category}}</td>
+         <!--  <td class="text-center">
             <span>{{product.presentation}}</span>
-          </td>
+          </td> -->
           <td class="text-center">
             {{product.minimumStock}}
           </td>
@@ -94,7 +94,7 @@
             {{product.cost | currency}}
           </td>
           <td class="text-center" >
-            {{product.price | currency}}
+            {{product.precios.uno.pVenta | currency}}
           </td>
            <td class="text-center" >
             <span ng-if="product.lotes"> <i class="fa fa-check"></i> </span>
