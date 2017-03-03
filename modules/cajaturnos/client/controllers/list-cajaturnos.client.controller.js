@@ -1,6 +1,5 @@
 (function () {
 	'use strict';
-
 	angular
 	.module('cajaturno')
 	.controller('CajaturnoListController', CajaturnoListController);
@@ -16,11 +15,12 @@
 		vm.sucursalList = SucursalsService.query();
         vm.cajaturno = cajaturno;
         vm.cajaturnoInfo = vm.cajaturno.uploadCajaturnoInfo();
+
         function init(){
 		vm.cajaRestServices.loadcajas().then(function(){
 			vm.cajaList = _.chain(vm.cajaRestServices.cajasList)
-			.groupBy("sucursalId.name")
-			.sortBy("sucursalId.name")
+			.groupBy('sucursalId.name')
+			.sortBy('sucursalId.name')
 			.value();
 			console.log(vm.cajaList);
 		});
@@ -30,19 +30,15 @@
 
 		socketio.on('cajaturnoInserted', function(result) {
 			init();
-			console.log('cajaturno started');
 		});
 
 		vm.refreshData = function(index){
-			console.log('asdfasd');
 			console.log(index);
 		};
 
 		vm.openCash = function(caja){
 			console.log(caja);
 			vm.cajaturno.selectedCaja = caja;
-          // $state.go('cajaturnos.create');
       };
-
   }
 })();
