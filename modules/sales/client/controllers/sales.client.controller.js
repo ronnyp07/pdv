@@ -678,27 +678,31 @@ vm.setClient = function(client){
 
 vm.printReport = function(){
   vm.isPrinting = true;
-  var defer = $q.defer();
+  // var defer = $q.defer();
   $timeout(function(){
    var printSection = document.getElementById('printSection');
-   var ticketContainer = document.getElementById('ticketContainer');
+   //var ticketContainer = document.getElementById('ticketContainer');
    function printElement(elem) {
     printSection.innerHTML = '';
+    //console.log(elem);
     printSection.appendChild(elem);
-    window.print();
-  }
+    //window.print();
+   }
   if (!printSection) {
     printSection = document.createElement('div');
     printSection.id = 'printSection';
     document.body.appendChild(printSection);
   }
                 //var target =  angular.element(document.querySelector('#printThisElement'));
-                var elemToPrint = document.getElementById("printThisElement");
-                if (elemToPrint) {
-                  printElement(elemToPrint);
-                }
-              }, 2000);
-  return defer.promise;
+  var elemToPrint = document.getElementById("printThisElement");
+  window.print();
+         //
+         console.log(elemToPrint);
+                // if (elemToPrint) {
+                //   printElement(elemToPrint);
+                // }
+    }, 2000);
+  //return defer.promise;
 };
 }
 })();

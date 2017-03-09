@@ -66,13 +66,10 @@
    <div class="row" ng-if="vm.product.formaPago === 'credito'">
       <div class="col-xs-12 text-center"><p>CALENDARIO DE PAGOS</p></div>
     </div>
-   <div class="row" ng-repeat="p in vm.product.rangoList" ng-if="vm.product.formaPago === 'credito'">
+   <div class="row"  ng-repeat="p in vm.product.rangoList" ng-if="vm.product.formaPago === 'credito'">
       <div class="col-xs-4 text-center"> {{p.numero}} - </div>
       <div class="col-xs-4 text-center"> {{p.date}}</div>
       <div class="col-xs-4 text-center"> {{p.cantidad | currency}} </div>
    </div>
-
-   <hr/>
-
    </div>
 </div>

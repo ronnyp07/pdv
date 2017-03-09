@@ -267,7 +267,6 @@ getTotalTax: function(){
   self.changeTax(tax);
   return tax;
 },
-self,
 updateItemPrice: function(index, price){
  var defer = $q.defer();
  self.cart.items[index].price = Number(price);

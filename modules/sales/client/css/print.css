@@ -68,7 +68,7 @@
     height: 99%;
    }
 
-#printSection, #printSection * {
+#printSection, #printThisElement * {
     visibility:visible;
 }
 #printSection {
@@ -87,7 +87,6 @@ position:absolute;
 .compraDetail{
   margin-bottom: 0px;
 }
-
 
 .ticketprices{
   float: left;

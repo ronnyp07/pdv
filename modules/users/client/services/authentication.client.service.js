@@ -49,10 +49,11 @@ userModule.factory('Authentication', ['$window', 'CacheFactory',
       sessionCheck : function(param){
 
       },'loadSucursal' : function(){
+        console.log('test');
         var sucursal = auth.sucursalCache.get('sucursal');
-        auth.sucursalInfo  = sucursal !=='superUser' ? sucursal.sucursalId._id: 'superUser';
-        //auth.sucursalList =
 
+        //auth.sucursalInfo  = sucursal !=='superUser' ? sucursal.sucursalId._id: 'superUser';
+        //auth.sucursalList =
       }
 		};
 
